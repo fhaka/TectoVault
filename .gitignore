@@ -1,0 +1,5 @@
+# Root-level ignores. apps/web and apps/api have their own .gitignore for
+# framework/language-specific paths (node_modules, .next, .venv, etc).
+.env
+!.env.example
+.DS_Store

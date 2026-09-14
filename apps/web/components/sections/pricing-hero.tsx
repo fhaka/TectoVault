@@ -1,0 +1,9 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
+
+export function PricingHero() {
+  const reduceMotion = useReducedMotion();
+  const factors = ["Scope", "Design", "Systems", "Infrastructure", "Timeline"];
+  return <section className="relative overflow-hidden border-b border-border pb-16 pt-36 md:pb-20 md:pt-44"><div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_78%_38%,rgba(47,143,114,.16),transparent_27rem)]" /><div className="container-page relative grid gap-12 lg:grid-cols-[1fr_.7fr] lg:items-end"><div><p className="text-xs font-semibold uppercase tracking-[.28em] text-accent">Pricing / made to measure</p><h1 className="mt-5 max-w-3xl text-balance font-display text-4xl font-medium leading-[1.03] md:text-6xl">Pricing that reflects the actual work.</h1><p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">Software isn&apos;t one-size-fits-all, and neither is its price. Every project is scoped for what it actually needs.</p></div><div className="relative mx-auto hidden h-60 w-full max-w-sm lg:block">{factors.map((factor, i) => <motion.div key={factor} className="absolute inset-0" style={{ rotate: `${i * 72}deg` }} animate={reduceMotion ? undefined : { rotate: [i * 72, i * 72 + 360] }} transition={{ duration: 22, repeat: Infinity, ease: "linear" }}><span className="absolute left-1/2 top-0 grid size-20 -translate-x-1/2 place-items-center rounded-full border border-accent/30 bg-card px-2 text-center text-xs font-semibold shadow-lg" style={{ rotate: `${-i * 72}deg` }}>{factor}</span></motion.div>)}<div className="absolute left-1/2 top-1/2 z-10 grid size-20 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-ink text-xs font-semibold text-white">Your build</div></div></div></section>;
+}

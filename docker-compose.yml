@@ -1,0 +1,62 @@
+name: tectovault
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-tectovault}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-tectovault_dev_password}
+      POSTGRES_DB: ${POSTGRES_DB:-tectovault_db}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-tectovault} -d ${POSTGRES_DB:-tectovault_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ./apps/api
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ENVIRONMENT: ${ENVIRONMENT:-development}
+      SECRET_KEY: ${SECRET_KEY:-dev-secret-change-me-in-production-1234567890}
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-tectovault}:${POSTGRES_PASSWORD:-tectovault_dev_password}@db:5432/${POSTGRES_DB:-tectovault_db}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:${WEB_PORT:-3000}}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      RESEND_FROM_EMAIL: ${RESEND_FROM_EMAIL:-TectoVault <onboarding@resend.dev>}
+      NOTIFICATION_EMAIL: ${NOTIFICATION_EMAIL:-hello@example.com}
+      # Set to seed/update the first admin user on startup — see
+      # docker-entrypoint.sh. Leave unset in production once the real admin
+      # account exists.
+      FIRST_ADMIN_EMAIL: ${FIRST_ADMIN_EMAIL:-admin@tectovault.example}
+      FIRST_ADMIN_PASSWORD: ${FIRST_ADMIN_PASSWORD:-ChangeMe123!}
+    ports:
+      - "${API_PORT:-8000}:8000"
+
+  web:
+    build:
+      context: ./apps/web
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:${WEB_PORT:-3000}}
+    restart: unless-stopped
+    depends_on:
+      - api
+    environment:
+      # Server-side only — the browser never calls this directly (see
+      # apps/web/lib/api.ts). "api" resolves via Docker's internal DNS to
+      # the api service above.
+      API_BASE_URL: http://api:8000
+      NODE_ENV: production
+    ports:
+      - "${WEB_PORT:-3000}:3000"
+
+volumes:
+  postgres_data:
