@@ -63,9 +63,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     name: siteConfig.name,
     url: siteConfig.url,
     description: siteConfig.description,
-    sameAs: [siteConfig.social.linkedin, siteConfig.social.instagram, siteConfig.social.github].filter(
-      (url) => !url.startsWith("[")
-    ),
+    sameAs: [siteConfig.social.instagram],
   };
 
   return (

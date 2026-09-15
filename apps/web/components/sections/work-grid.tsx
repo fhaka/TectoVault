@@ -24,7 +24,7 @@ const filters: ("All" | ProjectCategory)[] = [
 export function WorkGrid({ projects }: { projects: Project[] }) {
   const [active, setActive] = React.useState<(typeof filters)[number]>("All");
   const reduceMotion = useReducedMotion();
-  const { locale } = useTranslation();
+  const { locale, t } = useTranslation();
 
   const filtered =
     active === "All" ? projects : projects.filter((p) => p.category === active);
@@ -43,7 +43,7 @@ export function WorkGrid({ projects }: { projects: Project[] }) {
                 : "border-border text-muted-foreground hover:border-accent hover:text-foreground"
             )}
           >
-            {filter}
+            {filter === "All" ? t("work.filter.all") : filter}
           </button>
         ))}
       </div>

@@ -44,8 +44,14 @@ export function SiteFooter() {
               </li>
               <li className="flex items-start gap-2">
                 <Phone className="mt-0.5 size-4 shrink-0" />
-                <a href={`tel:${siteConfig.contact.phone}`} className="hover:text-foreground">
+                <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`} className="hover:text-foreground">
                   {siteConfig.contact.phone}
+                </a>
+              </li>
+              <li className="flex items-start gap-2">
+                <Phone className="mt-0.5 size-4 shrink-0 opacity-0" />
+                <a href={`tel:${siteConfig.contact.phone2.replace(/\s/g, "")}`} className="hover:text-foreground">
+                  {siteConfig.contact.phone2}
                 </a>
               </li>
               <li className="flex items-start gap-2">

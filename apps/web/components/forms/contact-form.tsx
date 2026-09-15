@@ -11,8 +11,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/lib/i18n/language-context";
 
 export function ContactForm() {
+  const { t } = useTranslation();
   const [submitted, setSubmitted] = React.useState(false);
   const {
     register,
@@ -32,7 +34,7 @@ export function ContactForm() {
       setSubmitted(true);
       reset();
     } catch {
-      toast.error("Something went wrong. Please try again or email us directly.");
+      toast.error(t("contact.form.error"));
     }
   }
 
@@ -40,12 +42,12 @@ export function ContactForm() {
     return (
       <div className="flex flex-col items-center rounded-2xl border border-border bg-card p-12 text-center">
         <CheckCircle2 className="size-10 text-accent" />
-        <h3 className="mt-5 text-xl font-medium">Message sent</h3>
+        <h3 className="mt-5 text-xl font-medium">{t("contact.form.sentTitle")}</h3>
         <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-          Thanks for reaching out — we&rsquo;ll get back to you as soon as possible.
+          {t("contact.form.sentBody")}
         </p>
         <Button variant="outline" className="mt-6" onClick={() => setSubmitted(false)}>
-          Send another message
+          {t("contact.form.sendAnother")}
         </Button>
       </div>
     );
@@ -57,31 +59,31 @@ export function ContactForm() {
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="name">Name</Label>
-          <Input id="name" placeholder="Your name" aria-invalid={!!errors.name} {...register("name")} />
+          <Label htmlFor="name">{t("contact.form.name")}</Label>
+          <Input id="name" placeholder={t("contact.form.namePlaceholder")} aria-invalid={!!errors.name} {...register("name")} />
           {errors.name ? <p className="text-sm text-destructive">{errors.name.message}</p> : null}
         </div>
         <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="you@company.com" aria-invalid={!!errors.email} {...register("email")} />
+          <Label htmlFor="email">{t("contact.form.email")}</Label>
+          <Input id="email" type="email" placeholder={t("contact.form.emailPlaceholder")} aria-invalid={!!errors.email} {...register("email")} />
           {errors.email ? <p className="text-sm text-destructive">{errors.email.message}</p> : null}
         </div>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="company">Company (optional)</Label>
-        <Input id="company" placeholder="Company name" {...register("company")} />
+        <Label htmlFor="company">{t("contact.form.company")}</Label>
+        <Input id="company" placeholder={t("contact.form.companyPlaceholder")} {...register("company")} />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="message">Message</Label>
-        <Textarea id="message" placeholder="Tell us what you need help with…" aria-invalid={!!errors.message} {...register("message")} />
+        <Label htmlFor="message">{t("contact.form.message")}</Label>
+        <Textarea id="message" placeholder={t("contact.form.messagePlaceholder")} aria-invalid={!!errors.message} {...register("message")} />
         {errors.message ? <p className="text-sm text-destructive">{errors.message.message}</p> : null}
       </div>
 
       <Button type="submit" size="lg" variant="accent" disabled={isSubmitting} className="w-full sm:w-auto">
         {isSubmitting ? <Loader2 className="size-4 animate-spin" /> : null}
-        Send Message
+        {t("contact.form.send")}
       </Button>
     </form>
   );

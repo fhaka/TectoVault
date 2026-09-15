@@ -6,10 +6,14 @@ import { ArrowUpRight, Sparkles } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { solutions } from "@/content/solutions";
+import { useTranslation } from "@/lib/i18n/language-context";
+import { solutionTranslationsSq } from "@/lib/i18n/content-sq";
 
 export function SolutionsExperience() {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const reduceMotion = useReducedMotion();
+  const { t, locale } = useTranslation();
+  const solTr = (slug: string) => (locale === "sq" ? solutionTranslationsSq[slug] : null);
   const active = solutions[activeIndex];
   const ActiveIcon = active.icon;
 
@@ -19,13 +23,13 @@ export function SolutionsExperience() {
         <div className="grid items-center gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:gap-20">
           <div>
             <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-accent">
-              <Sparkles className="size-3.5" /> Find your path
+              <Sparkles className="size-3.5" /> {t("solutions.eyebrow")}
             </p>
             <h2 className="mt-5 max-w-lg text-balance font-display text-3xl font-medium leading-tight md:text-5xl">
-              Start with the problem. Follow the signal to the solution.
+              {t("solutions.title")}
             </h2>
             <p className="mt-5 max-w-md leading-relaxed text-ink-muted">
-              Select the challenge closest to your business. The right product is never a template—it is a system designed around the work that matters.
+              {t("solutions.description")}
             </p>
 
             <div className="mt-8 grid gap-2">
@@ -45,7 +49,7 @@ export function SolutionsExperience() {
                     <span className={`grid size-8 place-items-center rounded-lg transition-colors ${selected ? "bg-accent text-white" : "bg-white/5"}`}>
                       <Icon className="size-4" />
                     </span>
-                    <span className="text-sm font-medium">{solution.title}</span>
+                    <span className="text-sm font-medium">{solTr(solution.slug)?.title ?? solution.title}</span>
                     <span className={`ml-auto size-1.5 rounded-full transition-all ${selected ? "scale-125 bg-accent shadow-[0_0_14px_3px_rgba(47,143,114,0.75)]" : "bg-white/20"}`} />
                   </button>
                 );
@@ -97,12 +101,12 @@ export function SolutionsExperience() {
                 <span className="grid size-10 place-items-center rounded-xl bg-accent text-white">
                   <ActiveIcon className="size-5" />
                 </span>
-                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Recommended path</p>
-                <h3 className="mt-2 font-display text-lg font-medium leading-tight md:text-2xl">{active.title}</h3>
-                <p className="mt-3 hidden text-sm leading-relaxed text-ink-muted sm:block">{active.shortDescription}</p>
+                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-accent">{t("solution.recommendedPath")}</p>
+                <h3 className="mt-2 font-display text-lg font-medium leading-tight md:text-2xl">{solTr(active.slug)?.title ?? active.title}</h3>
+                <p className="mt-3 hidden text-sm leading-relaxed text-ink-muted sm:block">{solTr(active.slug)?.shortDescription ?? active.shortDescription}</p>
               </div>
               <Link href={`/solutions/${active.slug}`} className="group mt-4 flex items-center gap-2 text-sm font-medium text-white">
-                Explore solution <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                {t("solution.exploreSolution")} <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </Link>
             </motion.div>
           </div>
