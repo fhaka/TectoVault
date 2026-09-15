@@ -26,12 +26,12 @@ export function CookiesBody() {
             </li>
             <li>
               <strong>Ruajtje preferencash</strong> — përdorim local storage të browser-it tënd për
-              të mbajtur mend gjuhën e zgjedhur (Anglisht/Shqip) mes vizitave. Kjo s'është një cookie
-              gjurmimi dhe s'ndahet kurrë me palë të treta.
+              të mbajtur mend gjuhën e zgjedhur (Anglisht/Shqip) mes vizitave. Kjo s’është një cookie
+              gjurmimi dhe s’ndahet kurrë me palë të treta.
             </li>
           </ul>
           <p className="mt-4">
-            Aktualisht s'përdorim cookies analitike apo reklamimi në këtë sajt. Nëse kjo ndryshon,
+            Aktualisht s’përdorim cookies analitike apo reklamimi në këtë sajt. Nëse kjo ndryshon,
             kjo politikë do të përditësohet përkatësisht.
           </p>
         </section>
@@ -69,7 +69,7 @@ export function CookiesBody() {
             <strong>Essential cookies</strong> — required for the website to function correctly.
           </li>
           <li>
-            <strong>Preference storage</strong> — we use your browser's local storage to remember
+            <strong>Preference storage</strong> — we use your browser’s local storage to remember
             your selected language (English/Albanian) between visits. This is not a tracking
             cookie and is never shared with third parties.
           </li>

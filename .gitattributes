@@ -1,0 +1,9 @@
+# Force LF line endings for files that get executed or parsed inside Linux
+# containers, regardless of the OS/editor used to check this repo out. A
+# shell script checked out with CRLF (Git's default on Windows) fails at
+# its very first line inside the container: "no such file or directory".
+* text=auto eol=lf
+
+*.sh text eol=lf
+Dockerfile text eol=lf
+*.py text eol=lf

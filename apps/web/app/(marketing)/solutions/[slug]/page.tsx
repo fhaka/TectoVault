@@ -31,6 +31,7 @@ export default async function SolutionDetailPage({
 
   const relatedProjects = projects.slice(0, 2);
   const { icon: _icon, ...solutionData } = solution;
+  void _icon;
 
   return <SolutionDetailBody solution={solutionData} icon={<solution.icon className="size-6" />} relatedProjects={relatedProjects} />;
 }

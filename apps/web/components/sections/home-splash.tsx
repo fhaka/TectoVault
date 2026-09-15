@@ -30,7 +30,8 @@ export function HomeSplash() {
     } catch {
       // sessionStorage unavailable (private mode, etc.) — just show the splash.
     }
-    setPhase(seen ? "hidden" : "visible");
+    const update = window.setTimeout(() => setPhase(seen ? "hidden" : "visible"), 0);
+    return () => window.clearTimeout(update);
   }, []);
 
   const dismiss = React.useCallback(() => {

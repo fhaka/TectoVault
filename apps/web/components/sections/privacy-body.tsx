@@ -31,7 +31,7 @@ export function PrivacyBody() {
         <section>
           <h2>3. Si i përdorim të dhënat tua</h2>
           <ul>
-            <li>Për t'iu përgjigjur pyetjeve dhe kërkesave për ofertë</li>
+            <li>Për t’iu përgjigjur pyetjeve dhe kërkesave për ofertë</li>
             <li>Për të vlerësuar aplikimet për punë</li>
             <li>Për të përmirësuar sajtin dhe shërbimet tona</li>
             <li>Për të përmbushur detyrime ligjore dhe kontabël</li>
@@ -42,7 +42,7 @@ export function PrivacyBody() {
           <h2>4. Baza ligjore</h2>
           <p>
             Procesojmë të dhëna personale bazuar në pëlqimin tënd (dërgimi i një formulari), interesin
-            tonë legjitim për t'iu përgjigjur pyetjeve, dhe, kur zbatohet, ekzekutimin e një kontrate.
+            tonë legjitim për t’iu përgjigjur pyetjeve, dhe, kur zbatohet, ekzekutimin e një kontrate.
           </p>
         </section>
 
@@ -72,7 +72,7 @@ export function PrivacyBody() {
             Përdorim një numër të kufizuar shërbimesh palësh të treta për të xhiruar sajtin tonë dhe
             për të komunikuar me ty: ofrues infrastrukture cloud për të hostuar sajtin dhe databazën
             tonë, dhe Resend për dërgimin e email-eve transaksionale (si konfirmimet e formularit të
-            kontaktit dhe kërkesës për ofertë). S'përdorim aktualisht analitikë apo tracker
+            kontaktit dhe kërkesës për ofertë). S’përdorim aktualisht analitikë apo tracker
             reklamimi të palëve të treta në këtë sajt.
           </p>
         </section>

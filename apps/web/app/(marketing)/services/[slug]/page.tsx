@@ -39,6 +39,7 @@ export default async function ServiceDetailPage({
   };
 
   const { icon: _icon, ...serviceData } = service;
+  void _icon;
 
   return (
     <>

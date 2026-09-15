@@ -26,8 +26,8 @@ function useSplashHandoff() {
       // Mirror the splash's fallback: it shows, so wait for its event.
     }
     if (!splashPending) {
-      setReady(true);
-      return;
+      const update = window.setTimeout(() => setReady(true), 0);
+      return () => window.clearTimeout(update);
     }
     const onExplore = () => setReady(true);
     window.addEventListener("tectovault:splash-explore", onExplore);

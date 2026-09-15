@@ -17,12 +17,15 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = React.useState<Locale>(defaultLocale);
 
   React.useEffect(() => {
+    let stored: string | null = null;
     try {
-      const stored = window.localStorage.getItem(STORAGE_KEY);
-      if (stored === "en" || stored === "sq") setLocaleState(stored);
+      stored = window.localStorage.getItem(STORAGE_KEY);
     } catch {
       // localStorage unavailable — stay on default locale.
     }
+    if (stored !== "en" && stored !== "sq") return;
+    const update = window.setTimeout(() => setLocaleState(stored as Locale), 0);
+    return () => window.clearTimeout(update);
   }, []);
 
   const setLocale = React.useCallback((next: Locale) => {

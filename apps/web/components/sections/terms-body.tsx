@@ -14,7 +14,7 @@ export function TermsBody() {
           <h2>1. Pranimi i kushteve</h2>
           <p>
             Duke hyrë në {siteConfig.url} ose duke angazhuar {siteConfig.name} për shërbime, ti pranon
-            këto kushte. Nëse s'pajtohesh, të lutem mos e përdor këtë sajt apo shërbimet tona.
+            këto kushte. Nëse s’pajtohesh, të lutem mos e përdor këtë sajt apo shërbimet tona.
           </p>
         </section>
 
@@ -31,7 +31,7 @@ export function TermsBody() {
           <h2>3. Oferta dhe vlerësime</h2>
           <p>
             Shifrat e dhëna përmes faqes së çmimeve apo formularit të kërkesës për ofertë janë vetëm
-            vlerësime dhe s'janë detyruese derisa të konfirmohen në një propozim apo marrëveshje të
+            vlerësime dhe s’janë detyruese derisa të konfirmohen në një propozim apo marrëveshje të
             nënshkruar.
           </p>
         </section>
@@ -61,7 +61,7 @@ export function TermsBody() {
         <section>
           <h2>6. Kufizimi i përgjegjësisë</h2>
           <p>
-            Në shkallën më të plotë të lejuar nga ligji, {siteConfig.name} s'mban përgjegjësi për dëme
+            Në shkallën më të plotë të lejuar nga ligji, {siteConfig.name} s’mban përgjegjësi për dëme
             indirekte, aksidentale, apo pasuese që dalin nga përdorimi i sajtit apo shërbimeve tona.
           </p>
         </section>

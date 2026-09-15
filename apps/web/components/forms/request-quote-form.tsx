@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useForm, type Path } from "react-hook-form";
+import { useForm, useWatch, type Path } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { AnimatePresence, motion } from "framer-motion";
@@ -72,14 +72,14 @@ export function RequestQuoteForm() {
     handleSubmit,
     trigger,
     setValue,
-    watch,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<QuoteFormValues>({
     resolver: zodResolver(quoteSchema),
     defaultValues: { projectType: "", budget: "", timeline: "" },
   });
 
-  const values = watch();
+  const values = useWatch({ control });
 
   async function next() {
     const valid = await trigger(steps[step].fields);

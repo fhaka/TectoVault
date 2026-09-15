@@ -4,7 +4,16 @@
 // remains in English for now; this covers what appears in navigation,
 // listing pages and cards across the site.
 
-export const serviceTranslationsSq: Record<string, { title: string; shortDescription: string }> = {
+export type ServiceTranslationSq = {
+  title: string;
+  shortDescription: string;
+  overview?: string;
+  capabilities?: string[];
+  whatWeBuild?: string[];
+  faq?: { question: string; answer: string }[];
+};
+
+export const serviceTranslationsSq: Record<string, ServiceTranslationSq> = {
   "ai-agents": {
     title: "Agjentë AI",
     shortDescription: "Agjentë inteligjentë që komunikojnë me klientët, përgjigjen pyetjeve dhe kryejnë detyra.",
