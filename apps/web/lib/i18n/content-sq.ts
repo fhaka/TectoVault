@@ -85,10 +85,6 @@ export const projectTranslationsSq: Record<string, { name: string; description: 
     name: "HAKA-SE — Sajt Fabrike Rrjetash Teli",
     description: "Sajt trigjuhësh për një prodhues rrjetash teli të saldiluara dhe gardhesh në Elbasan — katalog produktesh, prezantim fabrike, FAQ, kërkesa ofertash dhe porositje me WhatsApp.",
   },
-  "nails-by-mikela": {
-    name: "Nails by Mikela — Sajt Studioje",
-    description: "Sajt editorial për një studio thonjsh — shërbime, portofol, çmime dhe rezervim, i projektuar rreth punës së vetë studios.",
-  },
   "pirko-glass-management": {
     name: "Pirko Glass — Sistem Menaxhimi Porosish me AI",
     description: "Sistem i brendshëm menaxhimi për një prodhues xhamash dhe pasqyrash — AI nxjerr përmasat e xhamit direkt nga porositë në WhatsApp, llogarit çmimin sipas m², copë ose metër linear, dhe e çon porosinë nëpër prodhim, faturim dhe dërgesë.",

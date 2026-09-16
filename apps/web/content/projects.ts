@@ -107,23 +107,6 @@ export const projects: Project[] = [
       "Localized React application (SQ/EN/IT) with a product catalog, quote-request funnel and direct messaging contact paths, designed around the company's industrial brand.",
   },
   {
-    slug: "nails-by-mikela",
-    name: "Nails by Mikela — Studio Website",
-    industry: "Beauty & Wellness",
-    category: "Websites",
-    description:
-      "An editorial website for a nail studio — services, portfolio, pricing and booking, designed around the studio's own work.",
-    technology: ["React", "TypeScript"],
-    image: "/images/work/nails-by-mikela.jpg",
-    liveUrl: "https://www.nailsbymikela.org",
-    challenge:
-      "A one-person studio needed a site that looks as considered as the work itself, presents services and prices clearly, and turns visitors into bookings.",
-    solution:
-      "A magazine-style layout that puts the studio's real photography first, with services, pricing, an about story and a persistent booking action.",
-    architecture:
-      "Content-focused site with an editorial type system, image-led sections and direct booking and Instagram contact paths.",
-  },
-  {
     slug: "pirko-glass-management",
     name: "Pirko Glass — AI Order Management System",
     industry: "Manufacturing",
