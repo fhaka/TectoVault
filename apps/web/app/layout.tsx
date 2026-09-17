@@ -16,18 +16,23 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: [
+    "software company Albania",
+    "software development company Albania",
+    "web development Albania",
+    "website development Albania",
+    "custom software Albania",
+    "cloud services Albania",
+    "DevOps services Albania",
     "AI automation agency",
     "AI agents",
     "business automation",
     "custom software development",
-    "web application development",
-    "mobile app development",
-    "AI integration",
-    "digital transformation",
     "TectoVault",
-    "Tirana Albania software company",
   ],
   applicationName: siteConfig.name,
+  alternates: {
+    canonical: siteConfig.url,
+  },
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -42,6 +47,7 @@ export const metadata: Metadata = {
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
     url: siteConfig.url,
+    locale: "en_US",
     images: [{ url: "/icon-512.png", width: 512, height: 512, alt: siteConfig.name }],
   },
   twitter: {
@@ -61,9 +67,35 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: siteConfig.name,
+    legalName: siteConfig.legalName,
     url: siteConfig.url,
+    logo: `${siteConfig.url}/icon-512.png`,
     description: siteConfig.description,
+    foundingDate: String(siteConfig.founded),
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Tirana",
+      addressCountry: "AL",
+    },
+    areaServed: "Albania",
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: siteConfig.contact.phone,
+      email: siteConfig.contact.email,
+      contactType: "customer service",
+      areaServed: "AL",
+      availableLanguage: ["English", "Albanian"],
+    },
     sameAs: [siteConfig.social.instagram],
+  };
+
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    inLanguage: ["en", "sq"],
+    publisher: { "@type": "Organization", name: siteConfig.name },
   };
 
   return (
@@ -72,6 +104,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         <Providers>
           <MotionConfig reducedMotion="user">{children}</MotionConfig>

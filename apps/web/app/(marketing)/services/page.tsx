@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
 
+import { siteConfig } from "@/lib/site-config";
 import { ServicesOrbit } from "@/components/sections/services-orbit";
 import { ServicesGrid } from "@/components/sections/services-grid";
 import { Section } from "@/components/shared/section";
 import { FinalCta } from "@/components/sections/final-cta";
 
+const title = "Software Development Services in Albania";
+const description =
+  "Custom software, web applications, mobile apps, cloud & DevOps, and AI-driven automation — software development services built for businesses across Albania.";
+
 export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "AI agents, business automation, custom software, web applications, mobile applications, AI integration, digital transformation, intelligent operations, web development, cloud & DevOps, and maintenance & support — the systems that run modern businesses.",
+  title,
+  description,
+  alternates: { canonical: `${siteConfig.url}/services` },
+  openGraph: { title: `${title} — ${siteConfig.name}`, description, url: `${siteConfig.url}/services` },
+  twitter: { title: `${title} — ${siteConfig.name}`, description },
 };
 
 export default function ServicesPage() {

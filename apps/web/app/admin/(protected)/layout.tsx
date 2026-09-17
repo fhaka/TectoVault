@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 import { adminFetchJson } from "@/lib/admin-api";
@@ -5,9 +6,13 @@ import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { LogoutButton } from "@/components/admin/logout-button";
 import { siteConfig } from "@/lib/site-config";
 
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
+
 type CurrentUser = { id: string; email: string; name: string; role: string };
 
-// The real authorization check (see middleware.ts for why it isn't there):
+// The real authorization check (see proxy.ts for why it isn't there):
 // every load of an admin page asks the backend who the token belongs to.
 // An expired, forged, or missing token gets a 401 and we bounce to login.
 export default async function ProtectedAdminLayout({ children }: { children: React.ReactNode }) {

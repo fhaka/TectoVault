@@ -24,7 +24,15 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       // localStorage unavailable — stay on default locale.
     }
     if (stored !== "en" && stored !== "sq") return;
-    const update = window.setTimeout(() => setLocaleState(stored as Locale), 0);
+    const update = window.setTimeout(() => {
+      setLocaleState(stored as Locale);
+      // setLocaleState alone doesn't touch the DOM — a restored preference
+      // needs the same <html lang> sync that an explicit switch gets via
+      // setLocale, or a returning Albanian-preference visitor keeps lang="en".
+      if (typeof document !== "undefined") {
+        document.documentElement.lang = stored as Locale;
+      }
+    }, 0);
     return () => window.clearTimeout(update);
   }, []);
 

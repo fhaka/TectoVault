@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
 import { Newspaper } from "lucide-react";
 
+import { siteConfig } from "@/lib/site-config";
 import { blogPosts, blogCategories } from "@/content/blog";
 import { PageHero } from "@/components/shared/page-hero";
 import { Section } from "@/components/shared/section";
 import { FinalCta } from "@/components/sections/final-cta";
 
+const title = "Blog";
+const description = "Insights on software, cloud and building better digital products.";
+
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "Insights on software, cloud and building better digital products.",
+  title,
+  description,
+  alternates: { canonical: `${siteConfig.url}/blog` },
+  openGraph: { title: `${title} — ${siteConfig.name}`, description, url: `${siteConfig.url}/blog` },
+  twitter: { title: `${title} — ${siteConfig.name}`, description },
 };
 
 export default function BlogPage() {

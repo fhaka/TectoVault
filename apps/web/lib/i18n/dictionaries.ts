@@ -226,7 +226,7 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
 
     "about.whoWeAre.title": "Kush jemi",
     "about.whoWeAre.body":
-      "TectoVault është një studio softueri dhe automatizimi me AI, e fokusuar në ndërtimin e produkteve digjitale siç duhet — nga agjentët AI dhe automatizimi deri te platforma të plota softueri të personalizuara. Punojmë ngushtë me çdo klient për të kuptuar biznesin pas kërkesës, jo vetëm listën e veçorive.",
+      "TectoVault është një kompani software me bazë në Shqipëri, e specializuar në ndërtimin e produkteve digjitale siç duhet — nga agjentët AI dhe automatizimi deri te platforma të plota softueri të personalizuara. Punojmë ngushtë me çdo klient për të kuptuar biznesin pas kërkesës, jo vetëm listën e veçorive.",
     "about.philosophy.title": "Filozofia jonë",
     "about.philosophy.body":
       "Preferojmë të dorëzojmë diçka të fokusuar dhe të ndërtuar mirë sesa diçka të madhe dhe gjysmë të përfunduar. Kjo do të thotë të bësh pyetje përpara se të shkruash kod, të jesh i sinqertë për qëllimin dhe afatin, dhe ta trajtosh çdo projekt si diçka që do të ishim krenarë ta lidhnim me emrin tonë.",

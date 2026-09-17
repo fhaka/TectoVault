@@ -12,23 +12,35 @@ import { ADMIN_SESSION_COOKIE } from "@/lib/admin-api";
 // expired or forged token gets a 401 there and the page redirects to
 // /admin/login. So this middleware is a fast UX shortcut, not the security
 // boundary.
+//
+// It also sets X-Robots-Tag: noindex on every /admin/* response. The
+// protected layout can't set page-level `robots` metadata for every route
+// under it in one place, and /admin/login is a client component (Next.js
+// metadata exports only work in Server Components), so a response header
+// here is the one spot that reliably keeps the whole admin panel out of
+// search results, on top of the robots.txt disallow.
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const hasSession = request.cookies.has(ADMIN_SESSION_COOKIE);
 
   if (pathname === "/admin/login") {
     if (hasSession) {
-      return NextResponse.redirect(new URL("/admin", request.url));
+      return withNoindex(NextResponse.redirect(new URL("/admin", request.url)));
     }
-    return NextResponse.next();
+    return withNoindex(NextResponse.next());
   }
 
   if (pathname.startsWith("/admin") && !hasSession) {
     const loginUrl = new URL("/admin/login", request.url);
-    return NextResponse.redirect(loginUrl);
+    return withNoindex(NextResponse.redirect(loginUrl));
   }
 
-  return NextResponse.next();
+  return withNoindex(NextResponse.next());
+}
+
+function withNoindex(response: NextResponse) {
+  response.headers.set("X-Robots-Tag", "noindex, nofollow");
+  return response;
 }
 
 export const config = {

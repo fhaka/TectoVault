@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
 
+import { siteConfig } from "@/lib/site-config";
 import { RequestQuoteForm } from "@/components/forms/request-quote-form";
 
+const title = "Request a Quote";
+const description = "Tell us about your software project in Albania and get a real, scoped estimate.";
+
 export const metadata: Metadata = {
-  title: "Request a Quote",
-  description: "Tell us about your project and get a real, scoped estimate.",
+  title,
+  description,
+  alternates: { canonical: `${siteConfig.url}/request-quote` },
+  openGraph: { title: `${title} — ${siteConfig.name}`, description, url: `${siteConfig.url}/request-quote` },
+  twitter: { title: `${title} — ${siteConfig.name}`, description },
 };
 
 export default function RequestQuotePage() {

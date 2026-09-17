@@ -7,9 +7,15 @@ import { Section, SectionHeading } from "@/components/shared/section";
 import { GeneralApplicationForm } from "@/components/forms/general-application-form";
 import { siteConfig } from "@/lib/site-config";
 
+const title = "Careers";
+const description = `Join ${siteConfig.name} in Tirana, Albania. See open positions or send us your CV.`;
+
 export const metadata: Metadata = {
-  title: "Careers",
-  description: `Join ${siteConfig.name}. See open positions or send us your CV.`,
+  title,
+  description,
+  alternates: { canonical: `${siteConfig.url}/careers` },
+  openGraph: { title: `${title} — ${siteConfig.name}`, description, url: `${siteConfig.url}/careers` },
+  twitter: { title: `${title} — ${siteConfig.name}`, description },
 };
 
 const values = [

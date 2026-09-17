@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { siteConfig } from "@/lib/site-config";
 import { jobPostings, getJobBySlug } from "@/content/careers";
 import { PageHero } from "@/components/shared/page-hero";
 import { Section, SectionHeading } from "@/components/shared/section";
@@ -19,7 +20,14 @@ export async function generateMetadata({
   const { slug } = await params;
   const job = getJobBySlug(slug);
   if (!job) return {};
-  return { title: job.title, description: job.aboutRole };
+  const url = `${siteConfig.url}/careers/${slug}`;
+  return {
+    title: job.title,
+    description: job.aboutRole,
+    alternates: { canonical: url },
+    openGraph: { title: `${job.title} — ${siteConfig.name}`, description: job.aboutRole, url },
+    twitter: { title: `${job.title} — ${siteConfig.name}`, description: job.aboutRole },
+  };
 }
 
 export default async function JobPage({

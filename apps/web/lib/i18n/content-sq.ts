@@ -207,7 +207,7 @@ export const serviceDetailsSq: Record<
   },
   "web-applications": {
     overview:
-      "Nga portale klientësh deri te panele të brendshme kontrolli, ndërtojmë aplikacione web që trajtojnë logjikë biznesi reale, përdorues realë, dhe të dhëna reale — të projektuara të mbeten të mirëmbajtshme ndërsa rriten.",
+      "Bëjmë zhvillim aplikacionesh web, nga portale klientësh deri te panele të brendshme kontrolli — ndërtojmë aplikacione që trajtojnë logjikë biznesi reale, përdorues realë, dhe të dhëna reale, të projektuara të mbeten të mirëmbajtshme ndërsa rriten.",
     capabilities: [
       "Portale klientësh & shërbimi",
       "Vegla dhe panele të brendshme",
@@ -329,7 +329,7 @@ export const serviceDetailsSq: Record<
   },
   "web-development": {
     overview:
-      "Dizajnojmë dhe ndërtojmë sajte të shpejta, të aksesueshme që përfaqësojnë siç duhet biznesin tënd online — nga sajte korporative deri te faqe fushate, të gjitha të ndërtuara mbi baza moderne dhe të mirëmbajtshme.",
+      "Ofrojmë zhvillim faqesh web dhe krijim website të shpejtë e të aksesueshëm, që përfaqëson siç duhet biznesin tënd online — nga sajte korporative deri te faqe fushate, të gjitha të ndërtuara mbi baza moderne dhe të mirëmbajtshme.",
     capabilities: [
       "Sajte korporative",
       "Sajte marketingu",
