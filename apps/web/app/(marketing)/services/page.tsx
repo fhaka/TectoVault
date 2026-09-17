@@ -6,9 +6,9 @@ import { ServicesGrid } from "@/components/sections/services-grid";
 import { Section } from "@/components/shared/section";
 import { FinalCta } from "@/components/sections/final-cta";
 
-const title = "Software Development Services in Albania";
+const title = "Software & AI Development Services in Albania";
 const description =
-  "Custom software, web applications, mobile apps, cloud & DevOps, and AI-driven automation — software development services built for businesses across Albania.";
+  "AI agents, business automation, custom software, and web & cloud development — software & AI services built to grow businesses across Albania.";
 
 export const metadata: Metadata = {
   title,

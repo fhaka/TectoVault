@@ -11,9 +11,9 @@ import { HomeIndustries } from "@/components/sections/home-industries";
 import { HomeProcess } from "@/components/sections/home-process";
 import { FinalCta } from "@/components/sections/final-cta";
 
-const title = "Software Development Company in Albania";
+const title = "Software & AI Development Company in Albania";
 const description =
-  "Custom software, web development, and cloud & DevOps services in Albania. TectoVault builds AI-driven systems for businesses in Tirana and beyond.";
+  "AI agents, business automation, and custom software built to grow your business — TectoVault is a software & AI development company in Tirana, Albania.";
 
 export const metadata: Metadata = {
   title,

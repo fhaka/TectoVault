@@ -7,7 +7,7 @@ export const siteConfig = {
   domain: "tectovault.com",
   url: "https://tectovault.com",
   description:
-    "TectoVault is a software development company in Albania building intelligent systems that transform the way businesses operate — AI agents, business automation, custom software, web and mobile applications, cloud services, and AI integration for the businesses of tomorrow.",
+    "TectoVault is a software and AI development company in Albania, helping businesses grow through AI agents, business automation, custom software, web and mobile applications, cloud services, and AI integration — intelligent systems for the businesses of tomorrow.",
   founded: 2026,
 
   contact: {
