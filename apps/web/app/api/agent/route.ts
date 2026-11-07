@@ -1,12 +1,14 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { z } from "zod";
 
-import { DEMO_AGENT_SYSTEM_PROMPT } from "@/lib/demo-agent/prompt";
+import { DEMO_AGENT_SYSTEM_PROMPT, DEMO_AGENT_SYSTEM_PROMPT_NO_TOOLS } from "@/lib/demo-agent/prompt";
+import { DailyLimitError, streamWorkersAi, workersAi } from "@/lib/demo-agent/workers-ai";
 import { demoAgentTools, runDemoAgentTool, toolLabels } from "@/lib/demo-agent/tools";
 
-// Live demo agent endpoint. The browser sends the visible conversation (plain
-// text only); this handler runs Claude's tool loop server-side and streams
-// newline-delimited JSON events back:
+// Live demo agent endpoint. With ANTHROPIC_API_KEY set it runs Claude with
+// the booking tools; without it, it falls back to the free Cloudflare
+// Workers AI model (answers only, no tools). The browser sends the visible
+// conversation (plain text only) and gets newline-delimited JSON back:
 //   {type:"text", text}                      - a chunk of the reply
 //   {type:"tool", id, name, label, status}   - tool started / finished
 //   {type:"done"} | {type:"error", message}
@@ -58,19 +60,23 @@ const messagesFor = {
     unavailable: "The live demo is offline right now. You can reach the team at tectovault@gmail.com.",
     failed: "Something went wrong on my side. Please try again in a moment.",
     refusal: "I can't help with that one. I'm happy to answer anything about TectoVault's AI agents and services.",
+    limit:
+      "The live demo has reached today's limit. Message us on WhatsApp (+355 68 878 7812) or use the quote form, and the team will reply.",
   },
   sq: {
     busy: "Po dërgoni mesazhe pak shpejt. Ju lutem prisni disa minuta dhe provoni sërish.",
     unavailable: "Demo live nuk është aktive tani. Mund ta kontaktoni ekipin në tectovault@gmail.com.",
     failed: "Diçka shkoi keq nga ana ime. Ju lutem provoni sërish pas pak.",
     refusal: "Për këtë nuk mund të ndihmoj. Me kënaqësi përgjigjem për agjentët AI dhe shërbimet e TectoVault.",
+    limit:
+      "Demo live ka arritur limitin e sotëm. Na shkruani në WhatsApp (+355 68 878 7812) ose plotësoni formularin e ofertës dhe ekipi do t'ju përgjigjet.",
   },
 };
 
-/** Lets the chat widget hide itself until an API key is configured. */
+/** Lets the chat widget hide itself until Claude or Workers AI is available. */
 export function GET() {
   return Response.json(
-    { enabled: Boolean(process.env.ANTHROPIC_API_KEY) },
+    { enabled: Boolean(process.env.ANTHROPIC_API_KEY) || workersAi() !== null },
     { headers: { "Cache-Control": "no-store" } }
   );
 }
@@ -89,7 +95,9 @@ export async function POST(request: Request) {
   }
 
   if (!process.env.ANTHROPIC_API_KEY) {
-    return Response.json({ ok: false, message: copy.unavailable }, { status: 503 });
+    const ai = workersAi();
+    if (!ai) return Response.json({ ok: false, message: copy.unavailable }, { status: 503 });
+    return workersAiResponse(ai, visible, copy, request.signal);
   }
 
   const client = new Anthropic();
@@ -203,4 +211,44 @@ export async function POST(request: Request) {
       "X-Content-Type-Options": "nosniff",
     },
   });
+}
+
+const NDJSON_HEADERS = {
+  "Content-Type": "application/x-ndjson; charset=utf-8",
+  "Cache-Control": "no-store",
+  "X-Content-Type-Options": "nosniff",
+};
+
+function workersAiResponse(
+  ai: NonNullable<ReturnType<typeof workersAi>>,
+  visible: { role: "user" | "assistant"; content: string }[],
+  copy: (typeof messagesFor)["en"],
+  signal: AbortSignal
+) {
+  const encoder = new TextEncoder();
+  const body = new ReadableStream<Uint8Array>({
+    async start(controller) {
+      const send = (event: Record<string, unknown>) =>
+        controller.enqueue(encoder.encode(JSON.stringify(event) + "\n"));
+      try {
+        await streamWorkersAi(
+          ai,
+          [{ role: "system", content: DEMO_AGENT_SYSTEM_PROMPT_NO_TOOLS }, ...visible],
+          (text) => send({ type: "text", text }),
+          signal
+        );
+        send({ type: "done" });
+      } catch (err) {
+        if (err instanceof DailyLimitError) {
+          send({ type: "error", message: copy.limit });
+        } else if (!signal.aborted) {
+          console.error("[agent] Workers AI request failed", err);
+          send({ type: "error", message: copy.failed });
+        }
+      } finally {
+        controller.close();
+      }
+    },
+  });
+  return new Response(body, { headers: NDJSON_HEADERS });
 }

@@ -198,11 +198,25 @@ Secrets** (the Worker's runtime settings, not the "build variables" box). Pushes
 | Name | Type | What it does |
 | --- | --- | --- |
 | `API_BASE_URL` | Variable | URL of the FastAPI backend. Contact, quote and careers forms, the admin panel and the AI agent's call bookings all go through it. |
-| `ANTHROPIC_API_KEY` | **Secret** | Claude API key for the live demo agent (`/api/agent`). While it's unset, the chat widget and "Talk to the Live Agent" buttons stay hidden. |
+| `ANTHROPIC_API_KEY` | **Secret**, optional | Claude API key. When set, the live demo agent (`/api/agent`) uses Claude and can book intro calls. When unset, it uses the free Workers AI model (below). |
+| `WORKERS_AI_MODEL` | Variable, optional | Forces one Workers AI model, e.g. `@cf/meta/llama-3.3-70b-instruct-fp8-fast`. Leave unset to try the built-in list in order. |
 
-Never put a key in the repository, README or `wrangler.jsonc` — the repo is on GitHub. For the
-demo agent, also set a monthly spend limit in the Anthropic Console, and consider a Cloudflare
-rate-limiting rule on `/api/agent` (the route's own per-IP limit is per Worker instance only).
+Never put a key in the repository, README or `wrangler.jsonc` — the repo is on GitHub. Consider a
+Cloudflare rate-limiting rule on `/api/agent` (the route's own per-IP limit is per Worker instance only).
+
+### Live demo agent: free mode
+
+Without `ANTHROPIC_API_KEY`, the demo agent runs on **Cloudflare Workers AI** through the `AI`
+binding in `wrangler.jsonc`. Nothing to set up: no card, no key. Cloudflare gives every account a
+free daily allowance; when it is used up, the chat tells visitors to use WhatsApp or the quote form
+until it resets (00:00 UTC). In free mode the agent answers questions and points visitors to the
+quote form or WhatsApp to book a call; it doesn't book calls itself. The model list is in
+`apps/web/lib/demo-agent/workers-ai.ts`; models that aren't available on the free plan are skipped.
+To switch to Claude later, add the `ANTHROPIC_API_KEY` secret (and set a spend limit in the
+Anthropic Console).
+
+Local `wrangler dev` / `npm run preview:cloudflare` needs `npx wrangler login` first, because the
+`AI` binding always runs on Cloudflare.
 
 ### Deploying by hand (optional)
 

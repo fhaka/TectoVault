@@ -20,6 +20,11 @@
   "images": {
     "binding": "IMAGES"
   },
+  // Workers AI: the free model behind the live demo agent when no
+  // ANTHROPIC_API_KEY secret is set.
+  "ai": {
+    "binding": "AI"
+  },
   "observability": {
     "enabled": true
   }
