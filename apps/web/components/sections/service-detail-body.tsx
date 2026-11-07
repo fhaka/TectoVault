@@ -11,6 +11,12 @@ import { Reveal } from "@/components/shared/reveal";
 import { FinalCta } from "@/components/sections/final-cta";
 import { WebApplicationsHero } from "@/components/sections/web-applications-hero";
 import { AiAgentsHero } from "@/components/sections/ai-agents-hero";
+import { CapabilityMarquee } from "@/components/sections/ai-agents/capability-marquee";
+import { IndustryShowcase } from "@/components/sections/ai-agents/industry-showcase";
+import { IntegrationsMap } from "@/components/sections/ai-agents/integrations-map";
+import { LaunchTimeline } from "@/components/sections/ai-agents/launch-timeline";
+import { HandoffTrust } from "@/components/sections/ai-agents/handoff-trust";
+import { PackagesPreview } from "@/components/sections/ai-agents/packages-preview";
 import {
   Accordion,
   AccordionContent,
@@ -60,50 +66,63 @@ export function ServiceDetailBody({
         </PageHero>
       )}
 
-      <Section>
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-3">
-          <div className="lg:col-span-2">
-            <SectionHeading title={t("service.capabilities")} className="max-w-none" />
-            <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {capabilities.map((cap) => (
-                <li key={cap} className="flex items-start gap-3 text-sm">
-                  <Check className="mt-0.5 size-4 shrink-0 text-accent" />
-                  {cap}
-                </li>
-              ))}
-            </ul>
+      {service.slug === "ai-agents" ? (
+        // Flagship page: dedicated, animated sections instead of the generic
+        // capabilities / process layout every other service uses.
+        <>
+          <CapabilityMarquee items={capabilities} />
+          <IndustryShowcase />
+          <IntegrationsMap />
+          <LaunchTimeline />
+          <HandoffTrust />
+          <PackagesPreview />
+        </>
+      ) : (
+        <Section>
+          <div className="grid grid-cols-1 gap-16 lg:grid-cols-3">
+            <div className="lg:col-span-2">
+              <SectionHeading title={t("service.capabilities")} className="max-w-none" />
+              <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {capabilities.map((cap) => (
+                  <li key={cap} className="flex items-start gap-3 text-sm">
+                    <Check className="mt-0.5 size-4 shrink-0 text-accent" />
+                    {cap}
+                  </li>
+                ))}
+              </ul>
 
-            <h3 className="mt-14 text-xl font-medium">{t("service.whatWeBuild")}</h3>
-            <ul className="mt-6 space-y-3">
-              {whatWeBuild.map((item) => (
-                <li key={item} className="rounded-xl border border-border p-4 text-sm">
-                  {item}
-                </li>
-              ))}
-            </ul>
+              <h3 className="mt-14 text-xl font-medium">{t("service.whatWeBuild")}</h3>
+              <ul className="mt-6 space-y-3">
+                {whatWeBuild.map((item) => (
+                  <li key={item} className="rounded-xl border border-border p-4 text-sm">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <aside className="rounded-2xl border border-border bg-muted p-6">
+              <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                {t("service.ourProcess")}
+              </h3>
+              <ol className="mt-4 space-y-2">
+                {processStages.slice(0, 5).map((stage) => (
+                  <li key={stage.number} className="flex items-center gap-3 text-sm">
+                    <span className="font-display text-accent">{stage.number}</span>
+                    {stage.title}
+                  </li>
+                ))}
+              </ol>
+              <Link
+                href="/process"
+                className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent"
+              >
+                {t("service.seeFullProcess")} <ArrowUpRight className="size-3.5" />
+              </Link>
+            </aside>
           </div>
-
-          <aside className="rounded-2xl border border-border bg-muted p-6">
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-              {t("service.ourProcess")}
-            </h3>
-            <ol className="mt-4 space-y-2">
-              {processStages.slice(0, 5).map((stage) => (
-                <li key={stage.number} className="flex items-center gap-3 text-sm">
-                  <span className="font-display text-accent">{stage.number}</span>
-                  {stage.title}
-                </li>
-              ))}
-            </ol>
-            <Link
-              href="/process"
-              className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent"
-            >
-              {t("service.seeFullProcess")} <ArrowUpRight className="size-3.5" />
-            </Link>
-          </aside>
-        </div>
-      </Section>
+        </Section>
+      )}
 
       <Section>
         <SectionHeading eyebrow="FAQ" title={t("service.faqTitle")} />
@@ -119,7 +138,7 @@ export function ServiceDetailBody({
         </Reveal>
       </Section>
 
-      <FinalCta />
+      <FinalCta variant={service.slug === "ai-agents" ? "agents" : "default"} />
     </>
   );
 }
