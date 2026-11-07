@@ -17,7 +17,7 @@ export interface AgentPackage {
 }
 
 export const agentPackages: AgentPackage[] = [
-  { id: "starter", icon: MessagesSquare, setupPrice: null, monthlyPrice: null, featureCount: 6 },
-  { id: "growth", icon: PhoneCall, featured: true, setupPrice: null, monthlyPrice: null, featureCount: 7 },
+  { id: "starter", icon: MessagesSquare, setupPrice: "€390", monthlyPrice: "€49", featureCount: 6 },
+  { id: "growth", icon: PhoneCall, featured: true, setupPrice: "€890", monthlyPrice: "€129", featureCount: 7 },
   { id: "business", icon: Workflow, setupPrice: null, monthlyPrice: null, featureCount: 7 },
 ];

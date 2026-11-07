@@ -80,6 +80,20 @@ export function PackagesPreview() {
                 <p className={cn("mt-1 text-sm", pkg.featured ? "text-ink-muted" : "text-muted-foreground")}>
                   {t(`agentPackages.${pkg.id}.bestFor`)}
                 </p>
+                <p className="mt-4 flex flex-wrap items-baseline gap-x-1.5">
+                  {pkg.setupPrice ? (
+                    <>
+                      <span className="font-display text-2xl font-semibold">{pkg.setupPrice}</span>
+                      {pkg.monthlyPrice ? (
+                        <span className={cn("text-sm", pkg.featured ? "text-ink-muted" : "text-muted-foreground")}>
+                          + {pkg.monthlyPrice} {t("agentPackages.monthlySuffix")}
+                        </span>
+                      ) : null}
+                    </>
+                  ) : (
+                    <span className="font-display text-2xl font-semibold">{t("agentPackages.customQuote")}</span>
+                  )}
+                </p>
                 <ul className="mt-5 flex-1 space-y-2.5">
                   {[1, 2, 3].map((n) => (
                     <li key={n} className="flex items-start gap-2.5 text-sm">
