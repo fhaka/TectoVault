@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { RequestQuoteForm } from "@/components/forms/request-quote-form";
-import { getTx, pageMetadata } from "@/lib/i18n/server";
+import { pageMetadata } from "@/lib/i18n/server";
 
 export function generateMetadata(): Promise<Metadata> {
   return pageMetadata(
@@ -14,21 +14,27 @@ export function generateMetadata(): Promise<Metadata> {
   );
 }
 
-export default async function RequestQuotePage() {
-  const tx = await getTx();
+export default function RequestQuotePage() {
   return (
-    <section className="relative min-h-svh overflow-hidden bg-ink pb-16 pt-24 text-ink-foreground sm:pb-24 sm:pt-36 md:pt-40">
-      {/* Ambient glow so the dealt cards live in a lit space, not a void. */}
+    <section
+      data-header-tone="dark"
+      className="relative min-h-svh overflow-hidden bg-ink pb-20 pt-28 text-ink-foreground sm:pt-36 md:pt-40"
+    >
+      {/* Lit backdrop: grid, a soft glow behind the form, and a slow drifting orb. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(47,143,114,0.18),transparent)]"
+        className="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:linear-gradient(rgba(255,255,255,0.4)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.4)_1px,transparent_1px)] [background-size:4rem_4rem] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_80%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_45%_at_70%_20%,rgba(47,143,114,0.22),transparent)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-40 bottom-0 size-[36rem] animate-[pulse_8s_ease-in-out_infinite] rounded-full bg-accent/10 blur-3xl"
       />
 
       <div className="container-page relative">
-        <h1 className="sr-only">{tx("Request a Quote")}</h1>
-        <p className="mb-2 text-center text-xs font-semibold uppercase tracking-[0.25em] text-accent">
-          {tx("Request a Quote")}
-        </p>
         <RequestQuoteForm />
       </div>
     </section>

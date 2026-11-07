@@ -25,9 +25,13 @@ function isUnlocalizedPath(path: string) {
   return /^\/(api|admin|_next)(\/|$)/.test(path) || /\.[a-z0-9]+$/i.test(path.split(/[?#]/)[0]);
 }
 
-/** Removes a locale prefix: "/sq/services" -> "/services", "/sq" -> "/". */
+/**
+ * Removes a locale prefix: "/sq/services" -> "/services", "/sq" -> "/".
+ * Also strips the default locale, which only appears in internal
+ * (rewritten) paths such as "/en/services".
+ */
 export function stripLocale(path: string): string {
-  for (const l of prefixedLocales) {
+  for (const l of locales) {
     if (path === `/${l}`) return "/";
     if (path.startsWith(`/${l}/`) || path.startsWith(`/${l}?`) || path.startsWith(`/${l}#`)) {
       const rest = path.slice(l.length + 1);

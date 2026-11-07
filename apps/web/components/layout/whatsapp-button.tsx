@@ -1,16 +1,24 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { WhatsappIcon } from "@/components/shared/social-icons";
 import { useTranslation } from "@/lib/i18n/language-context";
 import { whatsappLink } from "@/lib/whatsapp";
+import { stripLocale } from "@/lib/i18n/config";
+
+// Pages that already show WhatsApp in their own layout.
+const HIDDEN_ON = ["/request-quote"];
 
 // Floating "message us on WhatsApp" button, bottom-left (the AI chat
 // launcher sits bottom-right). Opens WhatsApp with a greeting pre-typed.
 export function WhatsappButton() {
   const { t, locale } = useTranslation();
   const reduceMotion = useReducedMotion();
+  const pathname = stripLocale(usePathname() || "/");
+
+  if (HIDDEN_ON.includes(pathname)) return null;
 
   return (
     <motion.a
