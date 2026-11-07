@@ -7,7 +7,7 @@ import "@fontsource-variable/manrope";
 import "../globals.css";
 import { siteConfig } from "@/lib/site-config";
 import { Providers } from "@/components/layout/providers";
-import { getLocale, localeAlternates } from "@/lib/i18n/server";
+import { getLocale, localeAlternates, ogImage } from "@/lib/i18n/server";
 import { dictionaries } from "@/lib/i18n/dictionaries";
 import { notFound } from "next/navigation";
 import { isLocale, locales } from "@/lib/i18n/config";
@@ -84,13 +84,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: `${siteConfig.name} — ${tagline}`,
       description,
       ...openGraph,
-      images: [{ url: "/icon-512.png", width: 512, height: 512, alt: siteConfig.name }],
+      images: [ogImage(locale)],
     },
     twitter: {
       card: "summary_large_image",
       title: `${siteConfig.name} — ${tagline}`,
       description,
-      images: ["/icon-512.png"],
+      images: [ogImage(locale).url],
     },
     robots: {
       index: true,

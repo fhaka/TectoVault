@@ -23,7 +23,8 @@ export async function generateMetadata({
   return pageMetadata(
     `/services/${slug}`,
     { en: service.title, sq: serviceTranslationsSq[slug]?.title ?? service.title },
-    { en: service.shortDescription, sq: serviceTranslationsSq[slug]?.shortDescription ?? service.shortDescription }
+    { en: service.shortDescription, sq: serviceTranslationsSq[slug]?.shortDescription ?? service.shortDescription },
+    slug === "ai-agents" ? "ai-agents" : "default"
   );
 }
 

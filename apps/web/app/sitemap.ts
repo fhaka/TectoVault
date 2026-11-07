@@ -59,11 +59,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...services.map((s) => ({ path: `/services/${s.slug}`, priority: 0.9 })),
     ...solutions.map((s) => ({ path: `/solutions/${s.slug}`, priority: 0.8 })),
     ...industries.map((i) => ({ path: `/industries/${i.slug}`, priority: 0.7 })),
-    ...blogPosts.map((p) => ({ path: `/blog/${p.slug}`, priority: 0.6 })),
     ...jobPostings.map((j) => ({ path: `/careers/${j.slug}`, priority: 0.5 })),
   ];
 
   const dynamicRoutes = dynamicRouteDefs.flatMap(({ path, priority }) => entriesFor(path, "monthly", priority));
 
-  return [...staticRoutes, ...dynamicRoutes];
+  // Blog posts exist in one language only: one entry, no alternates.
+  const postRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: absolute(`/blog/${post.slug}`, post.locale),
+    lastModified: new Date(`${post.date}T12:00:00Z`),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...dynamicRoutes, ...postRoutes];
 }
