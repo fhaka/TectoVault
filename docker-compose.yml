@@ -54,6 +54,7 @@ services:
       # apps/web/lib/api.ts). "api" resolves via Docker's internal DNS to
       # the api service above.
       API_BASE_URL: http://api:8000
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
       NODE_ENV: production
     ports:
       - "${WEB_PORT:-3000}:3000"

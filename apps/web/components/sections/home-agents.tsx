@@ -22,6 +22,7 @@ import { cn } from "@/lib/utils";
 import { Section, SectionHeading } from "@/components/shared/section";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/lib/i18n/language-context";
+import { OpenAgentButton } from "@/components/agent/agent-chat";
 
 const agents = [
   { id: "voice", icon: PhoneCall },
@@ -120,6 +121,12 @@ export function HomeAgents() {
 
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg" variant="accent">
+              <OpenAgentButton>
+                <Bot className="size-4" />
+                {t("agentChat.tryLive")}
+              </OpenAgentButton>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
               <Link href="/services/ai-agents">
                 {t("agents.cta")}
                 <ArrowUpRight className="size-4" />

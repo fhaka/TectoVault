@@ -6,6 +6,7 @@ import { ArrowUpRight, Bot } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { AgentConsole } from "@/components/sections/agent-console";
+import { OpenAgentButton } from "@/components/agent/agent-chat";
 import { useTranslation } from "@/lib/i18n/language-context";
 
 export function AiAgentsHero({ overview }: { overview: string }) {
@@ -46,6 +47,12 @@ export function AiAgentsHero({ overview }: { overview: string }) {
                 {t("cta.getAgent")}
                 <ArrowUpRight className="size-4" />
               </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
+              <OpenAgentButton>
+                <Bot className="size-4" />
+                {t("agentChat.tryLive")}
+              </OpenAgentButton>
             </Button>
           </div>
         </motion.div>
