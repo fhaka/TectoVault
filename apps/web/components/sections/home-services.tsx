@@ -23,7 +23,7 @@ export async function HomeServices() {
 
       <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
         {featured ? (
-          <Reveal className="h-full sm:col-span-2">
+          <Reveal className="h-full sm:col-span-2 lg:row-span-2">
             <Link
               href={`/services/${featured.slug}`}
               className="group relative flex h-full flex-col justify-between overflow-hidden bg-ink p-8 text-ink-foreground md:p-10"

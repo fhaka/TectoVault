@@ -17,9 +17,9 @@ export const footerNav = {
   services: [
     { label: "AI Agents", href: "/services/ai-agents" },
     { label: "Business Automation", href: "/services/business-automation" },
-    { label: "Custom Software", href: "/services/custom-software" },
-    { label: "Web Applications", href: "/services/web-applications" },
-    { label: "AI Integration", href: "/services/ai-integration" },
+    { label: "Custom Software & Apps", href: "/services/custom-software" },
+    { label: "Websites", href: "/services/web-development" },
+    { label: "Hosting & Support", href: "/services/maintenance-support" },
   ],
   resources: [
     { label: "Blog", href: "/blog" },

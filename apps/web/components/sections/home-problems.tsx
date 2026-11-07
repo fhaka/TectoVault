@@ -11,8 +11,8 @@ const pairs = [
   { key: "pair1", href: "/services/ai-agents" },
   { key: "pair2", href: "/services/business-automation" },
   { key: "pair3", href: "/solutions/business-management-systems" },
-  { key: "pair4", href: "/services/ai-integration" },
-  { key: "pair5", href: "/services/digital-transformation" },
+  { key: "pair4", href: "/services/business-automation" },
+  { key: "pair5", href: "/services/custom-software" },
 ];
 
 export function HomeProblems() {

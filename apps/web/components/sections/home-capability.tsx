@@ -1,4 +1,4 @@
-import { Bot, Code2, Cloud, LayoutGrid, Workflow } from "lucide-react";
+import { Bot, Cpu, Globe, Server, Workflow } from "lucide-react";
 
 import { Reveal } from "@/components/shared/reveal";
 import { siteConfig } from "@/lib/site-config";
@@ -6,10 +6,10 @@ import { getTx } from "@/lib/i18n/server";
 
 const capabilities = [
   { icon: Bot, label: "AI Agents" },
-  { icon: Workflow, label: "Automation" },
-  { icon: LayoutGrid, label: "Web Applications" },
-  { icon: Code2, label: "Web Development" },
-  { icon: Cloud, label: "Cloud" },
+  { icon: Workflow, label: "Business Automation" },
+  { icon: Cpu, label: "Custom Software & Apps" },
+  { icon: Globe, label: "Websites" },
+  { icon: Server, label: "Hosting & Support" },
 ];
 
 export async function HomeCapability() {

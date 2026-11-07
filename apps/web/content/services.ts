@@ -1,18 +1,12 @@
-import {
-  Bot,
-  Workflow,
-  Cpu,
-  LayoutGrid,
-  Smartphone,
-  Plug,
-  RefreshCw,
-  Network,
-  Globe,
-  Cloud,
-  LifeBuoy,
-} from "lucide-react";
+import { Bot, Cpu, Globe, Server, Workflow } from "lucide-react";
 import type { Service } from "@/types/content";
 
+// Five services. Older service pages were merged into these, and their URLs
+// redirect here (see REMOVED_PAGES in proxy.ts):
+//   ai-integration                                   -> ai-agents
+//   intelligent-operations, digital-transformation   -> business-automation
+//   web-applications, mobile-applications            -> custom-software
+//   cloud-devops                                     -> maintenance-support
 export const services: Service[] = [
   {
     slug: "ai-agents",
@@ -35,12 +29,14 @@ export const services: Service[] = [
       "Notifications",
       "Business information retrieval",
       "Multilingual communication",
+      "AI added to your existing website, CRM and apps",
     ],
     whatWeBuild: [
       "Voice agents for phone and booking",
       "Chat agents for web and messaging channels",
       "Internal agents for staff and operations",
       "Multilingual customer-facing agents",
+      "AI features inside your existing software",
     ],
     technology: ["LLM APIs", "Voice AI", "Vector databases", "Webhooks & automation"],
     faq: [
@@ -59,6 +55,11 @@ export const services: Service[] = [
         answer:
           "Agents are designed to recognize their limits and hand off to a human — taking a message or transferring the call — rather than guessing.",
       },
+      {
+        question: "Do we need to rebuild our system to add AI?",
+        answer:
+          "Usually not. Most AI features connect to your existing website, CRM or app through APIs rather than requiring a rebuild.",
+      },
     ],
   },
   {
@@ -66,27 +67,29 @@ export const services: Service[] = [
     icon: Workflow,
     title: "Business Automation",
     shortDescription:
-      "Automating repetitive workflows, orders, communication, and internal processes.",
+      "Automated workflows, connected systems and live dashboards: less manual work, clearer decisions.",
     overview:
-      "We replace manual, repetitive work — messages, data entry, orders, documents, follow-ups, disconnected systems — with automated, connected workflows that run reliably in the background.",
+      "We replace manual, repetitive work (messages, data entry, orders, documents, follow-ups) with automated workflows, connect the tools your departments use so data flows between them, and give you dashboards and reports that show how the business is really doing. Step by step, paper and spreadsheet processes become connected digital systems.",
     capabilities: [
       "Workflow automation",
       "Order & document automation",
-      "Communication automation",
-      "Scheduling & notifications",
+      "Communication & follow-up automation",
       "System-to-system connections",
-      "Automated documentation",
+      "Dashboards & automated reporting",
+      "Process analysis & redesign",
+      "Moving paper and spreadsheet processes online",
+      "Cross-department workflows",
     ],
     whatWeBuild: [
-      "Automated workflows replacing manual processes",
+      "Automated workflows replacing manual steps",
       "Connected systems that share data in real time",
-      "Notification and follow-up automations",
-      "Automated reporting and documentation",
+      "Business dashboards and automated reports",
+      "Step-by-step digitisation roadmaps",
     ],
-    technology: ["n8n", "Zapier/Make", "APIs & webhooks", "Cloud functions"],
+    technology: ["n8n", "Make / Zapier", "APIs & webhooks", "BI dashboards"],
     faq: [
       {
-        question: "We already use several disconnected tools — can you help?",
+        question: "We already use several disconnected tools. Can you help?",
         answer:
           "Yes. A common starting point is connecting your existing tools through automation before considering a full custom rebuild.",
       },
@@ -95,31 +98,38 @@ export const services: Service[] = [
         answer:
           "We start by mapping your current process end to end, identifying where manual work happens, and agreeing on what to automate first for the fastest return.",
       },
+      {
+        question: "Where should a bigger digital change start?",
+        answer:
+          "With a short discovery phase that maps your processes and picks the one or two changes with the fastest impact, then builds from there in phases.",
+      },
     ],
   },
   {
     slug: "custom-software",
     icon: Cpu,
-    title: "Custom Software",
+    title: "Custom Software & Apps",
     shortDescription:
-      "Software engineered specifically around your business model and requirements.",
+      "Business systems, web applications and mobile apps built around how you work.",
     overview:
-      "When off-the-shelf tools force you into their workflow instead of yours, we build software shaped around your actual processes — operations, scheduling, reporting, or anything in between.",
+      "When off-the-shelf tools force you into their workflow, we build software shaped around yours: management systems, customer portals, internal dashboards and booking platforms on the web, plus iOS and Android apps for customers or staff, all on the same backend and designed to stay maintainable as you grow.",
     capabilities: [
-      "Business management systems",
-      "CRM & ERP-style applications",
-      "Reporting and analytics tooling",
-      "Legacy system modernization",
-      "System integrations",
-      "Data migration",
+      "Business management systems (CRM / ERP-style)",
+      "Customer portals & internal dashboards",
+      "Booking & scheduling systems",
+      "iOS & Android apps",
+      "Role-based access for staff, clients and admins",
+      "Integrations with your existing tools",
+      "Legacy modernisation & data migration",
+      "Real-time features & notifications",
     ],
     whatWeBuild: [
       "Operations and management platforms",
-      "Internal reporting systems",
-      "Booking and order management systems",
+      "Customer and client portals",
+      "Mobile apps for customers or staff",
       "Integrations between existing tools",
     ],
-    technology: ["Python", "FastAPI", "PostgreSQL", "Docker"],
+    technology: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL", "React Native"],
     faq: [
       {
         question: "How do you scope a custom software project?",
@@ -129,174 +139,28 @@ export const services: Service[] = [
       {
         question: "Can custom software replace several tools we use today?",
         answer:
-          "Often, yes — a common outcome is consolidating several disconnected tools into one system built around how your business actually runs.",
-      },
-    ],
-  },
-  {
-    slug: "web-applications",
-    icon: LayoutGrid,
-    title: "Web Applications",
-    shortDescription:
-      "SaaS platforms, dashboards, portals, and management systems.",
-    overview:
-      "From customer portals to internal dashboards, we build web applications that handle real business logic, real users and real data — designed to stay maintainable as they grow.",
-    capabilities: [
-      "Customer & client portals",
-      "Internal tools and dashboards",
-      "Booking and scheduling systems",
-      "Role-based access control",
-      "Real-time features",
-      "Third-party integrations",
-    ],
-    whatWeBuild: [
-      "Customer-facing portals",
-      "Internal operations dashboards",
-      "Booking and appointment systems",
-      "Multi-role platforms",
-    ],
-    technology: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL"],
-    faq: [
-      {
-        question: "Do you build the frontend and backend, or just one side?",
-        answer:
-          "We deliver full-stack: the interface your users see and the backend, database and APIs behind it, working as one coherent system.",
+          "Often, yes. A common outcome is consolidating several disconnected tools into one system built around how your business actually runs.",
       },
       {
-        question: "Can the application support different user roles?",
+        question: "Do you build both web and mobile?",
         answer:
-          "Yes — role-based access is a standard part of how we architect applications with more than one type of user, such as staff, clients and administrators.",
-      },
-    ],
-  },
-  {
-    slug: "mobile-applications",
-    icon: Smartphone,
-    title: "Mobile Applications",
-    shortDescription:
-      "Professional Android and iOS applications for customers and teams.",
-    overview:
-      "We build mobile applications that connect to the same backend and business logic as your web products — for customers, employees, and internal operations.",
-    capabilities: [
-      "iOS & Android applications",
-      "Cross-platform development",
-      "API & backend integration",
-      "Push notifications",
-      "App store preparation & submission",
-    ],
-    whatWeBuild: [
-      "Customer-facing mobile apps",
-      "Internal field/staff apps",
-      "Companion apps to existing platforms",
-    ],
-    technology: ["React Native", "TypeScript", "FastAPI"],
-    faq: [
-      {
-        question: "Do you build for both iOS and Android?",
-        answer:
-          "Yes, typically from a single cross-platform codebase unless a project specifically requires native development.",
-      },
-    ],
-  },
-  {
-    slug: "ai-integration",
-    icon: Plug,
-    title: "AI Integration",
-    shortDescription:
-      "Bringing AI into your existing software, websites, and communication channels.",
-    overview:
-      "You don't always need to rebuild from scratch. We integrate artificial intelligence into your existing websites, applications, CRM systems, and communication channels — adding intelligence where it creates real value.",
-    capabilities: [
-      "AI integration into existing systems",
-      "CRM & communication channel integration",
-      "Existing website & app enhancement",
-      "API-based AI feature integration",
-      "Data pipeline connections",
-    ],
-    whatWeBuild: [
-      "AI features added to existing products",
-      "Intelligent search and recommendations",
-      "AI-enhanced customer communication channels",
-    ],
-    technology: ["LLM APIs", "Vector search", "REST/GraphQL APIs"],
-    faq: [
-      {
-        question: "Do we need to rebuild our system to add AI?",
-        answer:
-          "Usually not — most AI integrations connect to your existing system through APIs rather than requiring a rebuild.",
-      },
-    ],
-  },
-  {
-    slug: "digital-transformation",
-    icon: RefreshCw,
-    title: "Digital Transformation",
-    shortDescription:
-      "Turning traditional processes into connected digital systems.",
-    overview:
-      "Businesses are moving from disconnected tools and manual processes toward intelligent systems that understand, automate, and continuously optimize operations. We build that transition.",
-    capabilities: [
-      "Process analysis & redesign",
-      "Legacy-to-digital migration",
-      "Departmental system connection",
-      "Change management support",
-      "Digital-first workflow design",
-    ],
-    whatWeBuild: [
-      "Modernized digital operating models",
-      "Connected, paperless workflows",
-      "Phased transformation roadmaps",
-    ],
-    technology: ["Cloud platforms", "APIs & integrations", "Automation tooling"],
-    faq: [
-      {
-        question: "Where should a digital transformation start?",
-        answer:
-          "Typically with a discovery phase that maps existing processes and identifies where digitizing and connecting systems will have the fastest impact.",
-      },
-    ],
-  },
-  {
-    slug: "intelligent-operations",
-    icon: Network,
-    title: "Intelligent Operations",
-    shortDescription:
-      "Connecting people, data, software, and automation into one ecosystem.",
-    overview:
-      "We optimize workflows, reduce manual work, connect departments, and enable smarter, data-driven business decisions — turning day-to-day operations into one intelligent, connected system.",
-    capabilities: [
-      "Workflow optimization",
-      "Cross-department connectivity",
-      "Business intelligence dashboards",
-      "Automated reporting & insights",
-      "Data-driven decision support",
-    ],
-    whatWeBuild: [
-      "Operational dashboards and analytics",
-      "Connected departmental workflows",
-      "Automated insight and reporting systems",
-    ],
-    technology: ["BI dashboards", "PostgreSQL", "Automation & APIs"],
-    faq: [
-      {
-        question: "Do you offer ongoing support once systems are connected?",
-        answer:
-          "Yes — this is typically covered under an ongoing optimization engagement, refining automations and dashboards as the business evolves.",
+          "Yes. We deliver the full stack (interface, backend, database and APIs), and mobile apps for iOS and Android usually from one cross-platform codebase, connected to the same system.",
       },
     ],
   },
   {
     slug: "web-development",
     icon: Globe,
-    title: "Web Development",
+    title: "Websites",
     shortDescription:
       "Corporate and marketing websites built for speed, clarity and conversion.",
     overview:
-      "We design and build fast, accessible websites that represent your business properly online — from corporate sites to campaign landing pages, all engineered on modern, maintainable foundations.",
+      "We design and build fast, accessible websites that represent your business properly online, from corporate sites to campaign landing pages, multilingual and ready for search engines, on modern, maintainable foundations.",
     capabilities: [
       "Corporate websites",
       "Marketing websites",
       "Landing pages",
+      "Multilingual websites",
       "High-performance websites",
       "CMS integrations",
       "SEO-ready architecture",
@@ -322,67 +186,39 @@ export const services: Service[] = [
     ],
   },
   {
-    slug: "cloud-devops",
-    icon: Cloud,
-    title: "Cloud & DevOps",
-    shortDescription:
-      "Reliable, scalable infrastructure and deployment pipelines.",
-    overview:
-      "We set up cloud infrastructure and deployment pipelines that keep your application available, secure and easy to release updates to — without you needing an in-house infrastructure team.",
-    capabilities: [
-      "Cloud architecture & hosting setup",
-      "CI/CD pipelines",
-      "Containerization",
-      "Monitoring & alerting",
-      "Backup & disaster recovery",
-      "Performance optimization",
-    ],
-    whatWeBuild: [
-      "Production cloud environments",
-      "Automated deployment pipelines",
-      "Containerized application infrastructure",
-      "Monitoring and uptime tooling",
-    ],
-    technology: ["AWS", "Cloudflare", "Docker", "CI/CD"],
-    faq: [
-      {
-        question: "Can you take over an existing infrastructure setup?",
-        answer:
-          "Yes — we regularly review and take ownership of existing cloud environments, documenting and improving them where needed.",
-      },
-      {
-        question: "Do you offer ongoing infrastructure support?",
-        answer:
-          "Yes, this is typically covered under a maintenance & support engagement after launch.",
-      },
-    ],
-  },
-  {
     slug: "maintenance-support",
-    icon: LifeBuoy,
-    title: "Maintenance & Support",
-    shortDescription: "Ongoing care after launch — updates, monitoring, fixes.",
+    icon: Server,
+    title: "Hosting & Support",
+    shortDescription: "Reliable hosting, deployments and ongoing care after launch.",
     overview:
-      "Launch is the beginning, not the end. We offer ongoing maintenance plans covering updates, monitoring, bug fixes and small improvements so your product stays reliable.",
+      "Launch is the beginning, not the end. We set up the cloud hosting and deployment pipelines that keep your website, app or AI agent available and secure, then look after it with updates, monitoring, fixes and small improvements, without you needing an in-house technical team.",
     capabilities: [
+      "Cloud hosting setup",
+      "Automated deployment pipelines",
+      "Monitoring & uptime alerts",
+      "Backups & disaster recovery",
       "Security & dependency updates",
-      "Bug fixing",
-      "Performance monitoring",
-      "Uptime monitoring & alerting",
-      "Small feature iterations",
+      "Bug fixes & small improvements",
+      "Performance optimisation",
       "Technical support",
     ],
     whatWeBuild: [
-      "Ongoing maintenance retainers",
-      "Monitoring & alerting setup",
-      "Incremental improvements post-launch",
+      "Production hosting environments",
+      "Automated deployments",
+      "Monitoring and alerting",
+      "Ongoing maintenance plans",
     ],
-    technology: ["Sentry", "CI/CD", "Docker"],
+    technology: ["Cloudflare", "AWS", "Docker", "CI/CD", "Sentry"],
     faq: [
       {
         question: "Do we need a support plan after launch?",
         answer:
-          "It's optional but recommended — software needs updates over time (security patches, dependency updates, small fixes) to stay reliable.",
+          "It's optional but recommended. Software needs updates over time (security patches, dependency updates, small fixes) to stay reliable.",
+      },
+      {
+        question: "Can you take over our existing hosting or infrastructure?",
+        answer:
+          "Yes. We review and take ownership of existing environments, documenting and improving them where needed.",
       },
     ],
   },

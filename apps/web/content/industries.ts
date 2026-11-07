@@ -21,7 +21,7 @@ export const industries: Industry[] = [
       "Limited online presence for new patient acquisition",
     ],
     relatedSolutions: ["booking-appointment-platforms", "customer-portals"],
-    relatedServices: ["ai-agents", "web-applications", "custom-software"],
+    relatedServices: ["ai-agents", "custom-software"],
   },
   {
     slug: "retail",
@@ -49,7 +49,7 @@ export const industries: Industry[] = [
       "Manual coordination between front-of-house and operations",
     ],
     relatedSolutions: ["booking-appointment-platforms"],
-    relatedServices: ["ai-agents", "web-applications"],
+    relatedServices: ["ai-agents", "custom-software"],
   },
   {
     slug: "real-estate",
@@ -63,7 +63,7 @@ export const industries: Industry[] = [
       "No centralized system for client and property data",
     ],
     relatedSolutions: ["customer-portals", "business-management-systems"],
-    relatedServices: ["ai-agents", "web-applications", "digital-transformation"],
+    relatedServices: ["ai-agents", "custom-software", "business-automation"],
   },
   {
     slug: "professional-services",
@@ -91,7 +91,7 @@ export const industries: Industry[] = [
       "Needing one partner for both web and software needs",
     ],
     relatedSolutions: ["business-management-systems", "business-automation"],
-    relatedServices: ["ai-agents", "custom-software", "business-automation", "intelligent-operations"],
+    relatedServices: ["ai-agents", "custom-software", "business-automation"],
   },
 ];
 

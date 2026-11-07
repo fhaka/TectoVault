@@ -17,7 +17,15 @@ export function proxy(request: NextRequest) {
 // keeps the English URLs exactly as they were. Anyone requesting /en/...
 // directly is redirected to the unprefixed URL so each page has one address.
 // Pages that were removed, and where their old links should land now.
-const REMOVED_PAGES: Record<string, string> = { "/work": "/services" };
+const REMOVED_PAGES: Record<string, string> = {
+  "/work": "/services",
+  "/services/ai-integration": "/services/ai-agents",
+  "/services/intelligent-operations": "/services/business-automation",
+  "/services/digital-transformation": "/services/business-automation",
+  "/services/web-applications": "/services/custom-software",
+  "/services/mobile-applications": "/services/custom-software",
+  "/services/cloud-devops": "/services/maintenance-support",
+};
 
 function localeRouting(request: NextRequest) {
   const { pathname } = request.nextUrl;

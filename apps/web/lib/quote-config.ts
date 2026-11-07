@@ -1,16 +1,4 @@
-import {
-  Bot,
-  Workflow,
-  LayoutGrid,
-  Smartphone,
-  Cpu,
-  Plug,
-  Network,
-  Globe,
-  Cloud,
-  LifeBuoy,
-  HelpCircle,
-} from "lucide-react";
+import { Bot, Cpu, Globe, HelpCircle, Server, Workflow } from "lucide-react";
 
 // Kept centralized and easy to edit — per spec section 15, budget values
 // must be configurable rather than hard-coded throughout the UI.
@@ -18,14 +6,9 @@ import {
 export const projectTypeOptions = [
   { value: "ai-agents", label: "AI Agents", icon: Bot },
   { value: "business-automation", label: "Business Automation", icon: Workflow },
+  { value: "custom-software", label: "Custom Software & Apps", icon: Cpu },
   { value: "website", label: "Website", icon: Globe },
-  { value: "web-application", label: "Web Application", icon: LayoutGrid },
-  { value: "mobile-application", label: "Mobile Application", icon: Smartphone },
-  { value: "custom-software", label: "Custom Software", icon: Cpu },
-  { value: "ai-integration", label: "AI Integration", icon: Plug },
-  { value: "intelligent-operations", label: "Intelligent Operations", icon: Network },
-  { value: "cloud-devops", label: "Cloud / DevOps", icon: Cloud },
-  { value: "maintenance-support", label: "Maintenance / Support", icon: LifeBuoy },
+  { value: "maintenance-support", label: "Hosting & Support", icon: Server },
   { value: "other", label: "Other", icon: HelpCircle },
 ] as const;
 

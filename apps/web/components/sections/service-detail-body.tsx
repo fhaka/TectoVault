@@ -9,7 +9,7 @@ import { PageHero } from "@/components/shared/page-hero";
 import { Section, SectionHeading } from "@/components/shared/section";
 import { Reveal } from "@/components/shared/reveal";
 import { FinalCta } from "@/components/sections/final-cta";
-import { WebApplicationsHero } from "@/components/sections/web-applications-hero";
+import { ServiceHero, hasServiceHero } from "@/components/sections/service-hero";
 import { AiAgentsHero } from "@/components/sections/ai-agents-hero";
 import { CapabilityMarquee } from "@/components/sections/ai-agents/capability-marquee";
 import { IndustryShowcase } from "@/components/sections/ai-agents/industry-showcase";
@@ -48,8 +48,8 @@ export function ServiceDetailBody({
     <>
       {service.slug === "ai-agents" ? (
         <AiAgentsHero overview={overview} />
-      ) : service.slug === "web-applications" ? (
-        <WebApplicationsHero overview={overview} />
+      ) : hasServiceHero(service.slug) ? (
+        <ServiceHero slug={service.slug} title={title} overview={overview} icon={icon} />
       ) : (
         <PageHero eyebrow={t("service.eyebrow")}>
           <div className="mt-1 flex items-center gap-4">

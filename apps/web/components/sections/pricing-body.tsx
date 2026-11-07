@@ -8,19 +8,13 @@ import { Reveal } from "@/components/shared/reveal";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/lib/i18n/language-context";
 import { serviceTranslationsSq } from "@/lib/i18n/content-sq";
+import { services } from "@/content/services";
 
-const categories = [
-  { slug: "business-automation", title: "Business Automation", description: "Automated workflows, orders and communication." },
-  { slug: "custom-software", title: "Custom Software", description: "Business management and operations systems." },
-  { slug: "web-applications", title: "Web Applications", description: "Interactive, account-based platforms." },
-  { slug: "mobile-applications", title: "Mobile Applications", description: "iOS and Android apps for customers and staff." },
-  { slug: "ai-integration", title: "AI Integration", description: "Adding AI into your existing systems." },
-  { slug: "digital-transformation", title: "Digital Transformation", description: "Turning manual processes into digital ones." },
-  { slug: "intelligent-operations", title: "Intelligent Operations", description: "Connected dashboards and business intelligence." },
-  { slug: "web-development", title: "Web Development", description: "Corporate and marketing websites." },
-  { slug: "cloud-devops", title: "Cloud & DevOps", description: "Infrastructure, deployment and monitoring." },
-  { slug: "maintenance-support", title: "Maintenance & Support", description: "Ongoing care after launch." },
-];
+// Custom-project categories: every service except AI agents, which have
+// their own packages above.
+const categories = services
+  .filter((s) => s.slug !== "ai-agents")
+  .map((s) => ({ slug: s.slug, title: s.title, description: s.shortDescription }));
 
 export function PricingBody() {
   const { t, locale } = useTranslation();

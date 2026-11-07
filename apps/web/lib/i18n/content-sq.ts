@@ -20,43 +20,19 @@ export const serviceTranslationsSq: Record<string, ServiceTranslationSq> = {
   },
   "business-automation": {
     title: "Automatizim Biznesi",
-    shortDescription: "Automatizim i proceseve, porosive dhe komunikimit të përsëritur.",
+    shortDescription: "Procese të automatizuara, sisteme të lidhura dhe panele në kohë reale: më pak punë manuale, vendime më të qarta.",
   },
   "custom-software": {
-    title: "Softuer i Personalizuar",
-    shortDescription: "Softuer i ndërtuar posaçërisht sipas modelit dhe nevojave të biznesit tënd.",
-  },
-  "web-applications": {
-    title: "Aplikacione Web",
-    shortDescription: "Platforma SaaS, panele kontrolli, portale dhe sisteme menaxhimi.",
-  },
-  "mobile-applications": {
-    title: "Aplikacione Mobile",
-    shortDescription: "Aplikacione profesionale Android dhe iOS për klientë dhe ekipe.",
-  },
-  "ai-integration": {
-    title: "Integrim AI",
-    shortDescription: "Sjellim inteligjencën artificiale në softuerin, sajtin dhe kanalet tuaja ekzistuese.",
-  },
-  "digital-transformation": {
-    title: "Transformim Digjital",
-    shortDescription: "Kthimi i proceseve tradicionale në sisteme digjitale të lidhura.",
-  },
-  "intelligent-operations": {
-    title: "Operacione Inteligjente",
-    shortDescription: "Lidhja e njerëzve, të dhënave, softuerit dhe automatizimit në një ekosistem.",
+    title: "Softuer & Aplikacione",
+    shortDescription: "Sisteme biznesi, aplikacione web dhe aplikacione mobile të ndërtuara sipas mënyrës si punoni.",
   },
   "web-development": {
-    title: "Zhvillim Web",
-    shortDescription: "Sajte korporative dhe marketingu, të ndërtuara për shpejtësi dhe konvertim.",
-  },
-  "cloud-devops": {
-    title: "Cloud & DevOps",
-    shortDescription: "Infrastrukturë e besueshme, e shkallëzueshme, dhe pipeline vendosjeje.",
+    title: "Faqe Interneti",
+    shortDescription: "Faqe korporative dhe marketingu, të ndërtuara për shpejtësi, qartësi dhe konvertim.",
   },
   "maintenance-support": {
-    title: "Mirëmbajtje & Suport",
-    shortDescription: "Kujdes i vazhdueshëm pas lançimit — përditësime, monitorim, riparime.",
+    title: "Hostim & Mbështetje",
+    shortDescription: "Hostim i besueshëm, publikime të automatizuara dhe kujdes i vazhdueshëm pas lançimit.",
   },
 };
 
@@ -85,12 +61,14 @@ export const serviceDetailsSq: Record<
       "Njoftime",
       "Marrje informacioni biznesi",
       "Komunikim shumëgjuhësh",
+      "AI në faqen, CRM-në dhe aplikacionet që keni tashmë",
     ],
     whatWeBuild: [
       "Agjentë zëri për telefon dhe rezervime",
       "Agjentë chat për web dhe kanale mesazhesh",
       "Agjentë të brendshëm për staf dhe operacione",
       "Agjentë shumëgjuhësh për klientët",
+      "Funksione AI brenda softuerit tuaj ekzistues",
     ],
     faq: [
       {
@@ -108,270 +86,147 @@ export const serviceDetailsSq: Record<
         answer:
           "Agjentët janë projektuar të njohin kufijtë e tyre dhe t'ia kalojnë një njeriu — duke marrë mesazh ose transferuar telefonatën — në vend që të hamendësojnë.",
       },
+      {
+        question: "A duhet ta rindërtojmë sistemin për të shtuar AI?",
+        answer:
+          "Zakonisht jo. Shumica e funksioneve AI lidhen me faqen, CRM-në ose aplikacionin tuaj ekzistues përmes API-ve, pa pasur nevojë për rindërtim.",
+      },
     ],
   },
   "business-automation": {
     overview:
-      "Zëvendësojmë punën manuale të përsëritur — mesazhe, hyrje të dhënash, porosi, dokumente, ndjekje, sisteme të shkëputura — me workflow të automatizuara dhe të lidhura që punojnë vetë në sfond.",
+      "Zëvendësojmë punën manuale dhe të përsëritur (mesazhe, futje të dhënash, porosi, dokumente, ndjekje klientësh) me procese të automatizuara, lidhim mjetet që përdorin departamentet tuaja që të dhënat të kalojnë mes tyre, dhe ju japim panele e raporte që tregojnë si po ecën vërtet biznesi. Hap pas hapi, proceset me letra dhe fletëllogaritje bëhen sisteme digjitale të lidhura.",
     capabilities: [
-      "Automatizim workflow-esh",
-      "Automatizim porosish & dokumentesh",
-      "Automatizim komunikimi",
-      "Planifikim & njoftime",
-      "Lidhje sistem-me-sistem",
-      "Dokumentim automatik",
+      "Automatizim procesesh",
+      "Automatizim porosish dhe dokumentesh",
+      "Automatizim komunikimi dhe ndjekjeje",
+      "Lidhje mes sistemeve",
+      "Panele dhe raporte të automatizuara",
+      "Analizë dhe rikonceptim procesesh",
+      "Kalim i proceseve me letra dhe fletëllogaritje online",
+      "Procese mes departamenteve",
     ],
     whatWeBuild: [
-      "Workflow të automatizuara që zëvendësojnë proceset manuale",
-      "Sisteme të lidhura që shkëmbejnë të dhëna në kohë reale",
-      "Automatizime njoftimi dhe ndjekjeje",
-      "Sisteme automatike raportimi dhe dokumentimi",
+      "Procese të automatizuara që zëvendësojnë hapat manualë",
+      "Sisteme të lidhura që ndajnë të dhëna në kohë reale",
+      "Panele biznesi dhe raporte të automatizuara",
+      "Plane hap pas hapi për digjitalizim",
     ],
     faq: [
       {
-        question: "Përdorim tashmë disa vegla të shkëputura — a mund të ndihmoni?",
+        question: "Përdorim tashmë disa mjete të palidhura. A mund të ndihmoni?",
         answer:
-          "Po. Një pikënisje e zakonshme është lidhja e veglave ekzistuese përmes automatizimit përpara se të mendohet për një rindërtim të plotë të personalizuar.",
+          "Po. Një pikënisje e zakonshme është lidhja e mjeteve që keni përmes automatizimit, para se të mendohet për një rindërtim të plotë.",
       },
       {
-        question: "Si e vlerësoni një projekt automatizimi?",
+        question: "Si e përcaktoni një projekt automatizimi?",
         answer:
-          "Fillojmë duke hartuar procesin tënd aktual nga fillimi në fund, identifikojmë ku ndodh puna manuale, dhe biem dakord çfarë të automatizohet së pari për kthimin më të shpejtë.",
+          "Nisim duke hartuar procesin tuaj aktual nga fillimi në fund, gjejmë ku ka punë manuale dhe biem dakord çfarë të automatizojmë së pari për fitimin më të shpejtë.",
+      },
+      {
+        question: "Ku duhet të nisë një ndryshim digjital më i madh?",
+        answer:
+          "Me një fazë të shkurtër zbulimi që harton proceset tuaja dhe zgjedh një ose dy ndryshimet me ndikimin më të shpejtë, pastaj ndërtojmë mbi to me faza.",
       },
     ],
   },
   "custom-software": {
     overview:
-      "Kur veglat gati të përdorimit të detyrojnë të futesh në workflow-in e tyre në vend të tëndit, ne ndërtojmë softuer të formësuar rreth proceseve tua reale — operacione, planifikim, raportim, apo çdo gjë tjetër ndërmjet.",
+      "Kur mjetet e gatshme ju detyrojnë të punoni si duan ato, ne ndërtojmë softuer sipas mënyrës suaj: sisteme menaxhimi, portale klientësh, panele të brendshme dhe platforma rezervimi në web, si dhe aplikacione iOS e Android për klientët ose stafin, të gjitha mbi të njëjtin sistem dhe të ndërtuara që të mirëmbahen lehtë ndërsa rriteni.",
     capabilities: [
-      "Sisteme menaxhimi biznesi",
-      "Aplikacione CRM & tip ERP",
-      "Vegla raportimi & analitike",
-      "Modernizim sistemesh të vjetra",
-      "Integrime sistemesh",
-      "Migrim të dhënash",
+      "Sisteme menaxhimi biznesi (si CRM / ERP)",
+      "Portale klientësh dhe panele të brendshme",
+      "Sisteme rezervimi dhe planifikimi",
+      "Aplikacione iOS dhe Android",
+      "Akses sipas roleve për stafin, klientët dhe administratorët",
+      "Integrime me mjetet që përdorni tashmë",
+      "Modernizim sistemesh të vjetra dhe migrim të dhënash",
+      "Funksione në kohë reale dhe njoftime",
     ],
     whatWeBuild: [
       "Platforma operacionesh dhe menaxhimi",
-      "Sisteme raportimi të brendshme",
-      "Sisteme menaxhimi rezervimesh dhe porosish",
-      "Integrime mes veglave ekzistuese",
-    ],
-    faq: [
-      {
-        question: "Si e vlerësoni një projekt softueri të personalizuar?",
-        answer:
-          "Fillojmë me një fazë zbulimi për të hartuar procesin tënd aktual, përcaktojmë çfarë duhet të bëjë softueri, dhe biem dakord për qëllimin përpara se të fillojë çdo zhvillim.",
-      },
-      {
-        question: "A mund softueri i personalizuar të zëvendësojë disa vegla që përdorim sot?",
-        answer:
-          "Shpesh, po — një rezultat i zakonshëm është konsolidimi i disa veglave të shkëputura në një sistem të vetëm të ndërtuar rreth mënyrës si funksionon vërtet biznesi yt.",
-      },
-    ],
-  },
-  "web-applications": {
-    overview:
-      "Bëjmë zhvillim aplikacionesh web, nga portale klientësh deri te panele të brendshme kontrolli — ndërtojmë aplikacione që trajtojnë logjikë biznesi reale, përdorues realë, dhe të dhëna reale, të projektuara të mbeten të mirëmbajtshme ndërsa rriten.",
-    capabilities: [
-      "Portale klientësh & shërbimi",
-      "Vegla dhe panele të brendshme",
-      "Sisteme rezervimesh dhe planifikimi",
-      "Kontroll aksesi sipas roli",
-      "Veçori në kohë reale",
-      "Integrime me palë të treta",
-    ],
-    whatWeBuild: [
       "Portale për klientët",
-      "Panele operacionesh të brendshme",
-      "Sisteme rezervimesh dhe takimesh",
-      "Platforma multi-rol",
+      "Aplikacione mobile për klientët ose stafin",
+      "Integrime mes mjeteve ekzistuese",
     ],
     faq: [
       {
-        question: "A ndërtoni frontend-in dhe backend-in, apo vetëm njërën anë?",
+        question: "Si e përcaktoni një projekt softueri të personalizuar?",
         answer:
-          "Ofrojmë zgjidhje të plotë: ndërfaqen që shohin përdoruesit e tu, dhe backend-in, databazën, dhe API-të pas saj, duke punuar si një sistem koherent.",
+          "Nisim me një fazë zbulimi për të hartuar procesin tuaj aktual, përcaktojmë çfarë duhet të bëjë softueri dhe biem dakord për qëllimin para se të fillojë zhvillimi.",
       },
       {
-        question: "A mund aplikacioni të mbështesë role të ndryshme përdoruesish?",
+        question: "A mund të zëvendësojë softueri i personalizuar disa mjete që përdorim sot?",
         answer:
-          "Po — aksesi sipas roli është pjesë standarde e mënyrës si projektojmë aplikacione me më shumë se një lloj përdoruesi, si staf, klientë, dhe administratorë.",
+          "Shpesh po. Një rezultat i zakonshëm është bashkimi i disa mjeteve të palidhura në një sistem të vetëm, të ndërtuar sipas mënyrës si funksionon biznesi juaj.",
       },
-    ],
-  },
-  "mobile-applications": {
-    overview:
-      "Ndërtojmë aplikacione mobile që lidhen me të njëjtin backend dhe logjikë biznesi si produktet tuaja web — për klientë, punonjës, dhe operacione të brendshme.",
-    capabilities: [
-      "Aplikacione iOS & Android",
-      "Zhvillim ndër-platformë",
-      "Integrim API & backend",
-      "Njoftime push",
-      "Përgatitje & dorëzim në app store",
-    ],
-    whatWeBuild: [
-      "Aplikacione mobile për klientët",
-      "Aplikacione për staf/terren",
-      "Aplikacione shoqëruese për platforma ekzistuese",
-    ],
-    faq: [
       {
-        question: "A ndërtoni për iOS dhe Android njëkohësisht?",
+        question: "A ndërtoni edhe web edhe mobile?",
         answer:
-          "Po, zakonisht nga një bazë kodi e vetme ndër-platformë, përveç rasteve kur një projekt kërkon specifikisht zhvillim nativ.",
-      },
-    ],
-  },
-  "ai-integration": {
-    overview:
-      "Nuk të duhet gjithmonë të rindërtosh nga zero. Integrojmë inteligjencën artificiale në sajtin, aplikacionet, sistemet CRM, dhe kanalet tua ekzistuese të komunikimit — duke shtuar inteligjencë aty ku krijon vlerë reale.",
-    capabilities: [
-      "Integrim AI në sisteme ekzistuese",
-      "Integrim CRM & kanalesh komunikimi",
-      "Përmirësim sajti & aplikacioni ekzistues",
-      "Integrim veçorish AI me bazë API",
-      "Lidhje pipeline të dhënash",
-    ],
-    whatWeBuild: [
-      "Veçori AI të shtuara në produkte ekzistuese",
-      "Kërkim dhe rekomandime inteligjente",
-      "Kanale komunikimi klientësh të përmirësuara me AI",
-    ],
-    faq: [
-      {
-        question: "Na duhet të rindërtojmë sistemin tonë për të shtuar AI?",
-        answer:
-          "Zakonisht jo — shumica e integrimeve AI lidhen me sistemin tënd ekzistues përmes API-ve në vend që të kërkojnë rindërtim.",
-      },
-    ],
-  },
-  "digital-transformation": {
-    overview:
-      "Bizneset po lëvizin nga vegla të shkëputura dhe procese manuale drejt sistemesh inteligjente që kuptojnë, automatizojnë, dhe optimizojnë vazhdimisht operacionet. Ne e ndërtojmë atë tranzicion.",
-    capabilities: [
-      "Analizë & rikonceptim procesesh",
-      "Migrim nga sisteme të vjetra në digjitale",
-      "Lidhje departamentesh",
-      "Mbështetje për menaxhimin e ndryshimit",
-      "Dizajn workflow-esh digjital-së-pari",
-    ],
-    whatWeBuild: [
-      "Modele operacionale të modernizuara digjitalisht",
-      "Workflow të lidhura, pa letra",
-      "Udhërrëfyes transformimi me faza",
-    ],
-    faq: [
-      {
-        question: "Ku duhet të fillojë një transformim digjital?",
-        answer:
-          "Zakonisht me një fazë zbulimi që harton proceset ekzistuese dhe identifikon ku digjitalizimi dhe lidhja e sistemeve do të kenë ndikimin më të shpejtë.",
-      },
-    ],
-  },
-  "intelligent-operations": {
-    overview:
-      "Optimizojmë workflow-e, reduktojmë punën manuale, lidhim departamente, dhe mundësojmë vendime biznesi më të mençura, të bazuara në të dhëna — duke kthyer operacionet e përditshme në një sistem të vetëm inteligjent dhe të lidhur.",
-    capabilities: [
-      "Optimizim workflow-esh",
-      "Lidhshmëri ndër-departamentesh",
-      "Panele business intelligence",
-      "Raportim & njohuri automatike",
-      "Mbështetje vendimesh të bazuara në të dhëna",
-    ],
-    whatWeBuild: [
-      "Panele dhe analitikë operacionale",
-      "Workflow departamentesh të lidhura",
-      "Sisteme automatike njohurie dhe raportimi",
-    ],
-    faq: [
-      {
-        question: "Ofroni mbështetje të vazhdueshme pasi sistemet të lidhen?",
-        answer:
-          "Po — kjo mbulohet zakonisht nën një angazhim optimizimi të vazhdueshëm, duke rafinuar automatizimet dhe panelet ndërsa biznesi evoluon.",
+          "Po. Ndërtojmë gjithçka (ndërfaqen, backend-in, databazën dhe API-të), dhe aplikacione iOS e Android zakonisht nga një kod i përbashkët, të lidhura me të njëjtin sistem.",
       },
     ],
   },
   "web-development": {
     overview:
-      "Ofrojmë zhvillim faqesh web dhe krijim website të shpejtë e të aksesueshëm, që përfaqëson siç duhet biznesin tënd online — nga sajte korporative deri te faqe fushate, të gjitha të ndërtuara mbi baza moderne dhe të mirëmbajtshme.",
+      "Projektojmë dhe ndërtojmë faqe interneti të shpejta dhe të aksesueshme që e përfaqësojnë biznesin tuaj si duhet online, nga faqe korporative deri te faqe fushatash, shumëgjuhëshe dhe gati për motorët e kërkimit, mbi baza moderne dhe të mirëmbajtshme.",
     capabilities: [
-      "Sajte korporative",
-      "Sajte marketingu",
-      "Faqe fushate",
-      "Sajte me performancë të lartë",
+      "Faqe korporative",
+      "Faqe marketingu",
+      "Faqe fushatash (landing pages)",
+      "Faqe shumëgjuhëshe",
+      "Faqe me performancë të lartë",
       "Integrime CMS",
       "Arkitekturë gati për SEO",
     ],
     whatWeBuild: [
-      "Sajte kompanish dhe produktesh",
-      "Faqe fushate dhe lançimi",
-      "Sajte marketingu me menaxhim përmbajtjeje",
-      "Sajte shumëgjuhëshe",
+      "Faqe për kompaninë dhe produktet",
+      "Faqe për fushata dhe lançime",
+      "Faqe marketingu me menaxhim përmbajtjeje",
+      "Faqe shumëgjuhëshe",
     ],
     faq: [
       {
-        question: "Sa zgjat zakonisht një projekt sajti?",
+        question: "Sa zgjat zakonisht një projekt faqeje interneti?",
         answer:
-          "Një sajt marketingu apo korporativ zakonisht zgjat disa javë nga fillimi te lançimi, në varësi të qëllimit dhe gatishmërisë së përmbajtjes.",
+          "Një faqe marketingu ose korporative zakonisht zgjat disa javë nga fillimi deri në publikim, në varësi të qëllimit, gatishmërisë së përmbajtjes dhe numrit të modeleve të faqeve.",
       },
       {
         question: "A mund të punoni me udhëzimet tona ekzistuese të markës?",
         answer:
-          "Po. Ndërtojmë brenda sistemit tënd ekzistues të markës kur ka një të tillë, dhe mund të ndihmojmë ta zgjerojmë për web kur ende s'e mbulon digjitalen.",
-      },
-    ],
-  },
-  "cloud-devops": {
-    overview:
-      "Vendosim infrastrukturë cloud dhe pipeline vendosjeje që mbajnë aplikacionin tënd të disponueshëm, të sigurt, dhe të lehtë për të lëshuar përditësime — pa pasur nevojë për një ekip infrastrukture të brendshëm.",
-    capabilities: [
-      "Arkitekturë cloud & hostim",
-      "Pipeline CI/CD",
-      "Konteinerizim",
-      "Monitorim & alarmim",
-      "Backup & rikuperim fatkeqësie",
-      "Optimizim performance",
-    ],
-    whatWeBuild: [
-      "Mjedise cloud prodhimi",
-      "Pipeline vendosjeje të automatizuara",
-      "Infrastrukturë aplikacioni e konteinerizuar",
-      "Vegla monitorimi dhe kohe-funksionimi",
-    ],
-    faq: [
-      {
-        question: "A mund të merrni përsipër një infrastrukturë ekzistuese?",
-        answer:
-          "Po — rishikojmë dhe marrim rregullisht pronësi mbi mjedise cloud ekzistuese, duke i dokumentuar dhe përmirësuar kur nevojitet.",
-      },
-      {
-        question: "Ofroni mbështetje të vazhdueshme për infrastrukturën?",
-        answer: "Po, kjo mbulohet zakonisht nën një angazhim mirëmbajtjeje & suporti pas lançimit.",
+          "Po. Ndërtojmë brenda sistemit tuaj të markës kur ekziston, dhe mund t'ju ndihmojmë ta zgjeroni për web aty ku ende nuk e mbulon.",
       },
     ],
   },
   "maintenance-support": {
     overview:
-      "Lançimi është fillimi, jo fundi. Ofrojmë plane mirëmbajtjeje që mbulojnë përditësime, monitorim, riparim gabimesh, dhe përmirësime të vogla që mbajnë produktin tënd të besueshëm.",
+      "Lançimi është fillimi, jo fundi. Konfigurojmë hostimin në cloud dhe publikimet e automatizuara që e mbajnë faqen, aplikacionin ose agjentin tuaj AI të disponueshëm dhe të sigurt, pastaj kujdesemi për të me përditësime, monitorim, riparime dhe përmirësime të vogla, pa pasur nevojë për një ekip teknik të brendshëm.",
     capabilities: [
-      "Përditësime sigurie & varësish",
-      "Riparim gabimesh",
-      "Monitorim performance",
-      "Monitorim & alarmim kohe-funksionimi",
-      "Përmirësime graduale veçorish",
+      "Konfigurim hostimi në cloud",
+      "Publikime të automatizuara",
+      "Monitorim dhe njoftime për ndërprerje",
+      "Kopje rezervë dhe rikuperim",
+      "Përditësime sigurie dhe varësish",
+      "Riparime dhe përmirësime të vogla",
+      "Optimizim performance",
       "Mbështetje teknike",
     ],
     whatWeBuild: [
-      "Kontrata mirëmbajtjeje të vazhdueshme",
-      "Konfigurim monitorimi & alarmimi",
-      "Përmirësime graduale pas lançimit",
+      "Mjedise hostimi për prodhim",
+      "Publikime të automatizuara",
+      "Monitorim dhe njoftime",
+      "Plane mirëmbajtjeje të vazhdueshme",
     ],
     faq: [
       {
-        question: "Na duhet një plan suporti pas lançimit?",
+        question: "A na duhet një plan mbështetjeje pas lançimit?",
         answer:
-          "Është opsionale por e rekomanduar — softueri ka nevojë për përditësime me kohën (rregullime sigurie, përditësime varësish, riparime të vogla) për të mbetur i besueshëm.",
+          "Është opsional por i rekomanduar. Softueri ka nevojë për përditësime me kalimin e kohës (sigurie, varësish, riparime të vogla) që të mbetet i besueshëm.",
+      },
+      {
+        question: "A mund të merrni përsipër hostimin ose infrastrukturën tonë ekzistuese?",
+        answer:
+          "Po. I rishikojmë dhe i marrim përsipër mjediset ekzistuese, duke i dokumentuar dhe përmirësuar aty ku duhet.",
       },
     ],
   },
