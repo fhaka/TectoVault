@@ -9,13 +9,22 @@ import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site-config";
 import { useTranslation } from "@/lib/i18n/language-context";
 
-// Shown once per browser session on the home page: a full-bleed splash with
-// the hero image, brand mark and an "Explore" button. Clicking it — or
-// scrolling, or pressing Enter/Escape — fades the splash out and reveals the
-// real homepage underneath. Uses sessionStorage (not localStorage) so it
-// reappears on a fresh visit but not on every client-side navigation back to
-// "/" within the same tab.
-const SPLASH_SESSION_KEY = "tectovault:splash-seen";
+// Shown once per visitor: a full-bleed splash with the hero image, brand
+// mark and an "Explore" button. Clicking it — or scrolling, or pressing
+// Enter/Escape — fades the splash out and reveals the real homepage
+// underneath. Remembered in localStorage, so returning visitors (and people
+// arriving from ads a second time) go straight to the content.
+const SPLASH_SEEN_KEY = "tectovault:splash-seen";
+
+/** True when this visitor has already seen (and dismissed) the splash. */
+export function hasSeenSplash() {
+  try {
+    return localStorage.getItem(SPLASH_SEEN_KEY) === "1";
+  } catch {
+    // Storage unavailable (private mode, etc.) — show the splash.
+    return false;
+  }
+}
 
 type Phase = "pending" | "visible" | "exiting" | "hidden";
 
@@ -24,19 +33,14 @@ export function HomeSplash() {
   const { t } = useTranslation();
 
   React.useEffect(() => {
-    let seen = false;
-    try {
-      seen = sessionStorage.getItem(SPLASH_SESSION_KEY) === "1";
-    } catch {
-      // sessionStorage unavailable (private mode, etc.) — just show the splash.
-    }
+    const seen = hasSeenSplash();
     const update = window.setTimeout(() => setPhase(seen ? "hidden" : "visible"), 0);
     return () => window.clearTimeout(update);
   }, []);
 
   const dismiss = React.useCallback(() => {
     try {
-      sessionStorage.setItem(SPLASH_SESSION_KEY, "1");
+      localStorage.setItem(SPLASH_SEEN_KEY, "1");
     } catch {
       // ignore
     }

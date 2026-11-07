@@ -6,12 +6,13 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 import { footerNav } from "@/content/nav";
 import { Logo } from "@/components/layout/logo";
-import { InstagramIcon } from "@/components/shared/social-icons";
+import { InstagramIcon, WhatsappIcon } from "@/components/shared/social-icons";
 import { useTranslation } from "@/lib/i18n/language-context";
+import { whatsappLink } from "@/lib/whatsapp";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
-  const { t, tx } = useTranslation();
+  const { t, tx, locale } = useTranslation();
 
   return (
     <footer className="border-t border-white/10 bg-ink text-ink-foreground">
@@ -19,7 +20,8 @@ export function SiteFooter() {
         <div className="grid grid-cols-1 gap-10 min-[400px]:grid-cols-2 md:grid-cols-6">
           <div className="min-[400px]:col-span-2">
             <Logo />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-muted">
+            <p className="mt-5 max-w-xs font-display text-lg font-medium leading-snug text-white">{t("brand.tagline")}</p>
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-ink-muted">
               {tx(siteConfig.description)}
             </p>
             <div className="mt-6 flex items-center gap-3">
@@ -52,6 +54,12 @@ export function SiteFooter() {
                 <Phone className="mt-0.5 size-4 shrink-0 opacity-0" />
                 <a href={`tel:${siteConfig.contact.phone2.replace(/\s/g, "")}`} className="hover:text-foreground">
                   {siteConfig.contact.phone2}
+                </a>
+              </li>
+              <li className="flex items-start gap-2">
+                <WhatsappIcon className="mt-0.5 size-4 shrink-0" />
+                <a href={whatsappLink(locale)} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                  WhatsApp
                 </a>
               </li>
               <li className="flex items-start gap-2">

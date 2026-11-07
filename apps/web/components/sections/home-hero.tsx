@@ -8,24 +8,20 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { AgentConsole } from "@/components/sections/agent-console";
+import { hasSeenSplash } from "@/components/sections/home-splash";
 import { useTranslation } from "@/lib/i18n/language-context";
 
 // When the splash is showing, the hero waits for its handoff event before
 // animating in — the splash copy sinks out while this copy rises in over the
 // same background image, so the two read as one continuous scene. When the
-// splash was already seen this session (or storage is unavailable and the
+// splash was already seen by this visitor (or storage is unavailable and the
 // splash chose to show, it still dispatches the event), the hero animates on
 // mount as usual.
 function useSplashHandoff() {
   const [ready, setReady] = React.useState(false);
 
   React.useEffect(() => {
-    let splashPending = true;
-    try {
-      splashPending = sessionStorage.getItem("tectovault:splash-seen") !== "1";
-    } catch {
-      // Mirror the splash's fallback: it shows, so wait for its event.
-    }
+    const splashPending = !hasSeenSplash();
     if (!splashPending) {
       const update = window.setTimeout(() => setReady(true), 0);
       return () => window.clearTimeout(update);

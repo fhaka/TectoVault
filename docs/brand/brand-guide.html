@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TectoVault — Brand guide</title>
+<style>
+  @font-face { font-family: Manrope; src: url("../../apps/web/node_modules/@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2") format("woff2"); font-weight: 200 800; }
+  @font-face { font-family: Manrope; src: url("../../apps/web/node_modules/@fontsource-variable/manrope/files/manrope-latin-ext-wght-normal.woff2") format("woff2"); font-weight: 200 800; unicode-range: U+0100-024F; }
+  @font-face { font-family: Inter; src: url("../../apps/web/node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2") format("woff2"); font-weight: 100 900; }
+  @font-face { font-family: Inter; src: url("../../apps/web/node_modules/@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2") format("woff2"); font-weight: 100 900; unicode-range: U+0100-024F; }
+  :root { --teal: #2f8f72; --mint: #4fd1a8; --ink: #08090c; --mist: #f4f4f6; --slate: #62636c; --line: #e6e6ea; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Inter, system-ui, sans-serif; color: #0b0c0f; background: #fff; line-height: 1.55; }
+  h1, h2, h3 { font-family: Manrope, Inter, sans-serif; letter-spacing: -0.02em; font-weight: 600; margin: 0; }
+  .page { max-width: 980px; margin: 0 auto; padding: 56px 48px; }
+  section { padding: 44px 0; border-top: 1px solid var(--line); break-inside: avoid; }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
+  h2 { font-size: 30px; margin-bottom: 18px; }
+  h3 { font-size: 17px; margin: 22px 0 8px; }
+  p, li { color: #2b2c33; }
+  .muted { color: var(--slate); font-size: 14px; }
+  .cover { background: var(--ink); color: #f4f4f6; border-radius: 28px; padding: 56px; position: relative; overflow: hidden; }
+  .cover::after { content: ""; position: absolute; right: -120px; top: -120px; width: 420px; height: 420px; border-radius: 50%; background: rgba(79,209,168,.22); filter: blur(60px); }
+  .cover img { height: 52px; position: relative; z-index: 1; }
+  .cover h1 { font-size: 52px; line-height: 1.04; margin-top: 64px; max-width: 640px; position: relative; z-index: 1; }
+  .cover p { color: #9a9ba3; margin-top: 18px; max-width: 560px; position: relative; z-index: 1; }
+  .grid { display: grid; gap: 16px; }
+  .g2 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: repeat(3, 1fr); } .g4 { grid-template-columns: repeat(4, 1fr); }
+  .tile { border: 1px solid var(--line); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; min-height: 150px; }
+  .tile img { width: 100%; max-height: 64px; object-fit: contain; object-position: left; }
+  .tile.dark { background: var(--ink); border-color: var(--ink); color: #9a9ba3; }
+  .tile.mist { background: var(--mist); }
+  .tile small { font-size: 12px; color: var(--slate); }
+  .tile.dark small { color: #9a9ba3; }
+  .swatch { border-radius: 18px; overflow: hidden; border: 1px solid var(--line); }
+  .swatch .chip { height: 96px; }
+  .swatch .info { padding: 12px 14px; font-size: 12.5px; }
+  .swatch .info b { display: block; font-size: 14px; font-family: Manrope, sans-serif; }
+  .mono { font-family: ui-monospace, Menlo, monospace; }
+  .do, .dont { border-radius: 16px; padding: 18px 20px; font-size: 14px; }
+  .do { background: rgba(47,143,114,.08); border: 1px solid rgba(47,143,114,.3); }
+  .dont { background: rgba(229,72,77,.06); border: 1px solid rgba(229,72,77,.25); }
+  .do b, .dont b { display: block; margin-bottom: 6px; font-family: Manrope, sans-serif; }
+  .do ul, .dont ul { margin: 0; padding-left: 18px; }
+  .type-sample { border: 1px solid var(--line); border-radius: 18px; padding: 26px; }
+  .tagline { font-family: Manrope, sans-serif; font-weight: 600; font-size: 34px; letter-spacing: -0.02em; line-height: 1.1; }
+  .copy { background: var(--mist); border-radius: 14px; padding: 16px 18px; font-size: 14px; margin: 8px 0 14px; white-space: pre-line; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  td, th { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--slate); }
+  @page { size: A4; margin: 14mm; }
+  @media print { .page { padding: 0; } section { padding: 30px 0; } .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; } * { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="cover">
+    <img src="logo/tectovault-logo-white.svg" alt="TectoVault" />
+    <h1>AI agents that work for your business.</h1>
+    <p>Brand guide — logo, colours, typography, voice and ready-to-use copy. Version 1 · November 2026.</p>
+  </div>
+
+  <section>
+    <div class="eyebrow">01 · Who we are</div>
+    <h2>One line, everywhere</h2>
+    <p class="tagline">AI agents that work for your business.</p>
+    <p class="tagline" style="color:var(--teal);margin-top:6px">Agjentë AI që punojnë për biznesin tuaj.</p>
+    <p style="margin-top:22px">TectoVault builds AI agents that answer customers, book appointments and handle repetitive work for businesses in Albania — and the automation and software they run on.</p>
+    <p class="muted">Use exactly this tagline on the website, social profiles, ads, proposals, invoices and email signatures. Retired lines — don't use them any more: “Optimize. Automate. Operate.” and “Building the intelligent business.”</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">02 · Logo</div>
+    <h2>Logo files</h2>
+    <div class="grid g2">
+      <div class="tile"><img src="logo/tectovault-logo.svg" alt="" /><small><span class="mono">tectovault-logo.svg</span> · full colour, on white or very light backgrounds</small></div>
+      <div class="tile dark"><img src="logo/tectovault-logo-white.svg" alt="" /><small><span class="mono">tectovault-logo-white.svg</span> · on ink, photos and dark backgrounds</small></div>
+      <div class="tile mist"><img src="logo/tectovault-logo-dark.svg" alt="" /><small><span class="mono">tectovault-logo-dark.svg</span> · one colour: documents, stamps, invoices</small></div>
+      <div class="tile"><img src="logo/tectovault-mark.svg" alt="" style="max-height:80px" /><small><span class="mono">tectovault-mark.svg</span> · icon only: avatars, favicons, app icons</small></div>
+    </div>
+    <h3>Rules</h3>
+    <div class="grid g2">
+      <div class="do"><b>Do</b><ul>
+        <li>Keep clear space around the logo equal to the height of the letter “o”.</li>
+        <li>Minimum size: 120 px wide on screens, 30 mm in print. Below that, use the icon only.</li>
+        <li>Use the white logo on dark backgrounds and photos.</li>
+      </ul></div>
+      <div class="dont"><b>Don't</b><ul>
+        <li>Stretch, rotate, outline or add shadows or glows to the logo.</li>
+        <li>Recolour it outside the palette below, or retype the wordmark in another font.</li>
+        <li>Put the full-colour logo on mid-tone or busy backgrounds.</li>
+      </ul></div>
+    </div>
+    <p class="muted" style="margin-top:16px">The SVG files were traced from the website's 696 × 147 px logo and are sharp at any screen size. For large-format print (signage, vehicles), ask the original designer for the master vector file.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">03 · Colour</div>
+    <h2>Palette</h2>
+    <div class="grid g4">
+      <div class="swatch"><div class="chip" style="background:#2f8f72"></div><div class="info"><b>Teal</b><span class="mono">#2F8F72 · rgb 47 143 114</span><br>Primary accent on light backgrounds: buttons, links, highlights.</div></div>
+      <div class="swatch"><div class="chip" style="background:#4fd1a8"></div><div class="info"><b>Mint</b><span class="mono">#4FD1A8 · rgb 79 209 168</span><br>Accent on dark backgrounds and for glows.</div></div>
+      <div class="swatch"><div class="chip" style="background:#08090c"></div><div class="info"><b>Ink</b><span class="mono">#08090C · rgb 8 9 12</span><br>Dark sections, headlines on light, the logo in one colour.</div></div>
+      <div class="swatch"><div class="chip" style="background:#ffffff"></div><div class="info"><b>White</b><span class="mono">#FFFFFF</span><br>Main light background.</div></div>
+      <div class="swatch"><div class="chip" style="background:#f4f4f6"></div><div class="info"><b>Mist</b><span class="mono">#F4F4F6</span><br>Alternate light sections, cards, text on ink.</div></div>
+      <div class="swatch"><div class="chip" style="background:#62636c"></div><div class="info"><b>Slate</b><span class="mono">#62636C</span><br>Secondary text on light backgrounds.</div></div>
+      <div class="swatch"><div class="chip" style="background:#9a9ba3"></div><div class="info"><b>Ash</b><span class="mono">#9A9BA3</span><br>Secondary text on dark backgrounds.</div></div>
+      <div class="swatch"><div class="chip" style="background:linear-gradient(90deg,#5f9584,#c3d2cd)"></div><div class="info"><b>Logo gradient</b><span class="mono">#5F9584 → #C3D2CD</span><br>Only inside the logo wordmark.</div></div>
+    </div>
+    <p class="muted" style="margin-top:14px">Rule of thumb: mostly ink and white, with teal (or mint on dark) used sparingly for what should be clicked or noticed. Red <span class="mono">#E5484D</span> is for errors only.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">04 · Typography</div>
+    <h2>Two typefaces</h2>
+    <div class="grid g2">
+      <div class="type-sample">
+        <div class="muted">Headings · Manrope · 500–600 · tight letter-spacing (−2%)</div>
+        <div style="font-family:Manrope;font-weight:600;font-size:38px;letter-spacing:-0.02em;line-height:1.05;margin-top:12px">Meet the agents that never clock out.</div>
+      </div>
+      <div class="type-sample">
+        <div class="muted">Body · Inter · 400–500 · 16–18 px on screens</div>
+        <p style="font-size:17px;margin-top:12px">Each agent learns your business — services, prices, policies and tone — and connects to your systems, so it gets things done instead of just chatting.</p>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:14px">Both are free (Google Fonts / Fontsource). Small labels: Inter 600, uppercase, wide letter-spacing (+20%), in teal. Where the fonts aren't available (Word, email), use Arial.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">05 · Voice</div>
+    <h2>How we write</h2>
+    <div class="grid g3">
+      <div class="tile"><b style="font-family:Manrope">Clear</b><small>Short sentences and everyday words. Say what the agent does: “books appointments”, not “leverages AI to optimise engagement”.</small></div>
+      <div class="tile"><b style="font-family:Manrope">Practical</b><small>Lead with the customer's problem (missed calls, messages at night) and the concrete result.</small></div>
+      <div class="tile"><b style="font-family:Manrope">Honest</b><small>No invented numbers, clients or guarantees. Examples are labelled as examples. Say what an agent can't do.</small></div>
+    </div>
+    <table style="margin-top:22px">
+      <tr><th>Write</th><th>Avoid</th></tr>
+      <tr><td>AI agent / agjent AI</td><td>chatbot, bot, robot (except when comparing)</td></tr>
+      <tr><td>TectoVault (in text)</td><td>Tectovault, TECTOVAULT, Tecto Vault — the logo is lowercase, text is not</td></tr>
+      <tr><td>Vault — the name of our own website agent</td><td>using “Vault” for the company</td></tr>
+      <tr><td>“answers every message in seconds”</td><td>“revolutionary”, “game-changing”, “100% automated”</td></tr>
+      <tr><td>Albanian first for local clients; English and Italian for tourism and export</td><td>mixing languages in one sentence</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <div class="eyebrow">06 · Ready-to-use copy</div>
+    <h2>Copy &amp; paste</h2>
+    <h3>Social bio (Instagram, ~150 characters)</h3>
+    <div class="copy">🇬🇧 AI agents that work for your business. Chat, voice & WhatsApp agents that answer customers and book appointments 24/7. Tirana 🇦🇱
+🇦🇱 Agjentë AI që punojnë për biznesin tuaj. Agjentë chat, zanorë & WhatsApp që u përgjigjen klientëve dhe rezervojnë takime 24/7. Tiranë</div>
+    <h3>LinkedIn — about</h3>
+    <div class="copy">TectoVault builds AI agents that work for your business: chat, voice and WhatsApp agents that answer customers, book appointments and handle repetitive work around the clock, in Albanian, English and Italian. We also build the automation, web applications and software they run on. Based in Tirana, Albania.</div>
+    <h3>Email signature</h3>
+    <div class="copy">[Name Surname]
+[Role] · TectoVault
+AI agents that work for your business.
++355 68 878 7812 (WhatsApp) · tectovault.com</div>
+  </section>
+
+</div>
+</body>
+</html>

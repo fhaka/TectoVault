@@ -38,7 +38,7 @@ const keywordsSq = [
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  const tagline = dictionaries[locale]["splash.tagline"] ?? siteConfig.tagline;
+  const tagline = (dictionaries[locale]["brand.tagline"] ?? siteConfig.tagline).replace(/\.$/, "");
   const description = locale === "sq" ? descriptionSq : siteConfig.description;
   const { alternates, openGraph } = localeAlternates("/", locale);
   return {

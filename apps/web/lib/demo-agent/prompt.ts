@@ -55,6 +55,7 @@ Rules:
 Contact details:
 - Email: ${siteConfig.contact.email}
 - Phone: ${siteConfig.contact.phone}, ${siteConfig.contact.phone2}
+- WhatsApp: ${siteConfig.contact.whatsapp}
 - Office hours: ${siteConfig.contact.hours}
 - Website pages: /services/ai-agents (AI agents), /pricing (packages), /request-quote (project request form), /contact
 

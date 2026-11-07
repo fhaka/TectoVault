@@ -1,0 +1,32 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
+
+import { WhatsappIcon } from "@/components/shared/social-icons";
+import { useTranslation } from "@/lib/i18n/language-context";
+import { whatsappLink } from "@/lib/whatsapp";
+
+// Floating "message us on WhatsApp" button, bottom-left (the AI chat
+// launcher sits bottom-right). Opens WhatsApp with a greeting pre-typed.
+export function WhatsappButton() {
+  const { t, locale } = useTranslation();
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <motion.a
+      href={whatsappLink(locale)}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={t("whatsapp.cta")}
+      title={t("whatsapp.cta")}
+      initial={reduceMotion ? false : { opacity: 0, scale: 0.6, y: 20 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      transition={{ delay: 1.2, type: "spring", stiffness: 260, damping: 20 }}
+      whileHover={reduceMotion ? undefined : { y: -3 }}
+      className="group fixed bottom-4 left-4 z-50 flex items-center gap-2 rounded-full bg-[#25D366] p-3 text-white shadow-[0_10px_30px_-6px_rgba(37,211,102,0.6)] sm:bottom-6 sm:left-6 sm:pr-5"
+    >
+      <WhatsappIcon className="size-6" />
+      <span className="hidden text-sm font-semibold sm:inline">{t("whatsapp.short")}</span>
+    </motion.a>
+  );
+}

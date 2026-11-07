@@ -3,7 +3,8 @@
 export const siteConfig = {
   name: "TectoVault",
   legalName: "TectoVault",
-  tagline: "Optimize. Automate. Operate.",
+  // The one brand line: use it everywhere (site, social, email signature).
+  tagline: "AI agents that work for your business.",
   domain: "tectovault.com",
   url: "https://tectovault.com",
   description:
@@ -14,6 +15,8 @@ export const siteConfig = {
     email: "tectovault@gmail.com",
     phone: "+355 69 243 0517",
     phone2: "+355 68 878 7812",
+    /** WhatsApp Business number (international format, no spaces in links). */
+    whatsapp: "+355 68 878 7812",
     address: "Tirana, Albania",
     hours: "Mon–Fri, 09:00–18:00 (CET)",
   },

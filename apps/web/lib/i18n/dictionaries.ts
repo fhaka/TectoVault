@@ -110,8 +110,9 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "aiAgentsHero.eyebrow": "Services / AI agents",
     "aiAgentsHero.title": "An AI workforce that answers, books and gets work done.",
 
-    "splash.tagline": "Optimize. Automate. Operate.",
-    "splash.message": "Building intelligent systems for the businesses of tomorrow.",
+    "brand.tagline": "AI agents that work for your business.",
+    "splash.tagline": "TectoVault · Tirana, Albania",
+    "splash.message": "AI agents that work for your business.",
     "splash.explore": "Explore",
     "splash.scrollHint": "or scroll to continue",
 
@@ -358,6 +359,9 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "industryPage.dayNote": "An illustration of a typical day, not real client data.",
     "industryPage.relatedEyebrow": "Go further",
     "industryPage.relatedTitle": "Services and solutions for your industry",
+    "whatsapp.cta": "Message us on WhatsApp",
+    "whatsapp.short": "WhatsApp",
+    "whatsapp.note": "we usually reply within working hours",
     "agentChat.launcher": "Talk to our AI agent",
     "agentChat.tryLive": "Talk to the Live Agent",
     "agentChat.teaserTitle": "Hi, I'm Vault 👋",
@@ -578,8 +582,9 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "aiAgentsHero.eyebrow": "Shërbimet / Agjentë AI",
     "aiAgentsHero.title": "Një fuqi punëtore AI që përgjigjet, rezervon dhe i kryen punët.",
 
-    "splash.tagline": "Optimizo. Automatizo. Operon.",
-    "splash.message": "Duke ndërtuar sisteme inteligjente për bizneset e së nesërmes.",
+    "brand.tagline": "Agjentë AI që punojnë për biznesin tuaj.",
+    "splash.tagline": "TectoVault · Tiranë, Shqipëri",
+    "splash.message": "Agjentë AI që punojnë për biznesin tuaj.",
     "splash.explore": "Eksploro",
     "splash.scrollHint": "ose lëviz poshtë për të vazhduar",
 
@@ -826,6 +831,9 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "industryPage.dayNote": "Ilustrim i një dite tipike, jo të dhëna reale klientësh.",
     "industryPage.relatedEyebrow": "Më tej",
     "industryPage.relatedTitle": "Shërbime dhe zgjidhje për industrinë tuaj",
+    "whatsapp.cta": "Na shkruani në WhatsApp",
+    "whatsapp.short": "WhatsApp",
+    "whatsapp.note": "zakonisht përgjigjemi brenda orarit të punës",
     "agentChat.launcher": "Bisedoni me agjentin tonë AI",
     "agentChat.tryLive": "Bisedoni me Agjentin Live",
     "agentChat.teaserTitle": "Përshëndetje, jam Vault 👋",
