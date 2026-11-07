@@ -138,8 +138,12 @@ Note: this project uses Next.js 16, where the `middleware.ts` convention has bee
   their filenames are recorded, but the files themselves aren't uploaded anywhere yet. Wiring
   S3 or Cloudflare R2 is a follow-up (the backend's `attachments`/`cv_filename` fields are
   already shaped for it).
-- **Internationalization** — the spec calls for `en` / `sq` / `it`; content is English-only for
-  now, since introducing `next-intl` routing is best done once real Albanian/Italian copy exists.
+- **Internationalization (partly done)** — the site is fully available in **English and
+  Albanian** via the EN / AL switcher in the header (copy lives in `apps/web/lib/i18n/`). The
+  switch happens in the browser and is remembered per visitor, so there are no separate `/sq` URLs
+  yet: search engines only index the English pages. Still to do: per-language URLs with `hreflang`
+  tags (e.g. via `next-intl` routing) so the Albanian pages can rank, and Italian (`it`), which the
+  spec also calls for.
 - **Content CMS** — services/solutions/industries/projects/blog/careers are still managed as
   structured content in `apps/web/content/*.ts`, not through the admin panel (there's no real
   content yet to justify building editing screens for them — see the phase-2 backend scope
