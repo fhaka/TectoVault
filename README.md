@@ -147,9 +147,65 @@ Note: this project uses Next.js 16, where the `middleware.ts` convention has bee
 - **Spam protection beyond the honeypot** — Cloudflare Turnstile (or equivalent) is a follow-up;
   the honeypot field is a reasonable first line of defense in the meantime.
 - **Analytics + error monitoring** — Sentry / analytics wiring is a follow-up.
-- **CI/CD + real hosting** — this repo has Docker + Compose for parity; actual deployment
-  (registry, hosting, CI pipeline) is a follow-up.
+- **CI/CD for the backend** — the website deploys automatically to Cloudflare (see
+  [Deploying the website](#deploying-the-website-cloudflare) below); the FastAPI backend has
+  Docker + Compose but no automated deploy pipeline yet.
 
 This scope (core infra + lead capture + admin, no content CMS) was a deliberate choice made
 when the backend phase started, since there's no real blog/case-study/careers content yet to
 manage.
+
+## Deploying the website (Cloudflare)
+
+The website (`apps/web`) runs on **Cloudflare Workers** through
+[OpenNext](https://opennext.js.org/cloudflare), and Cloudflare builds it straight from GitHub.
+
+**Every push to `main` deploys automatically.** There is nothing to run by hand: commit to `main`
+(directly, through the GitHub web editor, or by merging a pull request) and Cloudflare builds and
+publishes it, usually within a few minutes.
+
+- **Other branches** get a **preview build** with its own URL; the live site doesn't change. Use
+  this to check work before it reaches `main`.
+- **Watching a deploy:** Cloudflare dashboard → Workers & Pages → `tectovault` → **Deployments**.
+  When a build shows **Success**, hard-refresh the site (Ctrl+F5 / Cmd+Shift+R).
+- **If a build fails,** the live site keeps serving the last working version. Open the failed build
+  for its log.
+
+### Build settings
+
+Set in Cloudflare → `tectovault` → Settings → **Build**:
+
+| Setting | Value |
+| --- | --- |
+| Production branch | `main` |
+| Root directory | `apps/web` |
+| Build command | `npm run build:cloudflare` |
+| Deploy command | `npx wrangler deploy` |
+| Builds for non-production branches | On |
+
+The Worker itself is configured in `apps/web/wrangler.jsonc`.
+
+### Environment variables and secrets
+
+These are **not** in the code. Set them in Cloudflare → `tectovault` → Settings → **Variables and
+Secrets** (the Worker's runtime settings, not the "build variables" box). Pushes don't change them.
+
+| Name | Type | What it does |
+| --- | --- | --- |
+| `API_BASE_URL` | Variable | URL of the FastAPI backend. Contact, quote and careers forms, the admin panel and the AI agent's call bookings all go through it. |
+| `ANTHROPIC_API_KEY` | **Secret** | Claude API key for the live demo agent (`/api/agent`). While it's unset, the chat widget and "Talk to the Live Agent" buttons stay hidden. |
+
+Never put a key in the repository, README or `wrangler.jsonc` — the repo is on GitHub. For the
+demo agent, also set a monthly spend limit in the Anthropic Console, and consider a Cloudflare
+rate-limiting rule on `/api/agent` (the route's own per-IP limit is per Worker instance only).
+
+### Deploying by hand (optional)
+
+Only needed if automatic builds are off or you want to deploy from your own machine:
+
+```bash
+cd apps/web
+npm install
+npx wrangler login
+npm run deploy:cloudflare
+```
