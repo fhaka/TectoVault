@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 
 import { siteConfig } from "@/lib/site-config";
 import { PricingHero } from "@/components/sections/pricing-hero";
+import { PricingAgentPackages } from "@/components/sections/pricing-agent-packages";
 import { PricingBody } from "@/components/sections/pricing-body";
 import { FinalCta } from "@/components/sections/final-cta";
 
 const title = "Pricing";
 const description =
-  "How we price software projects in Albania — based on scope, complexity and requirements, not one-size-fits-all packages.";
+  "AI agent packages for chat, voice and operations — plus custom software projects in Albania, priced on scope, complexity and requirements.";
 
 export const metadata: Metadata = {
   title,
@@ -21,6 +22,7 @@ export default function PricingPage() {
   return (
     <>
       <PricingHero />
+      <PricingAgentPackages />
       <PricingBody />
       <FinalCta />
     </>

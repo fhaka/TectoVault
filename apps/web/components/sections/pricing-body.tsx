@@ -10,7 +10,6 @@ import { useTranslation } from "@/lib/i18n/language-context";
 import { serviceTranslationsSq } from "@/lib/i18n/content-sq";
 
 const categories = [
-  { slug: "ai-agents", title: "AI Agents", description: "Voice and chat agents for customers and teams." },
   { slug: "business-automation", title: "Business Automation", description: "Automated workflows, orders and communication." },
   { slug: "custom-software", title: "Custom Software", description: "Business management and operations systems." },
   { slug: "web-applications", title: "Web Applications", description: "Interactive, account-based platforms." },
@@ -36,7 +35,7 @@ export function PricingBody() {
   return (
     <>
       <Section>
-        <SectionHeading title={t("pricing.factorsTitle")} />
+        <SectionHeading eyebrow={t("pricing.customEyebrow")} title={t("pricing.factorsTitle")} />
         <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {factors.map((factor) => (
             <li key={factor} className="rounded-xl border border-border p-5 text-sm font-medium">
