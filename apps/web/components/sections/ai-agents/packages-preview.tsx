@@ -23,7 +23,7 @@ export function PackagesPreview() {
           description={t("aiPage.pkg.description")}
         />
         <Button asChild variant="outline" size="lg">
-          <Link href="/pricing#agent-packages">
+          <Link href="/pricing#ai-agents">
             {t("aiPage.pkg.compare")}
             <ArrowRight className="size-4" />
           </Link>
@@ -55,7 +55,7 @@ export function PackagesPreview() {
                 <div aria-hidden="true" className="absolute inset-0 rounded-3xl bg-border" />
               )}
               <Link
-                href="/pricing#agent-packages"
+                href="/pricing#ai-agents"
                 className={cn(
                   "relative flex h-full flex-col rounded-[calc(1.5rem-1px)] p-6",
                   pkg.featured ? "bg-ink text-ink-foreground" : "bg-card"
@@ -80,19 +80,8 @@ export function PackagesPreview() {
                 <p className={cn("mt-1 text-sm", pkg.featured ? "text-ink-muted" : "text-muted-foreground")}>
                   {t(`agentPackages.${pkg.id}.bestFor`)}
                 </p>
-                <p className="mt-4 flex flex-wrap items-baseline gap-x-1.5">
-                  {pkg.setupPrice ? (
-                    <>
-                      <span className="font-display text-2xl font-semibold">{pkg.setupPrice}</span>
-                      {pkg.monthlyPrice ? (
-                        <span className={cn("text-sm", pkg.featured ? "text-ink-muted" : "text-muted-foreground")}>
-                          + {pkg.monthlyPrice} {t("agentPackages.monthlySuffix")}
-                        </span>
-                      ) : null}
-                    </>
-                  ) : (
-                    <span className="font-display text-2xl font-semibold">{t("agentPackages.customQuote")}</span>
-                  )}
+                <p className={cn("mt-4 text-sm leading-relaxed", pkg.featured ? "text-white/80" : "text-foreground/80")}>
+                  {t(`agentPackages.${pkg.id}.tagline`)}
                 </p>
                 <ul className="mt-5 flex-1 space-y-2.5">
                   {[1, 2, 3].map((n) => (

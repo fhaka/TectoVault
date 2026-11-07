@@ -217,7 +217,7 @@ export const industryAgents: Record<string, IndustryAgent> = {
     ],
     fixes: [
       { en: "Repetitive messages and bookings run on their own instead of living in spreadsheets and your phone.", sq: "Mesazhet e përsëritura dhe rezervimet ecin vetë, në vend që të mbeten në fletëllogaritje dhe në telefonin tuaj." },
-      { en: "Clear packages from €390 + €49/month, no enterprise software budget needed.", sq: "Paketa të qarta nga €390 + €49/muaj, pa pasur nevojë për buxhet softueri enterprise." },
+      { en: "Packages sized for small businesses, no enterprise software budget needed.", sq: "Paketa të përshtatura për bizneset e vogla, pa pasur nevojë për buxhet softueri enterprise." },
       { en: "The same team builds your agent, your website and your software, so everything is connected.", sq: "I njëjti ekip ndërton agjentin, faqen dhe softuerin tuaj, kështu që gjithçka është e lidhur." },
     ],
     day: [

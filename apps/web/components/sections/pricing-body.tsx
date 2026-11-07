@@ -4,21 +4,11 @@ import Link from "@/components/i18n/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { Section, SectionHeading } from "@/components/shared/section";
-import { Reveal } from "@/components/shared/reveal";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/lib/i18n/language-context";
-import { serviceTranslationsSq } from "@/lib/i18n/content-sq";
-import { services } from "@/content/services";
-import { quoteHref } from "@/lib/quote-link";
-
-// Custom-project categories: every service except AI agents, which have
-// their own packages above.
-const categories = services
-  .filter((s) => s.slug !== "ai-agents")
-  .map((s) => ({ slug: s.slug, title: s.title, description: s.shortDescription }));
 
 export function PricingBody() {
-  const { t, locale } = useTranslation();
+  const { t } = useTranslation();
   const factors = [
     t("pricing.factor1"),
     t("pricing.factor2"),
@@ -40,25 +30,6 @@ export function PricingBody() {
         </ul>
       </Section>
 
-      <Section tone="muted">
-        <SectionHeading eyebrow={t("pricing.categoriesEyebrow")} title={t("pricing.categoriesTitle")} />
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map((category, i) => {
-            const tr = locale === "sq" ? serviceTranslationsSq[category.slug] : null;
-            return (
-              <Reveal key={category.title} delay={i * 0.05}>
-                <div className="rounded-2xl border border-border bg-card p-6">
-                  <h3 className="font-medium">{tr?.title ?? category.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{tr?.shortDescription ?? category.description}</p>
-                  <Link href={quoteHref({ service: category.slug })} className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent">
-                    {t("cta.getQuote")} <ArrowUpRight className="size-3.5" />
-                  </Link>
-                </div>
-              </Reveal>
-            );
-          })}
-        </div>
-      </Section>
 
       <Section>
         <div className="rounded-3xl border border-border bg-card p-10 text-center md:p-16">

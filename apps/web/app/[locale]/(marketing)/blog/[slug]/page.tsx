@@ -164,7 +164,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 </OpenAgentButton>
               </Button>
               <Button asChild variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/10">
-                <Link href="/pricing#agent-packages">
+                <Link href="/pricing#ai-agents">
                   {t("blog.cta.packages")}
                   <ArrowUpRight className="size-4" />
                 </Link>

@@ -19,7 +19,7 @@ const navLabelKeys: Record<string, string> = {
   Industries: "nav.industries",
   About: "nav.about",
   Process: "nav.process",
-  Pricing: "nav.pricing",
+  Packages: "nav.pricing",
 };
 
 const viewAllKeys: Record<string, string> = {

@@ -130,17 +130,12 @@ export function IndustryAgent({ agent }: { agent: IndustryAgentData }) {
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{t("industryPage.recommended")}</p>
                 <p className="mt-1 text-xl font-medium">
                   {t(`agentPackages.${pkg.id}.name`)}
-                  <span className="ml-3 text-base font-normal text-ink-muted">
-                    {pkg.setupPrice
-                      ? `${pkg.setupPrice} + ${pkg.monthlyPrice} ${t("agentPackages.monthlySuffix")}`
-                      : t("agentPackages.customQuote")}
-                  </span>
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">{agent.packageWhy[locale]}</p>
               </div>
               <div className="flex flex-wrap gap-3">
                 <Button asChild variant="accent">
-                  <Link href="/pricing#agent-packages">
+                  <Link href="/pricing#ai-agents">
                     {t("industryPage.seePackage")}
                     <ArrowUpRight className="size-4" />
                   </Link>

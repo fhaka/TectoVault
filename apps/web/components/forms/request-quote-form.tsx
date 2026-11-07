@@ -37,7 +37,8 @@ import {
   maxFiles,
 } from "@/lib/quote-config";
 import { services } from "@/content/services";
-import { agentPackages, type AgentPackage } from "@/content/agent-packages";
+import { findPackage, packageKey, type PackageService, type ServicePackage } from "@/content/service-packages";
+import { serviceToType, typeToService } from "@/lib/quote-link";
 import { serviceTranslationsSq } from "@/lib/i18n/content-sq";
 import { siteConfig } from "@/lib/site-config";
 import { whatsappLink } from "@/lib/whatsapp";
@@ -97,6 +98,7 @@ export function RequestQuoteForm() {
     handleSubmit,
     trigger,
     setValue,
+    setError,
     control,
     formState: { errors, isSubmitting },
   } = useForm<QuoteFormValues>({
@@ -105,7 +107,10 @@ export function RequestQuoteForm() {
   });
 
   const values = useWatch({ control });
-  const [chosenPackage, setChosenPackage] = React.useState<AgentPackage | null>(null);
+  const [chosenPackage, setChosenPackage] = React.useState<{ service: PackageService; pkg: ServicePackage } | null>(null);
+  // The package sentence we pre-filled; it doesn't count towards the minimum,
+  // so visitors still describe the project in their own words.
+  const [packageIntro, setPackageIntro] = React.useState("");
 
   // Pre-fill from links such as /request-quote?type=ai-agents&package=growth
   // (pricing cards, service and industry pages): select the service, note
@@ -114,16 +119,18 @@ export function RequestQuoteForm() {
     const params = new URLSearchParams(window.location.search);
     const type = params.get("type");
     if (!type || !projectTypeOptions.some((o) => o.value === type)) return;
-    const pkg = type === "ai-agents" ? agentPackages.find((p) => p.id === params.get("package")) ?? null : null;
+    const service = typeToService(type);
+    const pkg = service ? findPackage(service, params.get("package")) : null;
     const id = window.setTimeout(() => {
       setValue("projectType", type);
-      if (pkg) {
-        setChosenPackage(pkg);
-        const name = t(`agentPackages.${pkg.id}.name`);
-        const price = pkg.setupPrice
-          ? `${pkg.setupPrice} + ${pkg.monthlyPrice} ${t("agentPackages.monthlySuffix")}`
-          : t("agentPackages.customQuote");
-        setValue("description", t("quote.packageIntro").replace("{name}", name).replace("{price}", price) + " ");
+      if (service && pkg) {
+        setChosenPackage({ service, pkg });
+        const option = projectTypeOptions.find((o) => o.value === type)!;
+        const intro = t("quote.packageIntro")
+          .replace("{name}", t(`${packageKey(service, pkg.id)}.name`))
+          .replace("{service}", tx(option.label));
+        setPackageIntro(intro);
+        setValue("description", intro + " ");
       }
       setDirection(1);
       setStep(1);
@@ -133,9 +140,9 @@ export function RequestQuoteForm() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // A package only applies to AI agents.
+  // A package belongs to one service; drop it if the visitor picks another.
   React.useEffect(() => {
-    if (chosenPackage && values.projectType !== "ai-agents") {
+    if (chosenPackage && values.projectType !== serviceToType[chosenPackage.service]) {
       const id = window.setTimeout(() => setChosenPackage(null), 0);
       return () => window.clearTimeout(id);
     }
@@ -153,10 +160,23 @@ export function RequestQuoteForm() {
     [step]
   );
 
+  const description = values.description ?? "";
+  const ownDescription = (
+    packageIntro && description.trimStart().startsWith(packageIntro)
+      ? description.trimStart().slice(packageIntro.length)
+      : description
+  ).trim();
+  const descriptionLength = ownDescription.length;
+
   const next = React.useCallback(async () => {
     const valid = await trigger(steps[step].fields);
-    if (valid) goTo(step + 1);
-  }, [goTo, step, trigger]);
+    if (!valid) return;
+    if (step === 1 && descriptionLength < MIN_DESCRIPTION) {
+      setError("description", { message: "Please describe your project in a bit more detail." });
+      return;
+    }
+    goTo(step + 1);
+  }, [descriptionLength, goTo, setError, step, trigger]);
 
   // Choice steps: select, then move on after a short beat.
   const choose = (field: "projectType" | "budget" | "timeline", value: string) => {
@@ -193,6 +213,11 @@ export function RequestQuoteForm() {
   };
 
   async function onSubmit(data: QuoteFormValues) {
+    if (descriptionLength < MIN_DESCRIPTION) {
+      goTo(1);
+      setError("description", { message: "Please describe your project in a bit more detail." });
+      return;
+    }
     try {
       const res = await fetch("/api/quote", {
         method: "POST",
@@ -211,11 +236,13 @@ export function RequestQuoteForm() {
     if (index === 0) {
       const opt = projectTypeOptions.find((o) => o.value === values.projectType);
       if (!opt) return null;
-      return chosenPackage ? `${tx(opt.label)} · ${t(`agentPackages.${chosenPackage.id}.name`)}` : tx(opt.label);
+      return chosenPackage
+        ? `${tx(opt.label)} · ${t(`${packageKey(chosenPackage.service, chosenPackage.pkg.id)}.name`)}`
+        : tx(opt.label);
     }
     if (index === 1) {
-      const d = values.description?.trim();
-      return d && d.length >= MIN_DESCRIPTION ? (d.length > 42 ? `${d.slice(0, 42)}…` : d) : null;
+      const d = ownDescription;
+      return d.length >= MIN_DESCRIPTION ? (d.length > 42 ? `${d.slice(0, 42)}…` : d) : null;
     }
     if (index === 2) {
       const opt = budgetOptions.find((o) => o.value === values.budget);
@@ -250,8 +277,6 @@ export function RequestQuoteForm() {
   }
 
   const progress = ((step + 1) / steps.length) * 100;
-  const descriptionLength = values.description?.trim().length ?? 0;
-
   return (
     <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
       {/* ---------- Left rail ---------- */}
@@ -500,6 +525,9 @@ export function RequestQuoteForm() {
                           {...register("description")}
                         />
                       </div>
+                      {packageIntro && descriptionLength < MIN_DESCRIPTION ? (
+                        <p className="mt-2 text-xs text-white/55">{t("quote.packageHint")}</p>
+                      ) : null}
                       <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="flex items-center gap-1 text-xs text-white/40">

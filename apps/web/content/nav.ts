@@ -5,7 +5,7 @@ export const mainNav = [
   { label: "Solutions", href: "/solutions", megaMenu: "solutions" as const },
   { label: "Industries", href: "/industries", megaMenu: "industries" as const },
   { label: "About", href: "/about" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "Packages", href: "/pricing" },
 ];
 
 export const footerNav = {
@@ -23,7 +23,7 @@ export const footerNav = {
   ],
   resources: [
     { label: "Blog", href: "/blog" },
-    { label: "Pricing", href: "/pricing" },
+    { label: "Packages", href: "/pricing" },
   ],
   legal: [
     { label: "Privacy", href: "/privacy" },

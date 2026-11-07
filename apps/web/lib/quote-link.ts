@@ -1,10 +1,10 @@
-import type { AgentPackage } from "@/content/agent-packages";
+import type { PackageService } from "@/content/service-packages";
 
-// Links into the quote form with the answer to "What do you need?" (and,
-// for AI agents, the chosen package) already filled in. The form reads
-// these from the URL: /request-quote?type=ai-agents&package=growth
+// Links into the quote form with the answer to "What do you need?" (and the
+// chosen package) already filled in. The form reads these from the URL:
+// /request-quote?type=website&package=business
 
-const serviceToType: Record<string, string> = {
+export const serviceToType: Record<PackageService, string> = {
   "ai-agents": "ai-agents",
   "business-automation": "business-automation",
   "custom-software": "custom-software",
@@ -12,9 +12,14 @@ const serviceToType: Record<string, string> = {
   "maintenance-support": "maintenance-support",
 };
 
-export function quoteHref({ service, type, pkg }: { service?: string; type?: string; pkg?: AgentPackage["id"] } = {}) {
+export function typeToService(type: string): PackageService | null {
+  const entry = Object.entries(serviceToType).find(([, t]) => t === type);
+  return entry ? (entry[0] as PackageService) : null;
+}
+
+export function quoteHref({ service, type, pkg }: { service?: string; type?: string; pkg?: string } = {}) {
   const params = new URLSearchParams();
-  const resolved = type ?? (service ? serviceToType[service] : undefined);
+  const resolved = type ?? (service ? serviceToType[service as PackageService] : undefined);
   if (resolved) params.set("type", resolved);
   if (pkg) params.set("package", pkg);
   const query = params.toString();

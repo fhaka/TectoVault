@@ -73,7 +73,7 @@ export const postsSq: BlogPost[] = [
       },
       {
         type: "callout",
-        text: "Për shumicën e hoteleve rekomandojmë paketën Growth: agjent chat dhe zanor, deri në tre kanale, rezervime të sinkronizuara me kalendarin dhe përgjigje në shqip, anglisht dhe italisht, me €890 konfigurim një herë dhe €129 në muaj. Ia vlen ta nisni para sezonit, që agjenti të jetë testuar mirë kur mbërrijnë mysafirët.",
+        text: "Për shumicën e hoteleve rekomandojmë paketën Growth: agjent chat dhe zanor, deri në tre kanale, rezervime të sinkronizuara me kalendarin dhe përgjigje në shqip, anglisht dhe italisht. Ia vlen ta nisni para sezonit, që agjenti të jetë testuar mirë kur mbërrijnë mysafirët.",
       },
     ],
   },
@@ -147,7 +147,7 @@ export const postsSq: BlogPost[] = [
       },
       {
         type: "callout",
-        text: "Paketa Starter e TectoVault përfshin një agjent chat në WhatsApp ose në faqen tuaj të internetit, të trajnuar me menunë, çmimet dhe pyetjet tuaja të shpeshta, me €390 konfigurim një herë dhe €49 në muaj. Nëse doni që agjenti t'u përgjigjet edhe telefonatave, paketa Growth shton një agjent zanor.",
+        text: "Paketa Starter e TectoVault përfshin një agjent chat në WhatsApp ose në faqen tuaj të internetit, të trajnuar me menunë, çmimet dhe pyetjet tuaja të shpeshta. Nëse doni që agjenti t'u përgjigjet edhe telefonatave, paketa Growth shton një agjent zanor.",
       },
     ],
   },
@@ -276,7 +276,7 @@ export const postsSq: BlogPost[] = [
       },
       {
         type: "callout",
-        text: "Paketa Growth e TectoVault përfshin agjentin zanor që u përgjigjet telefonatave dhe rezervimet e sinkronizuara me kalendarin tuaj, me €890 konfigurim një herë dhe €129 në muaj. Para se agjenti të flasë me pacientë realë, e testojmë së bashku me ekipin tuaj.",
+        text: "Paketa Growth e TectoVault përfshin agjentin zanor që u përgjigjet telefonatave dhe rezervimet e sinkronizuara me kalendarin tuaj. Para se agjenti të flasë me pacientë realë, e testojmë së bashku me ekipin tuaj.",
       },
     ],
   },
@@ -327,14 +327,14 @@ export const postsSq: BlogPost[] = [
       { type: "h2", text: "Çmimet tona" },
       {
         type: "p",
-        text: "Te TectoVault, paketat janë të qarta që në fillim:",
+        text: "Te TectoVault ka tri paketa, dhe për secilën përgatisim një ofertë sipas biznesit tuaj:",
       },
       {
         type: "ul",
         items: [
-          "Starter: €390 konfigurim një herë + €49 në muaj. Një agjent chat në faqen tuaj ose në WhatsApp, në shqip dhe anglisht, me kontaktet e klientëve të dërguara në email-in tuaj dhe raport mujor.",
-          "Growth: €890 konfigurim një herë + €129 në muaj. Agjent chat dhe zanor, deri në tre kanale, rezervime të sinkronizuara me kalendarin, lidhje me CRM-në ose dyqanin online, edhe në italisht.",
-          "Business: ofertë e personalizuar, për disa agjentë, kanale pa kufi, përpunim dokumentesh dhe integrim me ERP-në ose sistemet tuaja.",
+          "Starter: një agjent chat në faqen tuaj ose në WhatsApp, në shqip dhe anglisht, me kontaktet e klientëve të dërguara në email-in tuaj dhe raport mujor.",
+          "Growth: agjent chat dhe zanor, deri në tre kanale, rezervime të sinkronizuara me kalendarin, lidhje me CRM-në ose dyqanin online, edhe në italisht.",
+          "Business: për disa agjentë, kanale pa kufi, përpunim dokumentesh dhe integrim me ERP-në ose sistemet tuaja.",
         ],
       },
       { type: "h2", text: "Si ta llogaritni nëse ia vlen" },
@@ -344,7 +344,7 @@ export const postsSq: BlogPost[] = [
       },
       {
         type: "callout",
-        text: "Shembull me supozime: nëse një punonjës shpenzon rreth 1 orë në ditë pune për t'iu përgjigjur mesazheve të përsëritura, kjo bën rreth 22 orë në muaj. Nëse një orë e kohës së tij i kushton biznesit €5, ato 22 orë kushtojnë rreth €110 në muaj, më shumë se €49 të paketës Starter. Vendosni shifrat tuaja reale; dhe mos harroni se agjenti punon edhe natën dhe në fundjavë, kur askush nuk është në detyrë.",
+        text: "Shembull me supozime: nëse një punonjës shpenzon rreth 1 orë në ditë pune për t'iu përgjigjur mesazheve të përsëritura, kjo bën rreth 22 orë në muaj. Nëse një orë e kohës së tij i kushton biznesit €5, ato 22 orë kushtojnë rreth €110 në muaj. Krahasojeni këtë me ofertën që ju përgatisim. Vendosni shifrat tuaja reale; dhe mos harroni se agjenti punon edhe natën dhe në fundjavë, kur askush nuk është në detyrë.",
       },
       {
         type: "p",

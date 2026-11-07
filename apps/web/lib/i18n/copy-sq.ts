@@ -23,6 +23,7 @@ export const copySq: Record<string, string> = {
   "About": "Rreth Nesh",
   "Process": "Procesi",
   "Pricing": "Çmimet",
+  "Packages": "Paketat",
   "Company": "Kompania",
   "Resources": "Burime",
   "Cookies": "Cookies",
