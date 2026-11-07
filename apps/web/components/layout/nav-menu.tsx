@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { ArrowRight } from "lucide-react";
 

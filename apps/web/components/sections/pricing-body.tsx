@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { Section, SectionHeading } from "@/components/shared/section";

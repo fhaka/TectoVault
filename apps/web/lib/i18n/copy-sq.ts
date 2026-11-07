@@ -4,6 +4,7 @@ import { industries } from "@/content/industries";
 import {
   industryTranslationsSq,
   projectTranslationsSq,
+  serviceDetailsSq,
   serviceTranslationsSq,
 } from "@/lib/i18n/content-sq";
 
@@ -49,6 +50,33 @@ export const copySq: Record<string, string> = {
   "AI agents first. Full software when you need it.": "Agjentët AI në plan të parë. Softuer i plotë kur ju duhet.",
   "We lead with AI agents that do real work for your business — and back them with the automation, web applications and infrastructure they run on.": "Ne nisim me agjentë AI që kryejnë punë reale për biznesin tuaj — dhe i mbështesim me automatizimin, aplikacionet web dhe infrastrukturën mbi të cilat funksionojnë.",
   "Our focus": "Fokusi ynë",
+  "TectoVault is a software and AI development company in Albania, helping businesses grow through AI agents, business automation, custom software, web and mobile applications, cloud services, and AI integration — intelligent systems for the businesses of tomorrow.": "TectoVault është një kompani zhvillimi softueri dhe AI në Shqipëri, që i ndihmon bizneset të rriten me agjentë AI, automatizim biznesi, softuer të personalizuar, aplikacione web dhe mobile, shërbime cloud dhe integrim AI — sisteme inteligjente për bizneset e së nesërmes.",
+  "Insights & Notes": "Ide & Shënime",
+  "Thoughts on software, cloud infrastructure and building digital products properly.": "Mendime mbi softuerin, infrastrukturën cloud dhe ndërtimin e produkteve digjitale si duhet.",
+  "We’re working on our first posts. Check back soon for insights on software, cloud and business technology.": "Po punojmë për artikujt tanë të parë. Rikthehuni së shpejti për ide mbi softuerin, cloud-in dhe teknologjinë për biznes.",
+  "Cybersecurity": "Siguri kibernetike",
+  "Business": "Biznes",
+  "We're a small, focused software studio — here's what it's like to work with us.": "Jemi një studio softueri e vogël dhe e fokusuar — ja si është të punosh me ne.",
+  "Even without an open role, we're happy to keep good people in mind for the future.": "Edhe pa një pozicion të hapur, me kënaqësi i mbajmë parasysh njerëzit e mirë për të ardhmen.",
+  "We don’t have any open positions right now, but we’re always interested in meeting talented people.": "Për momentin nuk kemi pozicione të hapura, por gjithmonë na intereson të njohim njerëz të talentuar.",
+  "Small, hands-on team": "Ekip i vogël dhe praktik",
+  "You'll work directly on real client projects, not buried in process.": "Do të punoni drejtpërdrejt në projekte reale klientësh, jo të humbur në procedura.",
+  "Room to grow": "Hapësirë për t'u rritur",
+  "As the company grows, so does the scope of what you own.": "Ndërsa kompania rritet, rritet edhe përgjegjësia që merrni përsipër.",
+  "Quality over speed-at-all-costs": "Cilësia mbi shpejtësinë me çdo kusht",
+  "We care about building things properly, not just shipping fast.": "Na intereson t'i ndërtojmë gjërat si duhet, jo vetëm t'i nxjerrim shpejt.",
+  "About the role": "Rreth rolit",
+  "Responsibilities": "Përgjegjësitë",
+  "Requirements": "Kërkesat",
+  "Nice to have": "Përparësi",
+  "Apply for this role": "Aplikoni për këtë rol",
+  "The page you’re looking for doesn’t exist or may have moved.": "Faqja që kërkoni nuk ekziston ose mund të jetë zhvendosur.",
+  "Explore our work": "Shikoni punët tona",
+  "Sample project": "Projekt shembull",
+  "Visit site": "Vizito faqen",
+  "Cloud": "Cloud",
+  "Food & Agriculture": "Ushqim & Bujqësi",
+  "Automotive": "Automobilistikë",
   "From marketing websites to full software platforms — one team across design, engineering and infrastructure.": "Nga sajtet e marketingut te platformat e plota softuerike — një ekip i vetëm për dizajnin, inxhinierinë dhe infrastrukturën.",
   "Who we work with": "Me kë punojmë",
   "Focused industry experience": "Përvojë e specializuar sipas industrisë",
@@ -239,6 +267,22 @@ for (const service of services) {
       }
     });
   }
+}
+
+// Service detail copy (overview, capabilities, what we build, FAQ) that the
+// service pages translate through serviceDetailsSq.
+for (const service of services) {
+  const detail = serviceDetailsSq[service.slug];
+  if (!detail) continue;
+  copySq[service.overview] ??= detail.overview;
+  detail.capabilities.forEach((value, i) => {
+    const source = service.capabilities[i];
+    if (source) copySq[source] ??= value;
+  });
+  detail.whatWeBuild.forEach((value, i) => {
+    const source = service.whatWeBuild[i];
+    if (source) copySq[source] ??= value;
+  });
 }
 
 for (const project of projects) {

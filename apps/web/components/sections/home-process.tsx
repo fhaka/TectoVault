@@ -1,23 +1,25 @@
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { processStages } from "@/content/process";
 import { Section, SectionHeading } from "@/components/shared/section";
 import { Reveal } from "@/components/shared/reveal";
 import { Button } from "@/components/ui/button";
+import { getTx } from "@/lib/i18n/server";
 
-export function HomeProcess() {
+export async function HomeProcess() {
+  const tx = await getTx();
   return (
     <Section>
       <div className="flex flex-wrap items-end justify-between gap-6">
         <SectionHeading
-          eyebrow="How we work"
-          title="A clear, predictable process"
-          description="No surprises — you always know what happens next."
+          eyebrow={tx("How we work")}
+          title={tx("A clear, predictable process")}
+          description={tx("No surprises — you always know what happens next.")}
         />
         <Button asChild variant="outline">
           <Link href="/process">
-            See the full process <ArrowUpRight className="size-4" />
+            {tx("See the full process")} <ArrowUpRight className="size-4" />
           </Link>
         </Button>
       </div>
@@ -26,7 +28,7 @@ export function HomeProcess() {
         {processStages.map((stage, i) => (
           <Reveal key={stage.number} delay={i * 0.04}>
             <div className="font-display text-3xl font-semibold text-accent">{stage.number}</div>
-            <div className="mt-2 text-sm font-medium">{stage.title}</div>
+            <div className="mt-2 text-sm font-medium">{tx(stage.title)}</div>
           </Reveal>
         ))}
       </div>

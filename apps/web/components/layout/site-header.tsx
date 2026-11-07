@@ -1,8 +1,9 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 import { usePathname } from "next/navigation";
+import { stripLocale } from "@/lib/i18n/config";
 import { Menu, ArrowUpRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -15,7 +16,8 @@ import { mainNav } from "@/content/nav";
 import { useTranslation } from "@/lib/i18n/language-context";
 
 export function SiteHeader() {
-  const pathname = usePathname();
+  // Compare against the unprefixed path so /sq/... behaves like /...
+  const pathname = stripLocale(usePathname() || "/");
   const { t } = useTranslation();
   const [surfaceTone, setSurfaceTone] = React.useState<"light" | "dark" | "hero" | "transparent-light" | "transparent-dark">(
     pathname === "/" ? "hero" : pathname === "/solutions" ? "dark" : "light"

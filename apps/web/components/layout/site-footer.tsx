@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 import { siteConfig } from "@/lib/site-config";
@@ -11,7 +11,7 @@ import { useTranslation } from "@/lib/i18n/language-context";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
-  const { t } = useTranslation();
+  const { t, tx } = useTranslation();
 
   return (
     <footer className="border-t border-white/10 bg-ink text-ink-foreground">
@@ -20,7 +20,7 @@ export function SiteFooter() {
           <div className="min-[400px]:col-span-2">
             <Logo />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-muted">
-              {siteConfig.description}
+              {tx(siteConfig.description)}
             </p>
             <div className="mt-6 flex items-center gap-3">
               <SocialLink href={siteConfig.social.instagram} label="Instagram">
@@ -56,7 +56,7 @@ export function SiteFooter() {
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="mt-0.5 size-4 shrink-0" />
-                <span>{siteConfig.contact.address}</span>
+                <span>{tx(siteConfig.contact.address)}</span>
               </li>
             </ul>
           </div>
@@ -69,7 +69,7 @@ export function SiteFooter() {
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             {footerNav.legal.map((item) => (
               <Link key={item.href} href={item.href} className="hover:text-white">
-                {item.label}
+                {tx(item.label)}
               </Link>
             ))}
           </div>
@@ -86,6 +86,7 @@ function FooterColumn({
   title: string;
   links: { label: string; href: string }[];
 }) {
+  const { tx } = useTranslation();
   return (
     <div>
       <h3 className="text-sm font-semibold">{title}</h3>
@@ -96,7 +97,7 @@ function FooterColumn({
               href={link.href}
               className="text-sm text-ink-muted hover:text-white"
             >
-              {link.label}
+              {tx(link.label)}
             </Link>
           </li>
         ))}

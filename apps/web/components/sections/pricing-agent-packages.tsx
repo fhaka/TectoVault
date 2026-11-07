@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Check, Repeat, Wrench } from "lucide-react";
 

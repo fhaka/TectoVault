@@ -2,6 +2,7 @@ import { Bot, Code2, Cloud, LayoutGrid, Workflow } from "lucide-react";
 
 import { Reveal } from "@/components/shared/reveal";
 import { siteConfig } from "@/lib/site-config";
+import { getTx } from "@/lib/i18n/server";
 
 const capabilities = [
   { icon: Bot, label: "AI Agents" },
@@ -11,7 +12,8 @@ const capabilities = [
   { icon: Cloud, label: "Cloud" },
 ];
 
-export function HomeCapability() {
+export async function HomeCapability() {
+  const tx = await getTx();
   const stats = siteConfig.stats;
 
   return (
@@ -22,17 +24,17 @@ export function HomeCapability() {
             {capabilities.map(({ icon: Icon, label }) => (
               <div key={label} className="flex items-center gap-2.5 text-sm font-medium text-muted-foreground">
                 <Icon className="size-4 text-accent" />
-                {label}
+                {tx(label)}
               </div>
             ))}
           </Reveal>
 
           {stats ? (
             <div className="flex flex-wrap gap-8">
-              {stats.projects ? <Stat value={stats.projects} label="Projects" /> : null}
-              {stats.clients ? <Stat value={stats.clients} label="Clients" /> : null}
-              {stats.countries ? <Stat value={stats.countries} label="Countries" /> : null}
-              {stats.years ? <Stat value={stats.years} label="Years" /> : null}
+              {stats.projects ? <Stat value={stats.projects} label={tx("Projects")} /> : null}
+              {stats.clients ? <Stat value={stats.clients} label={tx("Clients")} /> : null}
+              {stats.countries ? <Stat value={stats.countries} label={tx("Countries")} /> : null}
+              {stats.years ? <Stat value={stats.years} label={tx("Years")} /> : null}
             </div>
           ) : null}
         </div>

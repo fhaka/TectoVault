@@ -1,16 +1,18 @@
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 
 import { industries } from "@/content/industries";
 import { Section, SectionHeading } from "@/components/shared/section";
 import { Reveal } from "@/components/shared/reveal";
+import { getTx } from "@/lib/i18n/server";
 
-export function HomeIndustries() {
+export async function HomeIndustries() {
+  const tx = await getTx();
   return (
     <Section tone="muted">
       <SectionHeading
-        eyebrow="Who we work with"
-        title="Focused industry experience"
-        description="We bring domain understanding, not just code, to the sectors we work in most."
+        eyebrow={tx("Who we work with")}
+        title={tx("Focused industry experience")}
+        description={tx("We bring domain understanding, not just code, to the sectors we work in most.")}
       />
 
       <div className="mt-10 grid grid-cols-1 gap-3 min-[380px]:grid-cols-2 sm:mt-14 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
@@ -25,7 +27,7 @@ export function HomeIndustries() {
                 <span className="flex size-11 items-center justify-center rounded-full bg-muted text-foreground transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
                   <Icon className="size-5" />
                 </span>
-                <span className="text-sm font-medium">{industry.title}</span>
+                <span className="text-sm font-medium">{tx(industry.title)}</span>
               </Link>
             </Reveal>
           );

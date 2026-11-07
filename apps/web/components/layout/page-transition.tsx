@@ -2,8 +2,11 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 
+import { useTranslation } from "@/lib/i18n/language-context";
+
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const reduceMotion = useReducedMotion();
+  const { tx } = useTranslation();
 
   return (
     <>
@@ -31,7 +34,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           animate={{ opacity: [0, 1, 1, 0], y: [12, 0, 0, -12] }}
           transition={{ duration: reduceMotion ? 0.15 : 0.7, ease: "easeInOut" }}
         >
-          TECTOVAULT / Loading
+          TECTOVAULT / {tx("Loading")}
         </motion.div>
       </motion.div>
       {children}
