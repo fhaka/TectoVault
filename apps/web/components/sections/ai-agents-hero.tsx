@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { AgentConsole } from "@/components/sections/agent-console";
 import { OpenAgentButton } from "@/components/agent/agent-chat";
 import { useTranslation } from "@/lib/i18n/language-context";
+import { quoteHref } from "@/lib/quote-link";
 
 export function AiAgentsHero({ overview }: { overview: string }) {
   const reduceMotion = useReducedMotion();
@@ -43,7 +44,7 @@ export function AiAgentsHero({ overview }: { overview: string }) {
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/70">{overview}</p>
           <div className="mt-9 flex flex-wrap gap-4">
             <Button asChild size="lg" variant="accent">
-              <Link href="/request-quote">
+              <Link href={quoteHref({ type: "ai-agents" })}>
                 {t("cta.getAgent")}
                 <ArrowUpRight className="size-4" />
               </Link>

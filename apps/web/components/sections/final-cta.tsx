@@ -6,13 +6,14 @@ import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/shared/reveal";
 import { useTranslation } from "@/lib/i18n/language-context";
+import { quoteHref } from "@/lib/quote-link";
 
 export function FinalCta({
   eyebrow,
   title,
   description,
   primaryLabel,
-  primaryHref = "/request-quote",
+  primaryHref,
   secondaryLabel,
   secondaryHref = "/contact",
   variant = "default",
@@ -32,6 +33,7 @@ export function FinalCta({
   const resolvedEyebrow = eyebrow ?? t(`${ns}.eyebrow`);
   const resolvedTitle = title ?? t(`${ns}.title`);
   const resolvedDescription = description ?? t(`${ns}.description`);
+  const resolvedPrimaryHref = primaryHref ?? (variant === "agents" ? quoteHref({ type: "ai-agents" }) : "/request-quote");
   const resolvedPrimaryLabel =
     primaryLabel ?? t(variant === "agents" ? "cta.getAgent" : "cta.startProject");
   const resolvedSecondaryLabel = secondaryLabel ?? t("cta.contactUs");
@@ -51,7 +53,7 @@ export function FinalCta({
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Button asChild size="lg" variant="accent">
-              <Link href={primaryHref}>
+              <Link href={resolvedPrimaryHref}>
                 {resolvedPrimaryLabel}
                 <ArrowUpRight className="size-4" />
               </Link>

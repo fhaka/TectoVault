@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { OpenAgentButton } from "@/components/agent/agent-chat";
 import { useTranslation } from "@/lib/i18n/language-context";
 import { ChatPhone } from "@/components/sections/ai-agents/chat-phone";
+import { quoteHref } from "@/lib/quote-link";
 
 const industries = [
   { id: "restaurant", icon: UtensilsCrossed, channel: "WhatsApp" },
@@ -125,7 +126,7 @@ export function IndustryShowcase() {
               </OpenAgentButton>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link href="/request-quote">
+              <Link href={quoteHref({ type: "ai-agents" })}>
                 {t("aiPage.ind.getAgent")}
                 <ArrowUpRight className="size-4" />
               </Link>

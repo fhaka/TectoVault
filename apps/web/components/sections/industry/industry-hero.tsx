@@ -8,6 +8,7 @@ import { ArrowUpRight, Bot, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { OpenAgentButton } from "@/components/agent/agent-chat";
 import { useTranslation } from "@/lib/i18n/language-context";
+import { quoteHref } from "@/lib/quote-link";
 
 const FEED_MS = 2200;
 const FEED_SHOWN = 4;
@@ -88,7 +89,7 @@ export function IndustryHero({
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/70">{overview}</p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Button asChild size="lg" variant="accent">
-              <Link href="/request-quote">
+              <Link href={quoteHref({ type: "ai-agents" })}>
                 {t("industryPage.ctaAgent")}
                 <ArrowUpRight className="size-4" />
               </Link>

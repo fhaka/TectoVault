@@ -6,6 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/lib/i18n/language-context";
+import { quoteHref } from "@/lib/quote-link";
 
 // Animated hero for the service pages (AI Agents has its own). Pages with a
 // photo get a slow Ken Burns drift and a light sweep; pages without one get
@@ -81,7 +82,7 @@ export function ServiceHero({
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/72">{overview}</p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Button asChild size="lg" variant="accent">
-              <Link href="/request-quote">
+              <Link href={quoteHref({ service: slug })}>
                 {t("cta.startProject")}
                 <ArrowUpRight className="size-4" />
               </Link>

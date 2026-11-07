@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/lib/i18n/language-context";
 import { serviceTranslationsSq } from "@/lib/i18n/content-sq";
 import { services } from "@/content/services";
+import { quoteHref } from "@/lib/quote-link";
 
 // Custom-project categories: every service except AI agents, which have
 // their own packages above.
@@ -49,7 +50,7 @@ export function PricingBody() {
                 <div className="rounded-2xl border border-border bg-card p-6">
                   <h3 className="font-medium">{tr?.title ?? category.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{tr?.shortDescription ?? category.description}</p>
-                  <Link href="/contact" className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent">
+                  <Link href={quoteHref({ service: category.slug })} className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent">
                     {t("cta.getQuote")} <ArrowUpRight className="size-3.5" />
                   </Link>
                 </div>

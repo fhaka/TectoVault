@@ -37,6 +37,7 @@ import {
   maxFiles,
 } from "@/lib/quote-config";
 import { services } from "@/content/services";
+import { agentPackages, type AgentPackage } from "@/content/agent-packages";
 import { serviceTranslationsSq } from "@/lib/i18n/content-sq";
 import { siteConfig } from "@/lib/site-config";
 import { whatsappLink } from "@/lib/whatsapp";
@@ -104,6 +105,41 @@ export function RequestQuoteForm() {
   });
 
   const values = useWatch({ control });
+  const [chosenPackage, setChosenPackage] = React.useState<AgentPackage | null>(null);
+
+  // Pre-fill from links such as /request-quote?type=ai-agents&package=growth
+  // (pricing cards, service and industry pages): select the service, note
+  // the package in the description, and start at the second step.
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type");
+    if (!type || !projectTypeOptions.some((o) => o.value === type)) return;
+    const pkg = type === "ai-agents" ? agentPackages.find((p) => p.id === params.get("package")) ?? null : null;
+    const id = window.setTimeout(() => {
+      setValue("projectType", type);
+      if (pkg) {
+        setChosenPackage(pkg);
+        const name = t(`agentPackages.${pkg.id}.name`);
+        const price = pkg.setupPrice
+          ? `${pkg.setupPrice} + ${pkg.monthlyPrice} ${t("agentPackages.monthlySuffix")}`
+          : t("agentPackages.customQuote");
+        setValue("description", t("quote.packageIntro").replace("{name}", name).replace("{price}", price) + " ");
+      }
+      setDirection(1);
+      setStep(1);
+    }, 0);
+    return () => window.clearTimeout(id);
+    // Runs once on arrival; later language switches keep what was typed.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // A package only applies to AI agents.
+  React.useEffect(() => {
+    if (chosenPackage && values.projectType !== "ai-agents") {
+      const id = window.setTimeout(() => setChosenPackage(null), 0);
+      return () => window.clearTimeout(id);
+    }
+  }, [chosenPackage, values.projectType]);
 
   React.useEffect(() => () => {
     if (advanceTimer.current) window.clearTimeout(advanceTimer.current);
@@ -174,7 +210,8 @@ export function RequestQuoteForm() {
   const answerFor = (index: number): string | null => {
     if (index === 0) {
       const opt = projectTypeOptions.find((o) => o.value === values.projectType);
-      return opt ? tx(opt.label) : null;
+      if (!opt) return null;
+      return chosenPackage ? `${tx(opt.label)} · ${t(`agentPackages.${chosenPackage.id}.name`)}` : tx(opt.label);
     }
     if (index === 1) {
       const d = values.description?.trim();
@@ -240,7 +277,7 @@ export function RequestQuoteForm() {
             <span className="font-mono">{Math.round(progress)}%</span>
           </div>
           <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10">
-            <motion.div className="h-full rounded-full bg-accent" animate={{ width: `${progress}%` }} transition={{ duration: 0.5 }} />
+            <motion.div className="h-full origin-left rounded-full bg-accent" initial={false} animate={{ scaleX: progress / 100 }} transition={{ duration: 0.5 }} />
           </div>
         </div>
 
@@ -255,9 +292,9 @@ export function RequestQuoteForm() {
                 {i < steps.length - 1 ? (
                   <span aria-hidden="true" className="absolute -bottom-1 left-[1.4rem] top-[3rem] w-px overflow-hidden bg-white/10">
                     <motion.span
-                      className="block w-full origin-top bg-accent"
+                      className="block size-full origin-top bg-accent"
                       initial={false}
-                      animate={{ height: done ? "100%" : "0%" }}
+                      animate={{ scaleY: done ? 1 : 0 }}
                       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                     />
                   </span>
@@ -296,9 +333,9 @@ export function RequestQuoteForm() {
                     <AnimatePresence>
                       {answer ? (
                         <motion.span
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
+                          initial={{ opacity: 0, y: -4 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -4 }}
                           className="mt-0.5 block truncate text-xs text-accent"
                         >
                           {answer}
@@ -362,8 +399,9 @@ export function RequestQuoteForm() {
           {/* Progress bar */}
           <div className="h-1 bg-white/5">
             <motion.div
-              className="h-full bg-gradient-to-r from-accent to-[#4fd1a8]"
-              animate={{ width: `${progress}%` }}
+              className="h-full origin-left bg-gradient-to-r from-accent to-[#4fd1a8]"
+              initial={false}
+              animate={{ scaleX: progress / 100 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             />
           </div>

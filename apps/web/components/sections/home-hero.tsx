@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { AgentConsole } from "@/components/sections/agent-console";
 import { hasSeenSplash } from "@/components/sections/home-splash";
 import { useTranslation } from "@/lib/i18n/language-context";
+import { quoteHref } from "@/lib/quote-link";
 
 // When the splash is showing, the hero waits for its handoff event before
 // animating in — the splash copy sinks out while this copy rises in over the
@@ -110,7 +111,7 @@ export function HomeHero() {
           className="mt-8 grid gap-3 min-[400px]:flex min-[400px]:flex-wrap min-[400px]:items-center sm:mt-10 sm:gap-4"
         >
           <Button asChild size="lg" variant="accent">
-            <Link href="/request-quote">
+            <Link href={quoteHref({ type: "ai-agents" })}>
               {t("cta.getAgent")}
               <ArrowUpRight className="size-4" />
             </Link>

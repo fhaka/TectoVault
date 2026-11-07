@@ -11,6 +11,7 @@ import { Section, SectionHeading } from "@/components/shared/section";
 import { Reveal } from "@/components/shared/reveal";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/lib/i18n/language-context";
+import { quoteHref } from "@/lib/quote-link";
 
 export function PricingAgentPackages() {
   const { t } = useTranslation();
@@ -148,7 +149,7 @@ function PackageCard({ pkg, index, inView }: { pkg: AgentPackage; index: number;
           variant={pkg.featured ? "accent" : "outline"}
           className={cn("mt-8 w-full", !pkg.featured && "border-white/20 text-white hover:bg-white/10")}
         >
-          <Link href="/request-quote">
+          <Link href={quoteHref({ type: "ai-agents", pkg: pkg.id })}>
             {t(`agentPackages.${pkg.id}.cta`)}
             <ArrowUpRight className="size-4" />
           </Link>
