@@ -4,6 +4,8 @@ import { siteConfig } from "@/lib/site-config";
 import { HomeSplash } from "@/components/sections/home-splash";
 import { HomeHero } from "@/components/sections/home-hero";
 import { HomeCapability } from "@/components/sections/home-capability";
+import { HomeAgents } from "@/components/sections/home-agents";
+import { HomeAgentFlow } from "@/components/sections/home-agent-flow";
 import { HomeServices } from "@/components/sections/home-services";
 import { HomeWork } from "@/components/sections/home-work";
 import { HomeProblems } from "@/components/sections/home-problems";
@@ -59,12 +61,14 @@ export default function Home() {
       <HomeSplash />
       <HomeHero />
       <HomeCapability />
+      <HomeAgents />
+      <HomeAgentFlow />
+      <HomeProblems />
       <HomeServices />
       <HomeWork />
-      <HomeProblems />
       <HomeIndustries />
       <HomeProcess />
-      <FinalCta />
+      <FinalCta variant="agents" />
     </>
   );
 }

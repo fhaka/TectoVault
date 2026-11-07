@@ -13,6 +13,7 @@ import { mainNav } from "@/content/nav";
 import { useTranslation } from "@/lib/i18n/language-context";
 
 const navLabelKeys: Record<string, string> = {
+  "AI Agents": "nav.aiAgents",
   Services: "nav.services",
   Solutions: "nav.solutions",
   Industries: "nav.industries",
@@ -94,6 +95,12 @@ export function DesktopNav({ dark }: { dark?: boolean }) {
                     dark ? "text-white/90 hover:text-white" : "text-foreground/90 hover:text-foreground"
                   )}
                 >
+                  {"highlight" in item && item.highlight ? (
+                    <span className="relative mr-2 inline-flex size-1.5 align-middle">
+                      <span className="absolute inset-0 animate-ping rounded-full bg-accent opacity-75" />
+                      <span className="relative size-1.5 rounded-full bg-accent" />
+                    </span>
+                  ) : null}
                   {t(navLabelKeys[item.label] ?? item.label)}
                 </Link>
               </NavigationMenuPrimitive.Link>

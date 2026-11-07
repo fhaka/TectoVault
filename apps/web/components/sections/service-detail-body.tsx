@@ -10,6 +10,7 @@ import { Section, SectionHeading } from "@/components/shared/section";
 import { Reveal } from "@/components/shared/reveal";
 import { FinalCta } from "@/components/sections/final-cta";
 import { WebApplicationsHero } from "@/components/sections/web-applications-hero";
+import { AiAgentsHero } from "@/components/sections/ai-agents-hero";
 import {
   Accordion,
   AccordionContent,
@@ -39,7 +40,9 @@ export function ServiceDetailBody({
 
   return (
     <>
-      {service.slug === "web-applications" ? (
+      {service.slug === "ai-agents" ? (
+        <AiAgentsHero overview={overview} />
+      ) : service.slug === "web-applications" ? (
         <WebApplicationsHero overview={overview} />
       ) : (
         <PageHero eyebrow={t("service.eyebrow")}>

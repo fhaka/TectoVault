@@ -7,6 +7,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { AgentConsole } from "@/components/sections/agent-console";
 import { useTranslation } from "@/lib/i18n/language-context";
 
 // When the splash is showing, the hero waits for its handoff event before
@@ -47,40 +48,27 @@ export function HomeHero() {
       <AbstractVisual reduceMotion={reduceMotion} />
 
       <motion.div
-        aria-hidden="true"
-        className="absolute right-[7%] top-1/2 z-[1] hidden h-[min(42vw,38rem)] w-[min(42vw,38rem)] -translate-y-1/2 lg:block"
-        initial={{ opacity: 0, scale: 0.86, rotate: -14 }}
-        animate={ready ? { opacity: 1, scale: 1, rotate: 0 } : undefined}
-        transition={{ duration: 1.3, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute right-[6%] top-1/2 z-[1] hidden w-[min(34vw,27rem)] -translate-y-1/2 lg:block"
+        initial={{ opacity: 0, y: 40, scale: 0.94 }}
+        animate={ready ? { opacity: 1, y: 0, scale: 1 } : undefined}
+        transition={{ duration: 1.1, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
       >
+        {/* Soft halo so the console reads as the scene's light source. */}
         <motion.div
-          className="absolute inset-[7%] rounded-full border border-white/15"
-          animate={reduceMotion ? undefined : { rotate: 360 }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        >
-          <span className="absolute -left-1 top-1/2 size-2 -translate-y-1/2 rounded-full bg-accent shadow-[0_0_24px_5px_rgba(79,209,168,0.7)]" />
-          <span className="absolute right-[16%] top-[7%] size-1.5 rounded-full bg-white shadow-[0_0_18px_3px_rgba(255,255,255,0.8)]" />
-        </motion.div>
-        <motion.div
-          className="absolute inset-[18%] rounded-full border border-dashed border-white/20"
-          animate={reduceMotion ? undefined : { rotate: -360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          aria-hidden="true"
+          className="absolute -inset-10 -z-10 rounded-full bg-accent/20 blur-3xl"
+          animate={reduceMotion ? undefined : { opacity: [0.35, 0.7, 0.35], scale: [0.95, 1.05, 0.95] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         />
+        <AgentConsole active={ready} />
         <motion.div
-          className="absolute inset-[31%] rounded-full border border-accent/50 bg-accent/10 shadow-[0_0_100px_20px_rgba(79,209,168,0.22)]"
-          animate={reduceMotion ? undefined : { scale: [1, 1.12, 1], opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <div className="absolute left-1/2 top-1/2 grid size-24 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/25 bg-ink/60 backdrop-blur-xl">
-          <div className="size-4 rounded-full bg-accent shadow-[0_0_35px_12px_rgba(79,209,168,0.85)]" />
-        </div>
-        <motion.div
-          className="absolute -right-5 top-[18%] rounded-xl border border-white/15 bg-ink/65 px-4 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-white/75 backdrop-blur-md"
+          aria-hidden="true"
+          className="absolute -left-8 top-full mt-5 rounded-xl border border-white/15 bg-ink/75 px-4 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-white/75 backdrop-blur-md"
           animate={reduceMotion ? undefined : { y: [0, -10, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         >
-          <span className="mb-1.5 block text-accent">01 / Signal live</span>
-          Building what&apos;s next
+          <span className="mb-1.5 block text-accent">{t("hero.badgeTop")}</span>
+          {t("hero.badgeBottom")}
         </motion.div>
       </motion.div>
 
@@ -103,7 +91,7 @@ export function HomeHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={ready ? { opacity: 1, y: 0 } : undefined}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="max-w-4xl text-balance text-[2.65rem] font-medium leading-[1.02] tracking-tight min-[400px]:text-5xl md:text-7xl lg:text-[5.5rem]"
+          className="max-w-4xl text-balance text-[2.65rem] font-medium leading-[1.02] tracking-tight min-[400px]:text-5xl md:text-7xl lg:max-w-[52%] lg:text-[4.25rem] xl:text-[5rem]"
         >
           {t("hero.headline1")}
           <br />
@@ -114,7 +102,7 @@ export function HomeHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={ready ? { opacity: 1, y: 0 } : undefined}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-ink-muted sm:mt-8 sm:text-lg md:text-xl"
+          className="mt-6 max-w-xl text-pretty lg:max-w-[46%] text-base leading-relaxed text-ink-muted sm:mt-8 sm:text-lg md:text-xl"
         >
           {t("hero.subheadline")}
         </motion.p>
@@ -127,13 +115,13 @@ export function HomeHero() {
         >
           <Button asChild size="lg" variant="accent">
             <Link href="/request-quote">
-              {t("cta.startProject")}
+              {t("cta.getAgent")}
               <ArrowUpRight className="size-4" />
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
-            <Link href="/services">
-              {t("cta.exploreTechnology")}
+            <Link href="#agents">
+              {t("cta.seeAgents")}
               <ArrowRight className="size-4" />
             </Link>
           </Button>

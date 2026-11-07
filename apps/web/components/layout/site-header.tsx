@@ -116,6 +116,7 @@ export function SiteHeader() {
 }
 
 const navLabelKeys: Record<string, string> = {
+  "AI Agents": "nav.aiAgents",
   Services: "nav.services",
   Solutions: "nav.solutions",
   Industries: "nav.industries",
@@ -143,6 +144,9 @@ function MobileNav({ onNavigate }: { onNavigate: () => void }) {
             onClick={onNavigate}
             className="rounded-lg px-3 py-3 text-lg font-medium transition-colors hover:bg-muted"
           >
+            {"highlight" in item && item.highlight ? (
+              <span className="mr-2 inline-block size-2 rounded-full bg-accent align-middle" />
+            ) : null}
             {t(navLabelKeys[item.label] ?? item.label) || item.label}
           </Link>
         ))}

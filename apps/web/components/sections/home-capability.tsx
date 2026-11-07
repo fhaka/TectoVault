@@ -1,14 +1,14 @@
-import { Code2, Cloud, Cpu, PenTool, Workflow } from "lucide-react";
+import { Bot, Code2, Cloud, LayoutGrid, Workflow } from "lucide-react";
 
 import { Reveal } from "@/components/shared/reveal";
 import { siteConfig } from "@/lib/site-config";
 
 const capabilities = [
+  { icon: Bot, label: "AI Agents" },
+  { icon: Workflow, label: "Automation" },
+  { icon: LayoutGrid, label: "Web Applications" },
   { icon: Code2, label: "Web Development" },
   { icon: Cloud, label: "Cloud" },
-  { icon: Cpu, label: "Software Engineering" },
-  { icon: PenTool, label: "UI/UX" },
-  { icon: Workflow, label: "Automation" },
 ];
 
 export function HomeCapability() {

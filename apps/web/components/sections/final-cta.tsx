@@ -15,6 +15,7 @@ export function FinalCta({
   primaryHref = "/request-quote",
   secondaryLabel,
   secondaryHref = "/contact",
+  variant = "default",
 }: {
   eyebrow?: string;
   title?: string;
@@ -23,12 +24,16 @@ export function FinalCta({
   primaryHref?: string;
   secondaryLabel?: string;
   secondaryHref?: string;
+  /** "agents" swaps the default copy for the AI-agent pitch. */
+  variant?: "default" | "agents";
 }) {
   const { t } = useTranslation();
-  const resolvedEyebrow = eyebrow ?? t("finalCta.eyebrow");
-  const resolvedTitle = title ?? t("finalCta.title");
-  const resolvedDescription = description ?? t("finalCta.description");
-  const resolvedPrimaryLabel = primaryLabel ?? t("cta.startProject");
+  const ns = variant === "agents" ? "finalCta.agents" : "finalCta";
+  const resolvedEyebrow = eyebrow ?? t(`${ns}.eyebrow`);
+  const resolvedTitle = title ?? t(`${ns}.title`);
+  const resolvedDescription = description ?? t(`${ns}.description`);
+  const resolvedPrimaryLabel =
+    primaryLabel ?? t(variant === "agents" ? "cta.getAgent" : "cta.startProject");
   const resolvedSecondaryLabel = secondaryLabel ?? t("cta.contactUs");
   return (
     <section data-header-tone="dark" className="relative overflow-hidden bg-ink py-24 text-ink-foreground md:py-32">

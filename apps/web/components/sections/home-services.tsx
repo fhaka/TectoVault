@@ -5,20 +5,62 @@ import { services } from "@/content/services";
 import { Section, SectionHeading } from "@/components/shared/section";
 import { Reveal } from "@/components/shared/reveal";
 
+// AI Agents is the flagship offer, so it gets the large lead card; everything
+// else (web applications included) follows in the regular grid.
+const featured = services.find((s) => s.slug === "ai-agents");
+const rest = services.filter((s) => s.slug !== "ai-agents");
+
 export function HomeServices() {
   return (
     <Section id="services">
       <SectionHeading
         eyebrow="What we do"
-        title="End-to-end digital product development"
-        description="From marketing websites to full software platforms — one team across design, engineering and infrastructure."
+        title="AI agents first. Full software when you need it."
+        description="We lead with AI agents that do real work for your business — and back them with the automation, web applications and infrastructure they run on."
       />
 
       <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-        {services.map((service, i) => {
+        {featured ? (
+          <Reveal className="h-full sm:col-span-2">
+            <Link
+              href={`/services/${featured.slug}`}
+              className="group relative flex h-full flex-col justify-between overflow-hidden bg-ink p-8 text-ink-foreground md:p-10"
+            >
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-accent/25 blur-3xl transition-transform duration-700 group-hover:scale-125"
+              />
+              <div className="relative">
+                <div className="flex items-center gap-3">
+                  <span className="flex size-12 items-center justify-center rounded-xl bg-accent text-accent-foreground">
+                    <featured.icon className="size-6" />
+                  </span>
+                  <span className="flex items-center gap-2 rounded-full border border-accent/40 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+                    <span className="size-1.5 animate-pulse rounded-full bg-accent" />
+                    Our focus
+                  </span>
+                </div>
+                <h3 className="mt-6 text-2xl font-medium md:text-3xl">{featured.title}</h3>
+                <p className="mt-3 max-w-md text-ink-muted">{featured.overview}</p>
+              </div>
+              <ul className="relative mt-8 grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-white/80">
+                {featured.capabilities.slice(0, 6).map((c) => (
+                  <li key={c} className="flex items-center gap-2">
+                    <span className="size-1 rounded-full bg-accent" />
+                    {c}
+                  </li>
+                ))}
+              </ul>
+              <div className="relative mt-8 flex items-center gap-1 text-sm font-medium text-accent">
+                Learn more <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </div>
+            </Link>
+          </Reveal>
+        ) : null}
+        {rest.map((service, i) => {
           const Icon = service.icon;
           return (
-            <Reveal key={service.slug} delay={i * 0.05} className="h-full">
+            <Reveal key={service.slug} delay={(i + 1) * 0.05} className="h-full">
               <Link
                 href={`/services/${service.slug}`}
                 className="group flex h-full flex-col justify-between bg-card p-7 transition-colors hover:bg-muted"

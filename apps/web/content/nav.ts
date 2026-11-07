@@ -1,10 +1,11 @@
 export const mainNav = [
+  // Flagship offer: first in the nav and marked with a live dot.
+  { label: "AI Agents", href: "/services/ai-agents", highlight: true },
   { label: "Services", href: "/services", megaMenu: "services" as const },
   { label: "Solutions", href: "/solutions", megaMenu: "solutions" as const },
   { label: "Industries", href: "/industries", megaMenu: "industries" as const },
   { label: "Work", href: "/work" },
   { label: "About", href: "/about" },
-  { label: "Process", href: "/process" },
   { label: "Pricing", href: "/pricing" },
 ];
 
