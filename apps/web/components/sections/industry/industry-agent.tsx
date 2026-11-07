@@ -122,11 +122,11 @@ export function IndustryAgent({ agent }: { agent: IndustryAgentData }) {
                 transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
               />
             </div>
-            <div className="relative flex flex-wrap items-center gap-6 rounded-[calc(1.5rem-1px)] bg-[#0d1512] p-6">
+            <div className="relative flex flex-col items-start gap-5 rounded-[calc(1.5rem-1px)] bg-[#0d1512] p-6 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
               <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-accent text-accent-foreground">
                 <PkgIcon className="size-5" />
               </span>
-              <div className="min-w-0 flex-1">
+              <div className="min-w-0 sm:flex-1">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{t("industryPage.recommended")}</p>
                 <p className="mt-1 text-xl font-medium">
                   {t(`agentPackages.${pkg.id}.name`)}

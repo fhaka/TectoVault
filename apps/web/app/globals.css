@@ -145,7 +145,11 @@
     @apply bg-background text-foreground font-sans antialiased;
     font-feature-settings: "ss01", "cv01";
     min-width: 0;
-    overflow-wrap: anywhere;
+    /* break-word, not anywhere: "anywhere" lets flex and grid items shrink
+       to one character wide, which crushed text into thin columns on phones. */
+    overflow-wrap: break-word;
+    /* Slide-in animations start off-screen; never let them widen the page. */
+    overflow-x: clip;
   }
 
   img, video, svg {

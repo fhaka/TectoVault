@@ -179,6 +179,8 @@ export const copySq: Record<string, string> = {
   "End-to-end digital product development — hover a service to explore it.": "Zhvillim i plotë i produkteve digjitale — kaloni mbi një shërbim për ta eksploruar.",
   "Our Services": "Shërbimet tona",
   "Hover a node to explore": "Kaloni mbi një pikë për ta eksploruar",
+  "Tap a service to open it": "Prekni një shërbim për ta hapur",
+  "End-to-end digital product development — tap a service to open it.": "Zhvillim i plotë i produkteve digjitale — prekni një shërbim për ta hapur.",
   "Services / Web applications": "Shërbimet / Aplikacione web",
   "Web applications that make work flow.": "Aplikacione web që e bëjnë punën të rrjedhë.",
   "Frequently asked questions": "Pyetjet më të shpeshta",

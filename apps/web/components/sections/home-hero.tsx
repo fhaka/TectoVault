@@ -43,6 +43,11 @@ export function HomeHero() {
   return (
     <section data-header-tone="hero" className="relative flex min-h-svh items-end overflow-hidden bg-ink text-ink-foreground">
       <AbstractVisual reduceMotion={reduceMotion} />
+      {/* Phones: the text sits on top of the image, so darken behind it. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[78%] bg-gradient-to-t from-ink via-ink/85 to-transparent lg:hidden"
+      />
 
       <motion.div
         className="absolute right-[6%] top-1/2 z-[1] hidden w-[min(34vw,27rem)] -translate-y-1/2 lg:block"

@@ -67,7 +67,9 @@ export function ServicesOrbit() {
             {tx("Everything your product needs, connected.")}
           </h1>
           <p className="mt-4 text-sm leading-relaxed text-ink-muted md:text-base">
-            {tx("End-to-end digital product development — hover a service to explore it.")}
+            {/* Touch screens have no hover: a tap opens the service. */}
+            <span className="[@media(hover:hover)]:hidden">{tx("End-to-end digital product development — tap a service to open it.")}</span>
+            <span className="hidden [@media(hover:hover)]:inline">{tx("End-to-end digital product development — hover a service to explore it.")}</span>
           </p>
         </div>
 
@@ -184,7 +186,8 @@ export function ServicesOrbit() {
                       {tx("Our Services")}
                     </p>
                     <p className="mt-2 text-xs text-ink-muted sm:text-sm">
-                      {tx("Hover a node to explore")}
+                      <span className="[@media(hover:hover)]:hidden">{tx("Tap a service to open it")}</span>
+                      <span className="hidden [@media(hover:hover)]:inline">{tx("Hover a node to explore")}</span>
                     </p>
                   </motion.div>
                 )}

@@ -6,6 +6,7 @@ import { ArrowUp, Bot, Check, Loader2, RotateCcw, X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { useTranslation } from "@/lib/i18n/language-context";
+import { useHideOnScroll } from "@/lib/use-hide-on-scroll";
 
 // Floating live demo agent. Talks to /api/agent, which streams NDJSON events
 // (text chunks + tool progress). Any element can open it with
@@ -47,6 +48,7 @@ export function AgentChat() {
   const available = useAgentAvailable();
   const [open, setOpen] = React.useState(false);
   const [teaser, setTeaser] = React.useState(false);
+  const launcherHidden = useHideOnScroll();
   const [messages, setMessages] = React.useState<ChatMessage[]>([]);
   const [input, setInput] = React.useState("");
   const [busy, setBusy] = React.useState(false);
@@ -194,10 +196,11 @@ export function AgentChat() {
           <motion.div
             key="launcher"
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
+            animate={launcherHidden ? { opacity: 0, y: 24, scale: 0.9 } : { opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            transition={{ type: "spring", stiffness: 300, damping: 24 }}
-            className="fixed bottom-4 right-4 z-[60] flex flex-col items-end gap-3 sm:bottom-6 sm:right-6"
+            transition={launcherHidden ? { duration: 0.2 } : { type: "spring", stiffness: 300, damping: 24 }}
+            aria-hidden={launcherHidden || undefined}
+            className={cn("fixed bottom-4 right-4 z-[60] flex flex-col items-end gap-3 sm:bottom-6 sm:right-6", launcherHidden && "pointer-events-none")}
           >
             <AnimatePresence>
               {teaser ? (
@@ -226,7 +229,8 @@ export function AgentChat() {
                 setOpen(true);
                 dismissTeaser();
               }}
-              className="group relative flex items-center gap-2.5 rounded-full bg-ink py-2 pl-2 pr-5 text-sm font-medium text-white shadow-[0_12px_40px_-8px_rgba(47,143,114,0.6)] ring-1 ring-white/10 transition-transform hover:-translate-y-0.5"
+              aria-label={t("agentChat.launcher")}
+              className="group relative flex items-center gap-2.5 rounded-full bg-ink p-2 text-sm sm:pr-5 font-medium text-white shadow-[0_12px_40px_-8px_rgba(47,143,114,0.6)] ring-1 ring-white/10 transition-transform hover:-translate-y-0.5"
             >
               <span className="relative grid size-9 place-items-center rounded-full bg-accent text-accent-foreground">
                 <Bot className="size-[18px]" />
@@ -239,7 +243,8 @@ export function AgentChat() {
                   />
                 ) : null}
               </span>
-              {t("agentChat.launcher")}
+              {/* Icon only on phones, so it doesn't cover the page. */}
+              <span className="hidden sm:inline">{t("agentChat.launcher")}</span>
             </button>
           </motion.div>
         ) : null}

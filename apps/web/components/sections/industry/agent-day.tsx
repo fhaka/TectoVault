@@ -97,7 +97,7 @@ export function AgentDay({ day }: { day: { time: string; text: string }[] }) {
                 i === active ? "border-accent bg-card" : "border-border"
               )}
             >
-              <span className={cn("font-mono", i === active ? "text-accent" : "text-muted-foreground")}>{moment.time}</span>
+              <span className={cn("shrink-0 whitespace-nowrap font-mono", i === active ? "text-accent" : "text-muted-foreground")}>{moment.time}</span>
               <span>{moment.text}</span>
             </li>
           ))}

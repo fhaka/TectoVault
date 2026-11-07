@@ -15,10 +15,10 @@ export function SiteFooter() {
   const { t, tx, locale } = useTranslation();
 
   return (
-    <footer className="border-t border-white/10 bg-ink text-ink-foreground">
+    <footer data-header-tone="dark" className="border-t border-white/10 bg-ink text-ink-foreground">
       <div className="container-page py-16 md:py-20">
-        <div className="grid grid-cols-1 gap-10 min-[400px]:grid-cols-2 md:grid-cols-6">
-          <div className="min-[400px]:col-span-2">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-6">
+          <div className="col-span-2">
             <Logo />
             <p className="mt-5 max-w-xs font-display text-lg font-medium leading-snug text-white">{t("brand.tagline")}</p>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-ink-muted">
@@ -35,34 +35,35 @@ export function SiteFooter() {
           <FooterColumn title={t("footer.services")} links={footerNav.services} />
           <FooterColumn title={t("footer.resources")} links={footerNav.resources} />
 
-          <div>
+          {/* Full width on phones so the email address fits on one line. */}
+          <div className="col-span-2 md:col-span-1">
             <h3 className="text-sm font-semibold">{t("footer.contact")}</h3>
-            <ul className="mt-4 space-y-3 text-sm text-ink-muted">
-              <li className="flex items-start gap-2">
+            <ul className="mt-3 space-y-0.5 text-sm text-ink-muted">
+              <li className="flex items-start gap-2 py-1.5">
                 <Mail className="mt-0.5 size-4 shrink-0" />
-                <a href={`mailto:${siteConfig.contact.email}`} className="min-w-0 break-all hover:text-white">
+                <a href={`mailto:${siteConfig.contact.email}`} className="-my-2 inline-block min-w-0 break-words py-2 hover:text-white">
                   {siteConfig.contact.email}
                 </a>
               </li>
-              <li className="flex items-start gap-2">
+              <li className="flex items-start gap-2 py-1.5">
                 <Phone className="mt-0.5 size-4 shrink-0" />
-                <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`} className="hover:text-foreground">
+                <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`} className="-my-2 inline-block py-2 hover:text-white">
                   {siteConfig.contact.phone}
                 </a>
               </li>
-              <li className="flex items-start gap-2">
+              <li className="flex items-start gap-2 py-1.5">
                 <Phone className="mt-0.5 size-4 shrink-0 opacity-0" />
-                <a href={`tel:${siteConfig.contact.phone2.replace(/\s/g, "")}`} className="hover:text-foreground">
+                <a href={`tel:${siteConfig.contact.phone2.replace(/\s/g, "")}`} className="-my-2 inline-block py-2 hover:text-white">
                   {siteConfig.contact.phone2}
                 </a>
               </li>
-              <li className="flex items-start gap-2">
+              <li className="flex items-start gap-2 py-1.5">
                 <WhatsappIcon className="mt-0.5 size-4 shrink-0" />
-                <a href={whatsappLink(locale)} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                <a href={whatsappLink(locale)} target="_blank" rel="noopener noreferrer" className="-my-2 inline-block py-2 hover:text-white">
                   WhatsApp
                 </a>
               </li>
-              <li className="flex items-start gap-2">
+              <li className="flex items-start gap-2 py-1.5">
                 <MapPin className="mt-0.5 size-4 shrink-0" />
                 <span>{tx(siteConfig.contact.address)}</span>
               </li>
@@ -74,9 +75,9 @@ export function SiteFooter() {
           <p>
             © {year} {siteConfig.name}. {t("footer.rights")}
           </p>
-          <div className="flex flex-wrap gap-x-6 gap-y-2">
+          <div className="-my-1.5 flex flex-wrap gap-x-6">
             {footerNav.legal.map((item) => (
-              <Link key={item.href} href={item.href} className="hover:text-white">
+              <Link key={item.href} href={item.href} className="inline-block py-1.5 hover:text-white">
                 {tx(item.label)}
               </Link>
             ))}
@@ -98,12 +99,12 @@ function FooterColumn({
   return (
     <div>
       <h3 className="text-sm font-semibold">{title}</h3>
-      <ul className="mt-4 space-y-3">
+      <ul className="mt-3 space-y-0.5">
         {links.map((link) => (
           <li key={link.href}>
             <Link
               href={link.href}
-              className="text-sm text-ink-muted hover:text-white"
+              className="inline-block py-1.5 text-sm text-ink-muted hover:text-white"
             >
               {tx(link.label)}
             </Link>
