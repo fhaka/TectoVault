@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { RequestQuoteForm } from "@/components/forms/request-quote-form";
-import { pageMetadata } from "@/lib/i18n/server";
+import { getTx, pageMetadata } from "@/lib/i18n/server";
 
 export function generateMetadata(): Promise<Metadata> {
   return pageMetadata(
@@ -14,7 +14,8 @@ export function generateMetadata(): Promise<Metadata> {
   );
 }
 
-export default function RequestQuotePage() {
+export default async function RequestQuotePage() {
+  const tx = await getTx();
   return (
     <section className="relative min-h-svh overflow-hidden bg-ink pb-16 pt-24 text-ink-foreground sm:pb-24 sm:pt-36 md:pt-40">
       {/* Ambient glow so the dealt cards live in a lit space, not a void. */}
@@ -24,9 +25,9 @@ export default function RequestQuotePage() {
       />
 
       <div className="container-page relative">
-        <h1 className="sr-only">Request a Quote</h1>
+        <h1 className="sr-only">{tx("Request a Quote")}</h1>
         <p className="mb-2 text-center text-xs font-semibold uppercase tracking-[0.25em] text-accent">
-          Request a Quote
+          {tx("Request a Quote")}
         </p>
         <RequestQuoteForm />
       </div>

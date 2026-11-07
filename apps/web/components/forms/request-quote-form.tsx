@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/lib/i18n/language-context";
 
 const steps = [
   { title: "What do you need?", fields: ["projectType"] as Path<QuoteFormValues>[] },
@@ -61,6 +62,7 @@ const cardVariants = {
 };
 
 export function RequestQuoteForm() {
+  const { tx, locale } = useTranslation();
   const [step, setStep] = React.useState(0);
   const [direction, setDirection] = React.useState(1);
   const [submitted, setSubmitted] = React.useState(false);
@@ -99,19 +101,19 @@ export function RequestQuoteForm() {
     setFileError(null);
 
     if (list.length + files.length > maxFiles) {
-      setFileError(`You can upload up to ${maxFiles} files.`);
+      setFileError(locale === "sq" ? `Mund të ngarkoni deri në ${maxFiles} skedarë.` : `You can upload up to ${maxFiles} files.`);
       return;
     }
     const tooLarge = list.find((f) => f.size > maxFileSizeMb * 1024 * 1024);
     if (tooLarge) {
-      setFileError(`"${tooLarge.name}" exceeds the ${maxFileSizeMb}MB limit.`);
+      setFileError(locale === "sq" ? `"${tooLarge.name}" kalon kufirin prej ${maxFileSizeMb}MB.` : `"${tooLarge.name}" exceeds the ${maxFileSizeMb}MB limit.`);
       return;
     }
     const invalidType = list.find(
       (f) => !acceptedFileTypes.some((ext) => f.name.toLowerCase().endsWith(ext))
     );
     if (invalidType) {
-      setFileError(`"${invalidType.name}" is not an accepted file type.`);
+      setFileError(locale === "sq" ? `"${invalidType.name}" nuk është një lloj skedari i pranuar.` : `"${invalidType.name}" is not an accepted file type.`);
       return;
     }
     setFiles((prev) => [...prev, ...list]);
@@ -127,7 +129,7 @@ export function RequestQuoteForm() {
       if (!res.ok) throw new Error("Request failed");
       setSubmitted(true);
     } catch {
-      toast.error("Something went wrong submitting your request. Please try again or email us directly.");
+      toast.error(tx("Something went wrong submitting your request. Please try again or email us directly."));
     }
   }
 
@@ -168,7 +170,7 @@ export function RequestQuoteForm() {
           transition={{ duration: 0.4, delay: 0.7 }}
           className="mt-6 text-2xl font-medium"
         >
-          Request received
+          {tx("Request received")}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 10 }}
@@ -176,7 +178,7 @@ export function RequestQuoteForm() {
           transition={{ duration: 0.4, delay: 0.85 }}
           className="mt-3 text-muted-foreground"
         >
-          Thanks for the details — we&rsquo;ll review your project and get back to you shortly with next steps.
+          {tx("Thanks for the details — we’ll review your project and get back to you shortly with next steps.")}
         </motion.p>
       </motion.div>
     );
@@ -184,12 +186,12 @@ export function RequestQuoteForm() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <StepConstellation current={step} total={steps.length} />
+      <StepConstellation current={step} total={steps.length} label={tx("Step")} />
 
       {/* The question is the hero of each step: giant type, dealt in word by word. */}
       <div className="mt-6 min-h-[5.5rem] text-center sm:mt-8 md:min-h-[8rem]">
         <AnimatePresence mode="wait" initial={false}>
-          <AnimatedQuestion key={step} text={steps[step].title} />
+          <AnimatedQuestion key={step} text={tx(steps[step].title)} />
         </AnimatePresence>
       </div>
 
@@ -250,25 +252,25 @@ export function RequestQuoteForm() {
                           ) : null}
                         </AnimatePresence>
                         <Icon className={cn("size-6", active ? "text-accent" : "text-muted-foreground")} />
-                        <span className="text-sm font-medium">{opt.label}</span>
+                        <span className="text-sm font-medium">{tx(opt.label)}</span>
                       </motion.button>
                     );
                   })}
-                  {errors.projectType ? <p className="col-span-full text-sm text-destructive">{errors.projectType.message}</p> : null}
+                  {errors.projectType ? <p className="col-span-full text-sm text-destructive">{tx(errors.projectType.message ?? "")}</p> : null}
                 </div>
               ) : null}
 
               {step === 1 ? (
                 <div className="space-y-2">
-                  <Label htmlFor="description">Describe your project</Label>
+                  <Label htmlFor="description">{tx("Describe your project")}</Label>
                   <Textarea
                     id="description"
                     rows={8}
-                    placeholder="What are you trying to build? What problem should it solve?"
+                    placeholder={tx("What are you trying to build? What problem should it solve?")}
                     aria-invalid={!!errors.description}
                     {...register("description")}
                   />
-                  {errors.description ? <p className="text-sm text-destructive">{errors.description.message}</p> : null}
+                  {errors.description ? <p className="text-sm text-destructive">{tx(errors.description.message ?? "")}</p> : null}
                 </div>
               ) : null}
 
@@ -279,10 +281,10 @@ export function RequestQuoteForm() {
                       key={opt.value}
                       active={values.budget === opt.value}
                       onClick={() => setValue("budget", opt.value, { shouldValidate: true })}
-                      label={opt.label}
+                      label={tx(opt.label)}
                     />
                   ))}
-                  {errors.budget ? <p className="col-span-full text-sm text-destructive">{errors.budget.message}</p> : null}
+                  {errors.budget ? <p className="col-span-full text-sm text-destructive">{tx(errors.budget.message ?? "")}</p> : null}
                 </div>
               ) : null}
 
@@ -293,10 +295,10 @@ export function RequestQuoteForm() {
                       key={opt.value}
                       active={values.timeline === opt.value}
                       onClick={() => setValue("timeline", opt.value, { shouldValidate: true })}
-                      label={opt.label}
+                      label={tx(opt.label)}
                     />
                   ))}
-                  {errors.timeline ? <p className="col-span-full text-sm text-destructive">{errors.timeline.message}</p> : null}
+                  {errors.timeline ? <p className="col-span-full text-sm text-destructive">{tx(errors.timeline.message ?? "")}</p> : null}
                 </div>
               ) : null}
 
@@ -304,28 +306,28 @@ export function RequestQuoteForm() {
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Name</Label>
+                      <Label htmlFor="name">{tx("Name")}</Label>
                       <Input id="name" aria-invalid={!!errors.name} {...register("name")} />
-                      {errors.name ? <p className="text-sm text-destructive">{errors.name.message}</p> : null}
+                      {errors.name ? <p className="text-sm text-destructive">{tx(errors.name.message ?? "")}</p> : null}
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
+                      <Label htmlFor="email">{tx("Email")}</Label>
                       <Input id="email" type="email" aria-invalid={!!errors.email} {...register("email")} />
-                      {errors.email ? <p className="text-sm text-destructive">{errors.email.message}</p> : null}
+                      {errors.email ? <p className="text-sm text-destructive">{tx(errors.email.message ?? "")}</p> : null}
                     </div>
                   </div>
                   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                     <div className="space-y-2">
-                      <Label htmlFor="company">Company (optional)</Label>
+                      <Label htmlFor="company">{tx("Company (optional)")}</Label>
                       <Input id="company" {...register("company")} />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="phone">Phone (optional)</Label>
+                      <Label htmlFor="phone">{tx("Phone (optional)")}</Label>
                       <Input id="phone" type="tel" {...register("phone")} />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="companyWebsite">Website (optional)</Label>
+                    <Label htmlFor="companyWebsite">{tx("Website (optional)")}</Label>
                     <Input id="companyWebsite" placeholder="https://" {...register("companyWebsite")} />
                   </div>
                 </div>
@@ -338,9 +340,11 @@ export function RequestQuoteForm() {
                     className="flex cursor-pointer flex-col items-center gap-3 rounded-2xl border border-dashed border-border p-6 text-center transition-colors hover:border-accent sm:p-12"
                   >
                     <UploadCloud className="size-8 text-muted-foreground" />
-                    <span className="text-sm font-medium">Click to upload files</span>
+                    <span className="text-sm font-medium">{tx("Click to upload files")}</span>
                     <span className="text-xs text-muted-foreground">
-                      PDF, DOC/DOCX, PNG/JPG or ZIP — up to {maxFileSizeMb}MB each, {maxFiles} files max
+                      {locale === "sq"
+                        ? `PDF, DOC/DOCX, PNG/JPG ose ZIP — deri në ${maxFileSizeMb}MB secili, maksimumi ${maxFiles} skedarë`
+                        : `PDF, DOC/DOCX, PNG/JPG or ZIP — up to ${maxFileSizeMb}MB each, ${maxFiles} files max`}
                     </span>
                     <input
                       id="attachments"
@@ -362,7 +366,7 @@ export function RequestQuoteForm() {
                             type="button"
                             onClick={() => setFiles((prev) => prev.filter((_, idx) => idx !== i))}
                             className="text-muted-foreground hover:text-destructive"
-                            aria-label={`Remove ${file.name}`}
+                            aria-label={`${tx("Remove")} ${file.name}`}
                           >
                             <X className="size-4" />
                           </button>
@@ -375,12 +379,12 @@ export function RequestQuoteForm() {
 
               <div className="mt-8 flex flex-col-reverse gap-3 min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between sm:mt-10 [&>button]:w-full min-[380px]:[&>button]:w-auto">
                 <Button type="button" variant="ghost" onClick={back} disabled={step === 0} className={step === 0 ? "invisible" : ""}>
-                  <ArrowLeft className="size-4" /> Back
+                  <ArrowLeft className="size-4" /> {tx("Back")}
                 </Button>
 
                 {step < steps.length - 1 ? (
                   <Button type="button" variant="accent" onClick={next}>
-                    Continue <ArrowRight className="size-4" />
+                    {tx("Continue")} <ArrowRight className="size-4" />
                   </Button>
                 ) : (
                   // Deliberately type="button" with a programmatic submit, rather than
@@ -396,7 +400,7 @@ export function RequestQuoteForm() {
                     onClick={handleSubmit(onSubmit)}
                   >
                     {isSubmitting ? <Loader2 className="size-4 animate-spin" /> : null}
-                    Submit Project Request
+                    {tx("Submit Project Request")}
                   </Button>
                 )}
               </div>
@@ -411,7 +415,7 @@ export function RequestQuoteForm() {
 // Progress as a constellation: one node per step on a gentle arc, connected
 // by lines that draw themselves as steps are completed. The current node
 // pulses; completed nodes fill in.
-function StepConstellation({ current, total }: { current: number; total: number }) {
+function StepConstellation({ current, total, label }: { current: number; total: number; label: string }) {
   const width = 280;
   const height = 44;
   const points = Array.from({ length: total }, (_, i) => {
@@ -480,7 +484,7 @@ function StepConstellation({ current, total }: { current: number; total: number 
         })}
       </svg>
       <span className="text-xs font-medium uppercase tracking-[0.2em] text-ink-muted">
-        Step {current + 1} / {total}
+        {label} {current + 1} / {total}
       </span>
     </div>
   );

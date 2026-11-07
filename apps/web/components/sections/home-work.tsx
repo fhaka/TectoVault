@@ -36,7 +36,7 @@ export async function HomeWork() {
                 {project.image ? (
                   <Image
                     src={project.image}
-                    alt={`${project.name} — screenshot`}
+                    alt={`${project.name} — ${tx("screenshot")}`}
                     fill
                     sizes="(min-width: 768px) 50vw, 100vw"
                     className="object-cover object-top"
@@ -61,7 +61,7 @@ export async function HomeWork() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:border-accent hover:text-accent"
-                    aria-label={`Visit ${project.name}`}
+                    aria-label={`${tx("Visit")} ${project.name}`}
                   >
                     {tx("Visit site")} <ArrowUpRight className="size-4" />
                   </a>

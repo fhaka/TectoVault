@@ -58,9 +58,10 @@ const megaMenus = {
 } as const;
 
 export function DesktopNav({ dark }: { dark?: boolean }) {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   return (
     <NavigationMenuPrimitive.Root
+      aria-label={locale === "sq" ? "Kryesore" : "Main"}
       delayDuration={100}
       className="relative hidden lg:block"
     >

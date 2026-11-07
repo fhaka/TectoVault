@@ -150,7 +150,7 @@ export default async function LocaleRootLayout({ children, params }: LayoutProps
         />
         <Providers locale={locale}>
           <MotionConfig reducedMotion="user">{children}</MotionConfig>
-          <Toaster position="bottom-right" richColors />
+          <Toaster position="bottom-right" richColors containerAriaLabel={locale === "sq" ? "Njoftime" : "Notifications"} />
         </Providers>
       </body>
     </html>

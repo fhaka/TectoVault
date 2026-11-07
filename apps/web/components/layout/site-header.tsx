@@ -18,7 +18,7 @@ import { useTranslation } from "@/lib/i18n/language-context";
 export function SiteHeader() {
   // Compare against the unprefixed path so /sq/... behaves like /...
   const pathname = stripLocale(usePathname() || "/");
-  const { t } = useTranslation();
+  const { t, tx } = useTranslation();
   const [surfaceTone, setSurfaceTone] = React.useState<"light" | "dark" | "hero" | "transparent-light" | "transparent-dark">(
     pathname === "/" ? "hero" : pathname === "/solutions" ? "dark" : "light"
   );
@@ -98,7 +98,7 @@ export function SiteHeader() {
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
               <button
-                aria-label="Open menu"
+                aria-label={tx("Open menu")}
                 className={cn(
                   "flex size-11 items-center justify-center rounded-full transition-colors lg:hidden",
                   surfaceTone === "dark" || surfaceTone === "hero" || surfaceTone === "transparent-dark" ? "text-white hover:bg-white/10" : "text-foreground hover:bg-muted"

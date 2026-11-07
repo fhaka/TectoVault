@@ -12,7 +12,7 @@ import { solutionTranslationsSq } from "@/lib/i18n/content-sq";
 export function SolutionsExperience() {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const reduceMotion = useReducedMotion();
-  const { t, locale } = useTranslation();
+  const { t, locale, tx } = useTranslation();
   const solTr = (slug: string) => (locale === "sq" ? solutionTranslationsSq[slug] : null);
   const active = solutions[activeIndex];
   const ActiveIcon = active.icon;
@@ -78,7 +78,7 @@ export function SolutionsExperience() {
                 <button
                   key={solution.slug}
                   type="button"
-                  aria-label={`Show ${solution.title}`}
+                  aria-label={`${tx("Show")} ${locale === "sq" ? solutionTranslationsSq[solution.slug]?.title ?? solution.title : solution.title}`}
                   onClick={() => setActiveIndex(index)}
                   onMouseEnter={() => setActiveIndex(index)}
                   onFocus={() => setActiveIndex(index)}

@@ -11,6 +11,7 @@ import {
 import { ArrowRight } from "lucide-react";
 
 import { services } from "@/content/services";
+import { useTranslation } from "@/lib/i18n/language-context";
 
 // Interactive 3D map of the service catalog: icon nodes orbit a central hub
 // on a perspective-tilted plane that follows the cursor; hovering (or
@@ -30,6 +31,7 @@ function nodePosition(index: number, count: number) {
 }
 
 export function ServicesOrbit() {
+  const { tx } = useTranslation();
   const [activeSlug, setActiveSlug] = React.useState<string | null>(null);
   const active = services.find((s) => s.slug === activeSlug) ?? null;
 
@@ -59,14 +61,13 @@ export function ServicesOrbit() {
       <div className="container-page">
         <div className="mx-auto max-w-2xl text-center">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-accent">
-            Services
+            {tx("Services")}
           </p>
           <h1 className="text-balance text-3xl font-medium leading-[1.1] md:text-5xl">
-            Everything your product needs, connected.
+            {tx("Everything your product needs, connected.")}
           </h1>
           <p className="mt-4 text-sm leading-relaxed text-ink-muted md:text-base">
-            End-to-end digital product development — hover a service to
-            explore it.
+            {tx("End-to-end digital product development — hover a service to explore it.")}
           </p>
         </div>
 
@@ -158,16 +159,16 @@ export function ServicesOrbit() {
                     className="flex flex-col items-center"
                   >
                     <h2 className="text-balance text-base font-medium sm:text-xl">
-                      {active.title}
+                      {tx(active.title)}
                     </h2>
                     <p className="mt-2 hidden text-xs leading-relaxed text-ink-muted sm:block sm:text-sm">
-                      {active.shortDescription}
+                      {tx(active.shortDescription)}
                     </p>
                     <Link
                       href={`/services/${active.slug}`}
                       className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline sm:text-sm"
                     >
-                      Learn more <ArrowRight className="size-3.5" />
+                      {tx("Learn more")} <ArrowRight className="size-3.5" />
                     </Link>
                   </motion.div>
                 ) : (
@@ -180,10 +181,10 @@ export function ServicesOrbit() {
                     className="flex flex-col items-center"
                   >
                     <p className="font-display text-lg font-semibold sm:text-2xl">
-                      Our Services
+                      {tx("Our Services")}
                     </p>
                     <p className="mt-2 text-xs text-ink-muted sm:text-sm">
-                      Hover a node to explore
+                      {tx("Hover a node to explore")}
                     </p>
                   </motion.div>
                 )}
@@ -221,7 +222,7 @@ export function ServicesOrbit() {
                   >
                     <Link
                       href={`/services/${service.slug}`}
-                      aria-label={service.title}
+                      aria-label={tx(service.title)}
                       onMouseEnter={() => setActiveSlug(service.slug)}
                       onFocus={() => setActiveSlug(service.slug)}
                       className="group block -translate-x-1/2 -translate-y-1/2"
@@ -256,7 +257,7 @@ export function ServicesOrbit() {
                             : "text-ink-muted opacity-0 sm:opacity-60"
                         }`}
                       >
-                        {service.title}
+                        {tx(service.title)}
                       </span>
                     </Link>
                   </motion.div>

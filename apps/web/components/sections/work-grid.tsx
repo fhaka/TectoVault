@@ -24,7 +24,7 @@ const filters: ("All" | ProjectCategory)[] = [
 export function WorkGrid({ projects }: { projects: Project[] }) {
   const [active, setActive] = React.useState<(typeof filters)[number]>("All");
   const reduceMotion = useReducedMotion();
-  const { locale, t } = useTranslation();
+  const { locale, t, tx } = useTranslation();
 
   const filtered =
     active === "All" ? projects : projects.filter((p) => p.category === active);
@@ -43,7 +43,7 @@ export function WorkGrid({ projects }: { projects: Project[] }) {
                 : "border-border text-muted-foreground hover:border-accent hover:text-foreground"
             )}
           >
-            {filter === "All" ? t("work.filter.all") : filter}
+            {filter === "All" ? t("work.filter.all") : tx(filter)}
           </button>
         ))}
       </div>
@@ -57,7 +57,7 @@ export function WorkGrid({ projects }: { projects: Project[] }) {
               <div className="mt-4 flex items-start justify-between gap-3">
                 <div>
                   <h3 className="font-medium">{locale === "sq" ? projectTranslationsSq[project.slug]?.name ?? project.name : project.name}</h3>
-                  <p className="mt-0.5 text-sm text-muted-foreground">{project.industry}</p>
+                  <p className="mt-0.5 text-sm text-muted-foreground">{tx(project.industry)}</p>
                 </div>
                 {project.liveUrl ? (
                   <a
@@ -65,9 +65,9 @@ export function WorkGrid({ projects }: { projects: Project[] }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:border-accent hover:text-accent"
-                    aria-label={`Visit ${project.name}`}
+                    aria-label={`${tx("Visit")} ${project.name}`}
                   >
-                    Visit site <ArrowUpRight className="size-4" />
+                    {tx("Visit site")} <ArrowUpRight className="size-4" />
                   </a>
                 ) : null}
               </div>
@@ -79,7 +79,7 @@ export function WorkGrid({ projects }: { projects: Project[] }) {
 
       {filtered.length === 0 ? (
         <p className="mt-16 text-center text-muted-foreground">
-          No projects in this category yet.
+          {tx("No projects in this category yet.")}
         </p>
       ) : null}
     </div>
@@ -95,7 +95,7 @@ function ProjectMedia({
   index: number;
   reduceMotion: boolean | null;
 }) {
-  const { t } = useTranslation();
+  const { t, tx } = useTranslation();
   const gallery = project.images && project.images.length > 1 ? project.images : null;
   const [active, setActive] = React.useState(0);
 
@@ -132,7 +132,7 @@ function ProjectMedia({
           >
             <Image
               src={singleImage}
-              alt={`${project.name} — screenshot ${gallery ? active + 1 : ""}`}
+              alt={`${project.name} — ${tx("screenshot")} ${gallery ? active + 1 : ""}`.trim()}
               fill
               sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
               className="object-contain object-center sm:object-cover sm:object-top"
@@ -150,7 +150,7 @@ function ProjectMedia({
 
       {project.isPlaceholder ? (
         <Badge variant="outline" className="absolute left-4 top-4 z-20 bg-background/90 backdrop-blur">
-          Sample project
+          {tx("Sample project")}
         </Badge>
       ) : null}
 
@@ -165,7 +165,7 @@ function ProjectMedia({
           <button
             type="button"
             onClick={(e) => go(-1, e)}
-            aria-label="Previous screenshot"
+            aria-label={tx("Previous screenshot")}
             className="absolute left-2 top-1/2 z-20 flex size-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white opacity-0 backdrop-blur transition-opacity hover:bg-black/70 group-hover/media:opacity-100"
           >
             <ChevronLeft className="size-4" />
@@ -173,7 +173,7 @@ function ProjectMedia({
           <button
             type="button"
             onClick={(e) => go(1, e)}
-            aria-label="Next screenshot"
+            aria-label={tx("Next screenshot")}
             className="absolute right-2 top-1/2 z-20 flex size-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white opacity-0 backdrop-blur transition-opacity hover:bg-black/70 group-hover/media:opacity-100"
           >
             <ChevronRight className="size-4" />
@@ -188,7 +188,7 @@ function ProjectMedia({
                   e.stopPropagation();
                   setActive(i);
                 }}
-                aria-label={`Show screenshot ${i + 1}`}
+                aria-label={`${tx("Show screenshot")} ${i + 1}`}
                 className={cn(
                   "size-1.5 rounded-full transition-all",
                   i === active ? "w-4 bg-white" : "bg-white/50"

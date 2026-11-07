@@ -10,7 +10,7 @@ import { useTranslation } from "@/lib/i18n/language-context";
 import { serviceTranslationsSq } from "@/lib/i18n/content-sq";
 
 export function ServicesGrid() {
-  const { locale } = useTranslation();
+  const { locale, tx } = useTranslation();
   return (
     <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
       {services.map((service, i) => {
@@ -50,7 +50,7 @@ export function ServicesGrid() {
                 </p>
               </div>
               <div className="relative mt-8 flex items-center gap-1 text-sm font-medium text-accent">
-                Learn more <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                {tx("Learn more")} <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
             </Link>
           </Reveal>

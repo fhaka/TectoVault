@@ -11,8 +11,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/lib/i18n/language-context";
 
 export function GeneralApplicationForm() {
+  const { tx } = useTranslation();
   const [submitted, setSubmitted] = React.useState(false);
   const [cvName, setCvName] = React.useState<string | null>(null);
   const {
@@ -34,7 +36,7 @@ export function GeneralApplicationForm() {
       reset();
       setCvName(null);
     } catch {
-      toast.error("Something went wrong. Please try again or email us your CV directly.");
+      toast.error(tx("Something went wrong. Please try again or email us your CV directly."));
     }
   }
 
@@ -42,9 +44,9 @@ export function GeneralApplicationForm() {
     return (
       <div className="flex flex-col items-center rounded-2xl border border-border bg-card p-12 text-center">
         <CheckCircle2 className="size-10 text-accent" />
-        <h3 className="mt-5 text-xl font-medium">Application received</h3>
+        <h3 className="mt-5 text-xl font-medium">{tx("Application received")}</h3>
         <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-          Thanks for your interest — we&rsquo;ll keep your details on file and reach out if there&rsquo;s a fit.
+          {tx("Thanks for your interest — we’ll keep your details on file and reach out if there’s a fit.")}
         </p>
       </div>
     );
@@ -56,46 +58,46 @@ export function GeneralApplicationForm() {
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="name">Name</Label>
+          <Label htmlFor="name">{tx("Name")}</Label>
           <Input id="name" aria-invalid={!!errors.name} {...register("name")} />
-          {errors.name ? <p className="text-sm text-destructive">{errors.name.message}</p> : null}
+          {errors.name ? <p className="text-sm text-destructive">{tx(errors.name.message ?? "")}</p> : null}
         </div>
         <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">{tx("Email")}</Label>
           <Input id="email" type="email" aria-invalid={!!errors.email} {...register("email")} />
-          {errors.email ? <p className="text-sm text-destructive">{errors.email.message}</p> : null}
+          {errors.email ? <p className="text-sm text-destructive">{tx(errors.email.message ?? "")}</p> : null}
         </div>
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="phone">Phone (optional)</Label>
+          <Label htmlFor="phone">{tx("Phone (optional)")}</Label>
           <Input id="phone" type="tel" {...register("phone")} />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="linkedin">LinkedIn (optional)</Label>
+          <Label htmlFor="linkedin">{tx("LinkedIn (optional)")}</Label>
           <Input id="linkedin" placeholder="https://linkedin.com/in/…" {...register("linkedin")} />
         </div>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="portfolio">GitHub / Portfolio (optional)</Label>
+        <Label htmlFor="portfolio">{tx("GitHub / Portfolio (optional)")}</Label>
         <Input id="portfolio" placeholder="https://" {...register("portfolio")} />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="coverLetter">Cover letter (optional)</Label>
-        <Textarea id="coverLetter" placeholder="Anything you'd like us to know" {...register("coverLetter")} />
+        <Label htmlFor="coverLetter">{tx("Cover letter (optional)")}</Label>
+        <Textarea id="coverLetter" placeholder={tx("Anything you'd like us to know")} {...register("coverLetter")} />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="cv">CV / Resume</Label>
+        <Label htmlFor="cv">{tx("CV / Resume")}</Label>
         <label
           htmlFor="cv"
           className="flex cursor-pointer items-center justify-center gap-3 rounded-xl border border-dashed border-border p-6 text-sm text-muted-foreground transition-colors hover:border-accent"
         >
           <UploadCloud className="size-4" />
-          {cvName ?? "Click to upload your CV (PDF or DOC)"}
+          {cvName ?? tx("Click to upload your CV (PDF or DOC)")}
           <input
             id="cv"
             type="file"
@@ -108,7 +110,7 @@ export function GeneralApplicationForm() {
 
       <Button type="submit" size="lg" variant="accent" disabled={isSubmitting} className="w-full sm:w-auto">
         {isSubmitting ? <Loader2 className="size-4 animate-spin" /> : null}
-        Send Your CV
+        {tx("Send Your CV")}
       </Button>
     </form>
   );

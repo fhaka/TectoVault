@@ -20,7 +20,7 @@ const visualStyles = [
 
 export function IndustriesExperience() {
   const [active, setActive] = React.useState(0);
-  const { locale } = useTranslation();
+  const { locale, tx } = useTranslation();
   const trOf = (slug: string) => (locale === "sq" ? industryTranslationsSq[slug] : null);
   const reduceMotion = useReducedMotion();
   const selected = industries[active];
@@ -32,9 +32,9 @@ export function IndustriesExperience() {
         <div className="pointer-events-none absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:5rem_5rem]" />
         <div className="container-page relative grid items-end gap-10 lg:grid-cols-[1fr_0.8fr]">
           <div>
-            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-accent"><Sparkles className="size-3.5" /> Industries</p>
-            <h1 className="mt-5 max-w-3xl text-balance font-display text-4xl font-medium leading-[1.03] md:text-6xl">Technology that understands the work behind the work.</h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">Choose an industry to see the operational challenges we turn into better digital systems.</p>
+            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-accent"><Sparkles className="size-3.5" /> {tx("Industries")}</p>
+            <h1 className="mt-5 max-w-3xl text-balance font-display text-4xl font-medium leading-[1.03] md:text-6xl">{tx("Technology that understands the work behind the work.")}</h1>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">{tx("Choose an industry to see the operational challenges we turn into better digital systems.")}</p>
           </div>
           <motion.div className="relative hidden aspect-square max-w-sm justify-self-end lg:block" animate={reduceMotion ? undefined : { rotate: 360 }} transition={{ duration: 45, repeat: Infinity, ease: "linear" }}>
             <div className="absolute inset-0 rounded-full border border-dashed border-white/20" />
@@ -60,22 +60,22 @@ export function IndustriesExperience() {
             <div className="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
               <div>
                 <span className="grid size-14 place-items-center rounded-2xl bg-ink text-white shadow-xl"><SelectedIcon className="size-6" /></span>
-                <p className="mt-7 text-xs font-semibold uppercase tracking-[0.25em] text-accent">Industry signal / 0{active + 1}</p>
+                <p className="mt-7 text-xs font-semibold uppercase tracking-[0.25em] text-accent">{tx("Industry signal")} / 0{active + 1}</p>
                 <h2 className="mt-3 font-display text-3xl font-medium md:text-5xl">{trOf(selected.slug)?.title ?? selected.title}</h2>
                 <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">{trOf(selected.slug)?.overview ?? selected.overview}</p>
-                <Link href={`/industries/${selected.slug}`} className="mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-medium text-white transition-transform hover:-translate-y-1">Explore this industry <ArrowUpRight className="size-4" /></Link>
+                <Link href={`/industries/${selected.slug}`} className="mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-medium text-white transition-transform hover:-translate-y-1">{tx("Explore this industry")} <ArrowUpRight className="size-4" /></Link>
               </div>
               <div className="rounded-2xl border border-border/70 bg-background/75 p-6 backdrop-blur-sm">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">What we solve</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">{tx("What we solve")}</p>
                 <div className="mt-5 space-y-4">
-                  {selected.problems.map((problem, index) => <motion.div key={problem} initial={{ opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }} className="flex gap-3 text-sm leading-relaxed"><span className="mt-1.5 size-2 shrink-0 rounded-full bg-accent" />{problem}</motion.div>)}
+                  {selected.problems.map((problem, index) => ( <motion.div key={problem} initial={{ opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }} className="flex gap-3 text-sm leading-relaxed"><span className="mt-1.5 size-2 shrink-0 rounded-full bg-accent" />{trOf(selected.slug)?.problems?.[index] ?? problem}</motion.div>))}
                 </div>
               </div>
             </div>
           </motion.div>
 
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {industries.map((industry, index) => { const Icon = industry.icon; return <motion.button key={industry.slug} type="button" onMouseEnter={() => setActive(index)} onFocus={() => setActive(index)} onClick={() => setActive(index)} whileHover={reduceMotion ? undefined : { y: -8 }} className={`group flex min-h-44 flex-col justify-between rounded-2xl border p-6 text-left transition-colors ${active === index ? "border-accent bg-accent text-white" : "border-border bg-card hover:border-accent"}`}><span className={`grid size-10 place-items-center rounded-xl ${active === index ? "bg-white/15" : "bg-muted"}`}><Icon className="size-5" /></span><span><span className="block font-medium">{trOf(industry.slug)?.title ?? industry.title}</span><span className={`mt-1 block text-sm ${active === index ? "text-white/70" : "text-muted-foreground"}`}>Explore industry systems</span></span></motion.button>; })}
+            {industries.map((industry, index) => { const Icon = industry.icon; return <motion.button key={industry.slug} type="button" onMouseEnter={() => setActive(index)} onFocus={() => setActive(index)} onClick={() => setActive(index)} whileHover={reduceMotion ? undefined : { y: -8 }} className={`group flex min-h-44 flex-col justify-between rounded-2xl border p-6 text-left transition-colors ${active === index ? "border-accent bg-accent text-white" : "border-border bg-card hover:border-accent"}`}><span className={`grid size-10 place-items-center rounded-xl ${active === index ? "bg-white/15" : "bg-muted"}`}><Icon className="size-5" /></span><span><span className="block font-medium">{trOf(industry.slug)?.title ?? industry.title}</span><span className={`mt-1 block text-sm ${active === index ? "text-white/70" : "text-muted-foreground"}`}>{tx("Explore industry systems")}</span></span></motion.button>; })}
           </div>
         </div>
       </section>

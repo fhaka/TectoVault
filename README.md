@@ -143,9 +143,8 @@ Note: this project uses Next.js 16, where the `middleware.ts` convention has bee
   each language with `hreflang` alternates and both versions in the sitemap. Pages live under
   `apps/web/app/[locale]/`; `apps/web/proxy.ts` rewrites unprefixed URLs to the English version.
   Copy lives in `apps/web/lib/i18n/` (`dictionaries.ts` by key, `copy-sq.ts` for exact English
-  strings). Still to do: some page sections (process steps, parts of the about, industries,
-  work and request-a-quote pages) still show English on `/sq`, and Italian (`it`), which the spec
-  also calls for.
+  strings — wrap visible English copy in `tx()` and add its Albanian there). Still to do:
+  Italian (`it`), which the spec also calls for.
 - **Content CMS** — services/solutions/industries/projects/blog/careers are still managed as
   structured content in `apps/web/content/*.ts`, not through the admin panel (there's no real
   content yet to justify building editing screens for them — see the phase-2 backend scope

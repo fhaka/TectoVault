@@ -5,7 +5,7 @@ import { siteConfig } from "@/lib/site-config";
 import { useTranslation } from "@/lib/i18n/language-context";
 
 export function PrivacyBody() {
-  const { locale } = useTranslation();
+  const { locale, tx } = useTranslation();
 
   if (locale === "sq") {
     return (
@@ -81,7 +81,7 @@ export function PrivacyBody() {
           <h2>8. Kontakt</h2>
           <p>
             Për pyetje rreth kësaj politike, na kontakto te {siteConfig.contact.email} ose{" "}
-            {siteConfig.contact.address}.
+            {tx(siteConfig.contact.address)}.
           </p>
         </section>
       </LegalLayout>
@@ -162,7 +162,7 @@ export function PrivacyBody() {
         <h2>8. Contact</h2>
         <p>
           For questions about this policy, contact us at {siteConfig.contact.email} or{" "}
-          {siteConfig.contact.address}.
+          {tx(siteConfig.contact.address)}.
         </p>
       </section>
     </LegalLayout>

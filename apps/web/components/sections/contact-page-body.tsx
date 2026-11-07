@@ -9,7 +9,7 @@ import { siteConfig } from "@/lib/site-config";
 import { useTranslation } from "@/lib/i18n/language-context";
 
 export function ContactPageBody() {
-  const { t } = useTranslation();
+  const { t, tx } = useTranslation();
 
   return (
     <>
@@ -24,8 +24,8 @@ export function ContactPageBody() {
           <div className="space-y-8">
             <ContactInfoRow icon={Mail} label={t("contact.form.email")} value={siteConfig.contact.email} href={`mailto:${siteConfig.contact.email}`} />
             <ContactInfoRow icon={Phone} label={t("contact.label.phone")} value={`${siteConfig.contact.phone} / ${siteConfig.contact.phone2}`} href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`} />
-            <ContactInfoRow icon={MapPin} label={t("contact.label.location")} value={siteConfig.contact.address} />
-            <ContactInfoRow icon={Clock} label={t("contact.label.hours")} value={siteConfig.contact.hours} />
+            <ContactInfoRow icon={MapPin} label={t("contact.label.location")} value={tx(siteConfig.contact.address)} />
+            <ContactInfoRow icon={Clock} label={t("contact.label.hours")} value={tx(siteConfig.contact.hours)} />
           </div>
 
           <ContactForm />

@@ -33,7 +33,7 @@ export function ServiceDetailBody({
   service: Omit<Service, "icon">;
   icon: React.ReactNode;
 }) {
-  const { t, locale } = useTranslation();
+  const { t, locale, tx } = useTranslation();
 
   const trTitle = locale === "sq" ? serviceTranslationsSq[service.slug] : null;
   const trDetail = locale === "sq" ? serviceDetailsSq[service.slug] : null;
@@ -109,7 +109,7 @@ export function ServiceDetailBody({
                 {processStages.slice(0, 5).map((stage) => (
                   <li key={stage.number} className="flex items-center gap-3 text-sm">
                     <span className="font-display text-accent">{stage.number}</span>
-                    {stage.title}
+                    {tx(stage.title)}
                   </li>
                 ))}
               </ol>
@@ -125,7 +125,7 @@ export function ServiceDetailBody({
       )}
 
       <Section>
-        <SectionHeading eyebrow="FAQ" title={t("service.faqTitle")} />
+        <SectionHeading eyebrow={locale === "sq" ? "Pyetje" : "FAQ"} title={t("service.faqTitle")} />
         <Reveal className="mt-10 max-w-2xl">
           <Accordion type="single" collapsible>
             {faq.map((item, i) => (

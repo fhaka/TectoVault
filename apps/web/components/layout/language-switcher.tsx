@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { useTranslation } from "@/lib/i18n/language-context";
 
 export function LanguageSwitcher({ dark = false }: { dark?: boolean }) {
-  const { locale, setLocale } = useTranslation();
+  const { locale, setLocale, tx } = useTranslation();
 
   return (
     <div
@@ -13,7 +13,7 @@ export function LanguageSwitcher({ dark = false }: { dark?: boolean }) {
         dark ? "border-white/20 bg-white/5" : "border-border bg-muted"
       )}
       role="group"
-      aria-label="Language"
+      aria-label={tx("Language")}
     >
       <button
         type="button"
