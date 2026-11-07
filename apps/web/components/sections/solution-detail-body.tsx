@@ -3,21 +3,18 @@
 import { Check } from "lucide-react";
 
 import type { Solution } from "@/types/content";
-import type { Project } from "@/types/content";
 import { PageHero } from "@/components/shared/page-hero";
 import { Section, SectionHeading } from "@/components/shared/section";
 import { FinalCta } from "@/components/sections/final-cta";
 import { useTranslation } from "@/lib/i18n/language-context";
-import { solutionTranslationsSq, projectTranslationsSq } from "@/lib/i18n/content-sq";
+import { solutionTranslationsSq } from "@/lib/i18n/content-sq";
 
 export function SolutionDetailBody({
   solution,
   icon,
-  relatedProjects,
 }: {
   solution: Omit<Solution, "icon">;
   icon: React.ReactNode;
-  relatedProjects: Project[];
 }) {
   const { t, locale } = useTranslation();
   const tr = locale === "sq" ? solutionTranslationsSq[solution.slug] : null;
@@ -80,21 +77,6 @@ export function SolutionDetailBody({
               ))}
             </ul>
           </div>
-        </div>
-      </Section>
-
-      <Section>
-        <SectionHeading eyebrow={t("solution.relatedWork")} title={t("solution.relevantProjects")} />
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {relatedProjects.map((project) => {
-            const ptr = locale === "sq" ? projectTranslationsSq[project.slug] : null;
-            return (
-              <article key={project.slug} className="rounded-2xl border border-border bg-card p-6">
-                <h3 className="font-medium">{ptr?.name ?? project.name}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{ptr?.description ?? project.description}</p>
-              </article>
-            );
-          })}
         </div>
       </Section>
 

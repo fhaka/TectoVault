@@ -4,7 +4,6 @@ import Link from "@/components/i18n/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Bot } from "lucide-react";
 
-import type { Project } from "@/types/content";
 import { cn } from "@/lib/utils";
 import { Section, SectionHeading } from "@/components/shared/section";
 import { FinalCta } from "@/components/sections/final-cta";
@@ -18,7 +17,6 @@ import {
   industryTranslationsSq,
   solutionTranslationsSq,
   serviceTranslationsSq,
-  projectTranslationsSq,
 } from "@/lib/i18n/content-sq";
 
 export function IndustryDetailBody({
@@ -26,13 +24,11 @@ export function IndustryDetailBody({
   icon,
   relatedSolutions,
   relatedServices,
-  relatedProjects,
 }: {
   industry: { slug: string; title: string; overview: string; problems: string[] };
   icon: React.ReactNode;
   relatedSolutions: { slug: string; title: string; shortDescription: string }[];
   relatedServices: { slug: string; title: string; shortDescription: string }[];
-  relatedProjects: Project[];
 }) {
   const { t, locale } = useTranslation();
   const reduceMotion = useReducedMotion();
@@ -124,22 +120,6 @@ export function IndustryDetailBody({
         </div>
       </Section>
 
-      {relatedProjects.length > 0 ? (
-        <Section tone="muted">
-          <SectionHeading eyebrow={t("industry.caseStudiesEyebrow")} title={t("industry.relatedWork")} />
-          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
-            {relatedProjects.map((project) => {
-              const ptr = locale === "sq" ? projectTranslationsSq[project.slug] : null;
-              return (
-                <article key={project.slug} className="rounded-2xl border border-border bg-card p-6">
-                  <h3 className="font-medium">{ptr?.name ?? project.name}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{ptr?.description ?? project.description}</p>
-                </article>
-              );
-            })}
-          </div>
-        </Section>
-      ) : null}
 
       <FinalCta variant="agents" />
     </>

@@ -1,9 +1,7 @@
 import { services } from "@/content/services";
-import { projects } from "@/content/projects";
 import { industries } from "@/content/industries";
 import {
   industryTranslationsSq,
-  projectTranslationsSq,
   serviceDetailsSq,
   serviceTranslationsSq,
 } from "@/lib/i18n/content-sq";
@@ -114,7 +112,7 @@ export const copySq: Record<string, string> = {
   "Nice to have": "Përparësi",
   "Apply for this role": "Aplikoni për këtë rol",
   "The page you’re looking for doesn’t exist or may have moved.": "Faqja që kërkoni nuk ekziston ose mund të jetë zhvendosur.",
-  "Explore our work": "Shikoni punët tona",
+  "Explore our services": "Shikoni shërbimet tona",
   "Sample project": "Projekt shembull",
   "Visit site": "Vizito faqen",
   "Cloud": "Cloud",
@@ -326,14 +324,6 @@ for (const service of services) {
     const source = service.whatWeBuild[i];
     if (source) copySq[source] ??= value;
   });
-}
-
-for (const project of projects) {
-  const translated = projectTranslationsSq[project.slug];
-  if (translated) {
-    copySq[project.name] = translated.name;
-    copySq[project.description] = translated.description;
-  }
 }
 
 for (const industry of industries) {

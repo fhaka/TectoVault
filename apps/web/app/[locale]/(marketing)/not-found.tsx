@@ -20,8 +20,8 @@ export default async function NotFound() {
           </Link>
         </Button>
         <Button asChild variant="outline">
-          <Link href="/work">
-            <Search className="size-4" /> {tx("Explore our work")}
+          <Link href="/services">
+            <Search className="size-4" /> {tx("Explore our services")}
           </Link>
         </Button>
       </div>

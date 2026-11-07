@@ -12,7 +12,6 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "nav.services": "Services",
     "nav.solutions": "Solutions",
     "nav.industries": "Industries",
-    "nav.work": "Work",
     "nav.about": "About",
     "nav.process": "Process",
     "nav.pricing": "Pricing",
@@ -192,11 +191,6 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "contact.form.sendAnother": "Send another message",
     "contact.form.error": "Something went wrong. Please try again or email us directly.",
 
-    "work.eyebrow": "Selected work / 2026",
-    "work.title": "Ideas that made it into the world.",
-    "work.description": "A selection of digital products designed and engineered from the first sketch to a real release.",
-    "work.samplesNote": "Sample case studies shown below — real projects added as they launch.",
-    "work.filter.all": "All",
 
     "solutions.eyebrow": "Find your path",
     "solutions.title": "Start with the problem. Follow the signal to the solution.",
@@ -486,7 +480,6 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "nav.services": "Shërbimet",
     "nav.solutions": "Zgjidhjet",
     "nav.industries": "Industritë",
-    "nav.work": "Punimet",
     "nav.about": "Rreth Nesh",
     "nav.process": "Procesi",
     "nav.pricing": "Çmimet",
@@ -666,11 +659,6 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "contact.form.sendAnother": "Dërgo një mesazh tjetër",
     "contact.form.error": "Diçka shkoi keq. Provo përsëri ose na shkruaj direkt me email.",
 
-    "work.eyebrow": "Punime të përzgjedhura / 2026",
-    "work.title": "Idetë që u bënë realitet.",
-    "work.description": "Një përzgjedhje produktesh digjitale, të dizajnuara dhe ndërtuara nga skica e parë deri te lançimi real.",
-    "work.samplesNote": "Studime rasti shembull shfaqen më poshtë — projekte reale shtohen ndërsa lançohen.",
-    "work.filter.all": "Të gjitha",
 
     "solutions.eyebrow": "Gjej rrugën tënde",
     "solutions.title": "Fillo me problemin. Ndiq shenjën drejt zgjidhjes.",

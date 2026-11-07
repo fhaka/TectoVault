@@ -16,8 +16,21 @@ export function proxy(request: NextRequest) {
 // unprefixed requests are rewritten - not redirected - to /en/..., which
 // keeps the English URLs exactly as they were. Anyone requesting /en/...
 // directly is redirected to the unprefixed URL so each page has one address.
+// Pages that were removed, and where their old links should land now.
+const REMOVED_PAGES: Record<string, string> = { "/work": "/services" };
+
 function localeRouting(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  for (const [from, to] of Object.entries(REMOVED_PAGES)) {
+    for (const prefix of ["", ...prefixedLocales.map((l) => `/${l}`)]) {
+      if (pathname === `${prefix}${from}` || pathname.startsWith(`${prefix}${from}/`)) {
+        const url = request.nextUrl.clone();
+        url.pathname = `${prefix}${to}`;
+        return NextResponse.redirect(url, 308);
+      }
+    }
+  }
 
   if (pathname === `/${defaultLocale}` || pathname.startsWith(`/${defaultLocale}/`)) {
     const url = request.nextUrl.clone();

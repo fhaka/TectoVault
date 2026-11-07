@@ -17,7 +17,6 @@ const navLabelKeys: Record<string, string> = {
   Services: "nav.services",
   Solutions: "nav.solutions",
   Industries: "nav.industries",
-  Work: "nav.work",
   About: "nav.about",
   Process: "nav.process",
   Pricing: "nav.pricing",

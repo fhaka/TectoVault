@@ -5,7 +5,6 @@ import { siteConfig } from "@/lib/site-config";
 import { industries, getIndustryBySlug } from "@/content/industries";
 import { getSolutionBySlug } from "@/content/solutions";
 import { getServiceBySlug } from "@/content/services";
-import { projects } from "@/content/projects";
 import { IndustryDetailBody } from "@/components/sections/industry-detail-body";
 import { getLocale, pageMetadata } from "@/lib/i18n/server";
 import { localizePath } from "@/lib/i18n/config";
@@ -49,7 +48,6 @@ export default async function IndustryDetailPage({
   const relatedServices = (industry.relatedServices.map(getServiceBySlug).filter(Boolean) as NonNullable<
     ReturnType<typeof getServiceBySlug>
   >[]).map((s) => ({ slug: s.slug, title: s.title, shortDescription: s.shortDescription }));
-  const relatedProjects = projects.filter((p) => p.industry === industry.title).slice(0, 2);
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -72,7 +70,6 @@ export default async function IndustryDetailPage({
         icon={<industry.icon className="size-6" />}
         relatedSolutions={relatedSolutions}
         relatedServices={relatedServices}
-        relatedProjects={relatedProjects}
       />
     </>
   );

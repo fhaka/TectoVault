@@ -7,7 +7,6 @@ import { HomeCapability } from "@/components/sections/home-capability";
 import { HomeAgents } from "@/components/sections/home-agents";
 import { HomeAgentFlow } from "@/components/sections/home-agent-flow";
 import { HomeServices } from "@/components/sections/home-services";
-import { HomeWork } from "@/components/sections/home-work";
 import { HomeProblems } from "@/components/sections/home-problems";
 import { HomeIndustries } from "@/components/sections/home-industries";
 import { HomeProcess } from "@/components/sections/home-process";
@@ -56,7 +55,6 @@ export default function Home() {
       <HomeAgentFlow />
       <HomeProblems />
       <HomeServices />
-      <HomeWork />
       <HomeIndustries />
       <HomeProcess />
       <FinalCta variant="agents" />

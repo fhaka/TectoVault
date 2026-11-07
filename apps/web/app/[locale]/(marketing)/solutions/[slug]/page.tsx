@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 
 import { siteConfig } from "@/lib/site-config";
 import { solutions, getSolutionBySlug } from "@/content/solutions";
-import { projects } from "@/content/projects";
 import { SolutionDetailBody } from "@/components/sections/solution-detail-body";
 import { getLocale, pageMetadata } from "@/lib/i18n/server";
 import { localizePath } from "@/lib/i18n/config";
@@ -40,7 +39,6 @@ export default async function SolutionDetailPage({
   const locale = await getLocale();
   const abs = (path: string) => `${siteConfig.url}${localizePath(path, locale) === "/" ? "" : localizePath(path, locale)}`;
   const url = abs(`/solutions/${slug}`);
-  const relatedProjects = projects.slice(0, 2);
 
   const serviceJsonLd = {
     "@context": "https://schema.org",
@@ -79,7 +77,7 @@ export default async function SolutionDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <SolutionDetailBody solution={solutionData} icon={<solution.icon className="size-6" />} relatedProjects={relatedProjects} />
+      <SolutionDetailBody solution={solutionData} icon={<solution.icon className="size-6" />} />
     </>
   );
 }
