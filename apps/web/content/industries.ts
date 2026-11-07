@@ -21,7 +21,7 @@ export const industries: Industry[] = [
       "Limited online presence for new patient acquisition",
     ],
     relatedSolutions: ["booking-appointment-platforms", "customer-portals"],
-    relatedServices: ["web-applications", "custom-software"],
+    relatedServices: ["ai-agents", "web-applications", "custom-software"],
   },
   {
     slug: "retail",
@@ -35,7 +35,7 @@ export const industries: Industry[] = [
       "Manual order and stock tracking",
     ],
     relatedSolutions: ["e-commerce-solutions", "business-management-systems"],
-    relatedServices: ["business-automation", "custom-software"],
+    relatedServices: ["ai-agents", "business-automation", "custom-software"],
   },
   {
     slug: "hospitality",
@@ -63,7 +63,7 @@ export const industries: Industry[] = [
       "No centralized system for client and property data",
     ],
     relatedSolutions: ["customer-portals", "business-management-systems"],
-    relatedServices: ["web-applications", "digital-transformation"],
+    relatedServices: ["ai-agents", "web-applications", "digital-transformation"],
   },
   {
     slug: "professional-services",
@@ -77,7 +77,7 @@ export const industries: Industry[] = [
       "Manual, ad hoc project and document tracking",
     ],
     relatedSolutions: ["customer-portals", "business-automation"],
-    relatedServices: ["custom-software", "business-automation"],
+    relatedServices: ["ai-agents", "custom-software", "business-automation"],
   },
   {
     slug: "smb",
@@ -91,7 +91,7 @@ export const industries: Industry[] = [
       "Needing one partner for both web and software needs",
     ],
     relatedSolutions: ["business-management-systems", "business-automation"],
-    relatedServices: ["custom-software", "business-automation", "intelligent-operations"],
+    relatedServices: ["ai-agents", "custom-software", "business-automation", "intelligent-operations"],
   },
 ];
 

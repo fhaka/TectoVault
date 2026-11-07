@@ -1,12 +1,18 @@
 "use client";
 
 import Link from "@/components/i18n/link";
-import { ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowUpRight, Bot } from "lucide-react";
 
 import type { Project } from "@/types/content";
-import { PageHero } from "@/components/shared/page-hero";
+import { cn } from "@/lib/utils";
 import { Section, SectionHeading } from "@/components/shared/section";
 import { FinalCta } from "@/components/sections/final-cta";
+import { IndustryHero } from "@/components/sections/industry/industry-hero";
+import { BeforeAfter } from "@/components/sections/industry/before-after";
+import { IndustryAgent } from "@/components/sections/industry/industry-agent";
+import { AgentDay } from "@/components/sections/industry/agent-day";
+import { industryAgents } from "@/content/industry-agents";
 import { useTranslation } from "@/lib/i18n/language-context";
 import {
   industryTranslationsSq,
@@ -24,85 +30,102 @@ export function IndustryDetailBody({
 }: {
   industry: { slug: string; title: string; overview: string; problems: string[] };
   icon: React.ReactNode;
-  relatedSolutions: { slug: string; title: string }[];
-  relatedServices: { slug: string; title: string }[];
+  relatedSolutions: { slug: string; title: string; shortDescription: string }[];
+  relatedServices: { slug: string; title: string; shortDescription: string }[];
   relatedProjects: Project[];
 }) {
   const { t, locale } = useTranslation();
+  const reduceMotion = useReducedMotion();
   const tr = locale === "sq" ? industryTranslationsSq[industry.slug] : null;
+  const agent = industryAgents[industry.slug];
 
   const title = tr?.title ?? industry.title;
   const overview = tr?.overview ?? industry.overview;
   const problems = tr?.problems ?? industry.problems;
 
+  const related = [
+    ...relatedServices.map((s) => {
+      const st = locale === "sq" ? serviceTranslationsSq[s.slug] : null;
+      return {
+        href: `/services/${s.slug}`,
+        title: st?.title ?? s.title,
+        description: st?.shortDescription ?? s.shortDescription,
+        featured: s.slug === "ai-agents",
+      };
+    }),
+    ...relatedSolutions.map((s) => {
+      const st = locale === "sq" ? solutionTranslationsSq[s.slug] : null;
+      return {
+        href: `/solutions/${s.slug}`,
+        title: st?.title ?? s.title,
+        description: st?.shortDescription ?? s.shortDescription,
+        featured: false,
+      };
+    }),
+  ];
+
   return (
     <>
-      <PageHero eyebrow={t("industry.eyebrow")}>
-        <span className="flex size-14 items-center justify-center rounded-2xl bg-muted">
-          {icon}
-        </span>
-        <h1 className="mt-6 max-w-2xl text-balance text-4xl font-medium leading-[1.05] tracking-tight md:text-6xl">
-          {title}
-        </h1>
-        <p className="mt-6 max-w-xl text-balance text-lg leading-relaxed text-muted-foreground">
-          {overview}
-        </p>
-      </PageHero>
+      <IndustryHero
+        icon={icon}
+        title={title}
+        overview={overview}
+        feed={agent ? agent.feed.map((f) => f[locale]) : []}
+        tryPrompt={agent ? t(`${agent.scripts[0].key}.try`) : ""}
+      />
+
+      {agent ? (
+        <>
+          <BeforeAfter problems={problems} fixes={agent.fixes.map((f) => f[locale])} />
+          <IndustryAgent agent={agent} />
+          <AgentDay day={agent.day.map((d) => ({ time: d.time, text: d.text[locale] }))} />
+        </>
+      ) : null}
 
       <Section>
-        <SectionHeading eyebrow={t("industry.challengesEyebrow")} title={t("industry.challengesTitle")} />
-        <ul className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
-          {problems.map((problem) => (
-            <li key={problem} className="rounded-2xl border border-border p-6 text-sm leading-relaxed">
-              {problem}
-            </li>
+        <SectionHeading eyebrow={t("industryPage.relatedEyebrow")} title={t("industryPage.relatedTitle")} />
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {related.map((item, i) => (
+            <motion.div
+              key={item.href}
+              initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.06, duration: 0.5 }}
+              whileHover={reduceMotion ? undefined : { y: -4 }}
+              className={cn(item.featured && "sm:col-span-2 lg:col-span-1")}
+            >
+              <Link
+                href={item.href}
+                className={cn(
+                  "group flex h-full flex-col rounded-2xl border p-6 transition-colors",
+                  item.featured ? "border-transparent bg-ink text-ink-foreground" : "border-border bg-card hover:border-accent"
+                )}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-medium">{item.title}</span>
+                  {item.featured ? (
+                    <Bot className="size-4 text-accent" />
+                  ) : (
+                    <ArrowUpRight className="size-4 text-muted-foreground transition-colors group-hover:text-accent" />
+                  )}
+                </div>
+                <p className={cn("mt-2 flex-1 text-sm leading-relaxed", item.featured ? "text-ink-muted" : "text-muted-foreground")}>
+                  {item.description}
+                </p>
+                {item.featured ? (
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent">
+                    {t("cta.learnMore")} <ArrowUpRight className="size-3.5" />
+                  </span>
+                ) : null}
+              </Link>
+            </motion.div>
           ))}
-        </ul>
-      </Section>
-
-      <Section tone="muted">
-        <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
-          <div>
-            <SectionHeading title={t("industry.relevantSolutions")} className="max-w-none" />
-            <div className="mt-8 space-y-3">
-              {relatedSolutions.map((s) => {
-                const stitle = locale === "sq" ? solutionTranslationsSq[s.slug]?.title ?? s.title : s.title;
-                return (
-                  <Link
-                    key={s.slug}
-                    href={`/solutions/${s.slug}`}
-                    className="group flex items-center justify-between rounded-xl border border-border bg-card p-4 text-sm font-medium hover:border-accent"
-                  >
-                    {stitle}
-                    <ArrowUpRight className="size-4 text-muted-foreground group-hover:text-accent" />
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-          <div>
-            <SectionHeading title={t("industry.relevantServices")} className="max-w-none" />
-            <div className="mt-8 space-y-3">
-              {relatedServices.map((s) => {
-                const stitle = locale === "sq" ? serviceTranslationsSq[s.slug]?.title ?? s.title : s.title;
-                return (
-                  <Link
-                    key={s.slug}
-                    href={`/services/${s.slug}`}
-                    className="group flex items-center justify-between rounded-xl border border-border bg-card p-4 text-sm font-medium hover:border-accent"
-                  >
-                    {stitle}
-                    <ArrowUpRight className="size-4 text-muted-foreground group-hover:text-accent" />
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
         </div>
       </Section>
 
       {relatedProjects.length > 0 ? (
-        <Section>
+        <Section tone="muted">
           <SectionHeading eyebrow={t("industry.caseStudiesEyebrow")} title={t("industry.relatedWork")} />
           <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
             {relatedProjects.map((project) => {
@@ -118,7 +141,7 @@ export function IndustryDetailBody({
         </Section>
       ) : null}
 
-      <FinalCta />
+      <FinalCta variant="agents" />
     </>
   );
 }

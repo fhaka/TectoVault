@@ -45,10 +45,10 @@ export default async function IndustryDetailPage({
 
   const relatedSolutions = (industry.relatedSolutions.map(getSolutionBySlug).filter(Boolean) as NonNullable<
     ReturnType<typeof getSolutionBySlug>
-  >[]).map((s) => ({ slug: s.slug, title: s.title }));
+  >[]).map((s) => ({ slug: s.slug, title: s.title, shortDescription: s.shortDescription }));
   const relatedServices = (industry.relatedServices.map(getServiceBySlug).filter(Boolean) as NonNullable<
     ReturnType<typeof getServiceBySlug>
-  >[]).map((s) => ({ slug: s.slug, title: s.title }));
+  >[]).map((s) => ({ slug: s.slug, title: s.title, shortDescription: s.shortDescription }));
   const relatedProjects = projects.filter((p) => p.industry === industry.title).slice(0, 2);
 
   const breadcrumbJsonLd = {

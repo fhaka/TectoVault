@@ -8,6 +8,76 @@ const AUTHOR = "Ekipi TectoVault";
 
 export const postsSq: BlogPost[] = [
   {
+    slug: "agjent-ai-per-hotele",
+    locale: "sq",
+    title: "Si mund t'u përgjigjet një hotel mysafirëve 24/7 me një agjent AI",
+    excerpt:
+      "Rezervime, pyetje për dhomat dhe check-in-in, transferta dhe mysafirë që shkruajnë në tri gjuhë: si e lehtëson një agjent AI punën e recepsionit gjatë gjithë vitit, e sidomos në sezon.",
+    category: "AI Agents",
+    author: AUTHOR,
+    date: "2026-11-07",
+    readingTime: "6 min lexim",
+    content: [
+      {
+        type: "p",
+        text: "Për një hotel në Shqipëri, sezoni turistik do të thotë më shumë mysafirë, por edhe një rrjedhë të pandërprerë mesazhesh dhe telefonatash: a ka dhomë të lirë, sa kushton, a përfshihet mëngjesi, ku parkohet, a mund të vij më vonë se ora 22:00. Shumë prej tyre vijnë natën ose nga mysafirë jashtë vendit, në anglisht apo italisht, kur recepsioni ka më pak njerëz.",
+      },
+      {
+        type: "p",
+        text: "Mysafiri që nuk merr përgjigje shpejt zakonisht nuk pret: rezervon diku tjetër. Një agjent AI i përgjigjet çdo pyetjeje menjëherë, në çdo orë dhe në gjuhën e mysafirit, dhe e trajton vetë pjesën më të madhe të punës së përsëritur.",
+      },
+      { type: "h2", text: "Çfarë mund të bëjë një agjent AI për hotelin tuaj" },
+      {
+        type: "ul",
+        items: [
+          "Të kontrollojë disponueshmërinë dhe t'u ofrojë mysafirëve dhomat dhe datat e lira.",
+          "Të mbajë një dhomë dhe t'i dërgojë mysafirit linkun për ta konfirmuar rezervimin.",
+          "T'u përgjigjet pyetjeve për llojet e dhomave, çmimet, mëngjesin, parkimin dhe kafshët shtëpiake.",
+          "Të japë informacion për check-in-in, check-out-in dhe mbërritjen e vonë.",
+          "Të regjistrojë kërkesa për transfertë nga aeroporti, krevat shtesë apo dhomë me pamje nga deti.",
+          "Të mbledhë kërkesat për grupe, dasma dhe evente dhe t'ia kalojë menaxherit me të gjitha detajet.",
+        ],
+      },
+      { type: "h2", text: "Një mysafir, tri gjuhë" },
+      {
+        type: "p",
+        text: "Mysafirët e huaj shpesh shkruajnë në anglisht ose italisht. Agjenti përgjigjet në gjuhën në të cilën i shkruajnë, pa pasur nevojë që dikush në recepsion t'i flasë të gjitha gjuhët. Nëse një mysafir fillon në anglisht dhe vazhdon në italisht, agjenti e ndjek natyrshëm.",
+      },
+      { type: "h2", text: "Si duket në praktikë" },
+      {
+        type: "p",
+        text: "Mysafiri: «Keni një dhomë dyshe për 3 netë nga 14 gushti?»",
+      },
+      {
+        type: "p",
+        text: "Agjenti: «Po! Një dhomë dyshe me pamje nga deti është e lirë nga 14 deri më 17 gusht, me mëngjes të përfshirë. T'jua mbaj?»",
+      },
+      {
+        type: "p",
+        text: "Pasi mysafiri pranon dhe kërkon edhe një transfertë nga aeroporti, agjenti e mban dhomën për një kohë të caktuar, regjistron kërkesën për transfertë që ta shohë recepsioni dhe i dërgon mysafirit linkun për të konfirmuar rezervimin.",
+      },
+      { type: "h2", text: "Kur i kalon bisedën recepsionit" },
+      {
+        type: "p",
+        text: "Agjenti nuk duhet të vendosë për gjithçka. Ju përcaktoni rregullat: për shembull, ai nuk jep zbritje, nuk ndryshon politikën e anulimit dhe ua kalon stafit ankesat, kërkesat e veçanta dhe grupet e mëdha. Në këto raste, recepsioni merr bisedën me një përmbledhje të shkurtër, kështu që nuk ka nevojë t'ia bëjë mysafirit të njëjtat pyetje nga e para.",
+      },
+      { type: "h2", text: "Çfarë ju nevojitet për ta nisur" },
+      {
+        type: "ul",
+        items: [
+          "Kanalet ku ju shkruajnë mysafirët: WhatsApp, faqja e hotelit, email-i ose telefoni.",
+          "Informacionin për dhomat, çmimet sipas sezonit, rregullat e anulimit dhe shërbimet shtesë.",
+          "Sistemin ku mbani rezervimet, që agjenti të shohë disponueshmërinë reale. Nëse rezervimet vijnë edhe nga platforma si Booking.com, e kontrollojmë së bashku si mund të lidhen.",
+          "Disa ditë testimi me stafin tuaj para sezonit, jo në mes të tij.",
+        ],
+      },
+      {
+        type: "callout",
+        text: "Për shumicën e hoteleve rekomandojmë paketën Growth: agjent chat dhe zanor, deri në tre kanale, rezervime të sinkronizuara me kalendarin dhe përgjigje në shqip, anglisht dhe italisht, me €890 konfigurim një herë dhe €129 në muaj. Ia vlen ta nisni para sezonit, që agjenti të jetë testuar mirë kur mbërrijnë mysafirët.",
+      },
+    ],
+  },
+  {
     slug: "agjent-ai-whatsapp-restorant",
     locale: "sq",
     title: "Si mund të përdorë një restorant një agjent AI në WhatsApp",
