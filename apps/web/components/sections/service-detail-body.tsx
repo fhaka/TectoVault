@@ -17,6 +17,8 @@ import { IntegrationsMap } from "@/components/sections/ai-agents/integrations-ma
 import { LaunchTimeline } from "@/components/sections/ai-agents/launch-timeline";
 import { HandoffTrust } from "@/components/sections/ai-agents/handoff-trust";
 import { PackagesPreview } from "@/components/sections/ai-agents/packages-preview";
+import { PilotOffer } from "@/components/sections/pilot-offer";
+import { SavingsCalculator } from "@/components/sections/savings-calculator";
 import {
   Accordion,
   AccordionContent,
@@ -75,7 +77,9 @@ export function ServiceDetailBody({
           <IntegrationsMap />
           <LaunchTimeline />
           <HandoffTrust />
+          <SavingsCalculator />
           <PackagesPreview />
+          <PilotOffer className="pt-0 sm:pt-0 md:pt-0" />
         </>
       ) : (
         <Section>

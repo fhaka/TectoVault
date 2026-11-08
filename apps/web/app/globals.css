@@ -189,3 +189,55 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Range sliders in the savings calculator: a filled track up to the thumb. */
+.calc-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2.25rem;
+  background: transparent;
+  cursor: pointer;
+  touch-action: pan-y;
+}
+.calc-range::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--accent) var(--pct), color-mix(in oklab, var(--foreground) 12%, transparent) var(--pct));
+}
+.calc-range::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--foreground) 12%, transparent);
+}
+.calc-range::-moz-range-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+.calc-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  margin-top: -9px;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #fff;
+  border: 2px solid var(--accent);
+  box-shadow: 0 4px 14px -2px rgba(47, 143, 114, 0.5);
+  transition: transform 0.15s;
+}
+.calc-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #fff;
+  border: 2px solid var(--accent);
+}
+.calc-range:active::-webkit-slider-thumb {
+  transform: scale(1.15);
+}
+.calc-range:focus-visible {
+  outline: none;
+}
+.calc-range:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 30%, transparent);
+}

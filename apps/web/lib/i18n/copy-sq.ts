@@ -34,6 +34,7 @@ export const copySq: Record<string, string> = {
   "TectoVault builds intelligent systems that transform the way businesses operate — AI agents, business automation, custom software, web and mobile applications, and AI integration for the businesses of tomorrow.": "TectoVault ndërton sisteme inteligjente që transformojnë mënyrën si funksionojnë bizneset — agjentë AI, automatizim biznesi, softuer të personalizuar, aplikacione web dhe për celular, si dhe integrim AI për bizneset e së nesërmes.",
   "Careers": "Karriera",
   "Blog": "Blogu",
+  "FAQ": "Pyetje të shpeshta",
   "Contact": "Kontakti",
   "Privacy": "Privatësia",
   "Terms": "Kushtet",

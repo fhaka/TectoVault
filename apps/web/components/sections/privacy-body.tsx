@@ -9,7 +9,7 @@ export function PrivacyBody() {
 
   if (locale === "sq") {
     return (
-      <LegalLayout title="Privacy Policy" titleSq="Politika e Privatësisë" lastUpdated="7 Nëntor 2026">
+      <LegalLayout title="Privacy Policy" titleSq="Politika e Privatësisë" lastUpdated="8 Nëntor 2026">
         <section>
           <h2>1. Kush jemi</h2>
           <p>
@@ -43,10 +43,11 @@ export function PrivacyBody() {
         <section>
           <h2>4. Agjenti AI në këtë sajt</h2>
           <p>
-            Agjenti AI në këtë sajt përdor modelet Claude të Anthropic për të shkruar përgjigjet. Kur i
-            shkruan, mesazhet e bisedës dërgohen te Anthropic për të gjeneruar përgjigjen. Anthropic i
-            përpunon ato si nënpërpunues dhe nuk i përdor për të trajnuar modelet e veta, dhe i ruan për
-            një periudhë të kufizuar sipas politikës së vet. Ne nuk e ruajmë bisedën në serverët tanë.
+            Agjenti AI në këtë sajt i shkruan përgjigjet me modele AI që i ekzekuton Cloudflare
+            (Workers AI) ose, kur aktivizohen, me modelet Claude të Anthropic. Kur i shkruan, mesazhet e
+            bisedës dërgohen te ky ofrues për të gjeneruar përgjigjen. Ofruesi i përpunon ato si
+            nënpërpunues dhe, sipas kushteve të veta, nuk i përdor për të trajnuar modelet e veta AI. Ne
+            nuk e ruajmë bisedën në serverët tanë.
           </p>
           <p>
             Nëse i kërkon agjentit të rezervojë një takim, emri, email-i, ora që zgjedh dhe tema që
@@ -102,8 +103,8 @@ export function PrivacyBody() {
             Përdorim një numër të kufizuar shërbimesh palësh të treta për të xhiruar sajtin tonë dhe
             për të komunikuar me ty: Cloudflare dhe ofrues të tjerë infrastrukture cloud për të
             hostuar sajtin dhe databazën tonë; Resend për dërgimin e email-eve transaksionale (si
-            konfirmimet e formularit të kontaktit dhe kërkesës për ofertë); Anthropic për agjentin AI
-            në këtë sajt; dhe WhatsApp (Meta) kur zgjedh të na shkruash atje, sipas kushteve të
+            konfirmimet e formularit të kontaktit dhe kërkesës për ofertë); Cloudflare (Workers AI) dhe Anthropic për
+            agjentin AI në këtë sajt; dhe WhatsApp (Meta) kur zgjedh të na shkruash atje, sipas kushteve të
             WhatsApp. S’përdorim aktualisht analitikë apo tracker reklamimi të palëve të treta në
             këtë sajt.
           </p>
@@ -121,7 +122,7 @@ export function PrivacyBody() {
   }
 
   return (
-    <LegalLayout title="Privacy Policy" lastUpdated="November 7, 2026">
+    <LegalLayout title="Privacy Policy" lastUpdated="November 8, 2026">
       <section>
         <h2>1. Who we are</h2>
         <p>
@@ -155,11 +156,11 @@ export function PrivacyBody() {
       <section>
         <h2>4. The AI agent on this website</h2>
         <p>
-          The AI agent on this website uses Anthropic&rsquo;s Claude models to write its replies.
-          When you chat with it, the messages in the conversation are sent to Anthropic to generate a
-          response. Anthropic processes them as a sub-processor, does not use them to train its
-          models, and keeps them for a limited period under its own policy. We do not store the
-          conversation on our servers.
+          The AI agent on this website writes its replies with AI models run by Cloudflare
+          (Workers AI) or, when enabled, Anthropic&rsquo;s Claude models. When you chat with it, the
+          messages in the conversation are sent to that provider to generate a response. The provider
+          processes them as a sub-processor and, under its terms, does not use them to train its AI
+          models. We do not store the conversation on our servers.
         </p>
         <p>
           If you ask the agent to book a call, your name, email, chosen time and the topic you
@@ -216,7 +217,7 @@ export function PrivacyBody() {
           We use a limited number of third-party services to operate our website and
           communicate with you: Cloudflare and other cloud infrastructure providers to host our
           website and database; Resend for delivering transactional emails (such as contact form
-          and quote request confirmations); Anthropic for the AI agent on this website; and
+          and quote request confirmations); Cloudflare (Workers AI) and Anthropic for the AI agent on this website; and
           WhatsApp (Meta) when you choose to message us there, under WhatsApp&rsquo;s own terms. We
           do not currently use third-party analytics or advertising trackers on this website.
         </p>

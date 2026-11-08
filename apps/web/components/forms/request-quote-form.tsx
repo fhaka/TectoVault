@@ -111,6 +111,7 @@ export function RequestQuoteForm() {
   // The package sentence we pre-filled; it doesn't count towards the minimum,
   // so visitors still describe the project in their own words.
   const [packageIntro, setPackageIntro] = React.useState("");
+  const [pilot, setPilot] = React.useState(false);
 
   // Pre-fill from links such as /request-quote?type=ai-agents&package=growth
   // (pricing cards, service and industry pages): select the service, note
@@ -121,6 +122,7 @@ export function RequestQuoteForm() {
     if (!type || !projectTypeOptions.some((o) => o.value === type)) return;
     const service = typeToService(type);
     const pkg = service ? findPackage(service, params.get("package")) : null;
+    const isPilot = type === "ai-agents" && params.get("offer") === "pilot";
     const id = window.setTimeout(() => {
       setValue("projectType", type);
       if (service && pkg) {
@@ -131,6 +133,11 @@ export function RequestQuoteForm() {
           .replace("{service}", tx(option.label));
         setPackageIntro(intro);
         setValue("description", intro + " ");
+      } else if (isPilot) {
+        setPilot(true);
+        const intro = t("pilot.quoteIntro");
+        setPackageIntro(intro);
+        setValue("description", intro + " ");
       }
       setDirection(1);
       setStep(1);
@@ -139,6 +146,14 @@ export function RequestQuoteForm() {
     // Runs once on arrival; later language switches keep what was typed.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // The pilot is for AI agents only.
+  React.useEffect(() => {
+    if (pilot && values.projectType !== "ai-agents") {
+      const id = window.setTimeout(() => setPilot(false), 0);
+      return () => window.clearTimeout(id);
+    }
+  }, [pilot, values.projectType]);
 
   // A package belongs to one service; drop it if the visitor picks another.
   React.useEffect(() => {
@@ -236,9 +251,8 @@ export function RequestQuoteForm() {
     if (index === 0) {
       const opt = projectTypeOptions.find((o) => o.value === values.projectType);
       if (!opt) return null;
-      return chosenPackage
-        ? `${tx(opt.label)} · ${t(`${packageKey(chosenPackage.service, chosenPackage.pkg.id)}.name`)}`
-        : tx(opt.label);
+      if (chosenPackage) return `${tx(opt.label)} · ${t(`${packageKey(chosenPackage.service, chosenPackage.pkg.id)}.name`)}`;
+      return pilot ? `${tx(opt.label)} · ${t("pilot.label")}` : tx(opt.label);
     }
     if (index === 1) {
       const d = ownDescription;

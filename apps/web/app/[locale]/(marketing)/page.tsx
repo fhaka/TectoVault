@@ -10,16 +10,17 @@ import { HomeServices } from "@/components/sections/home-services";
 import { HomeProblems } from "@/components/sections/home-problems";
 import { HomeIndustries } from "@/components/sections/home-industries";
 import { HomeProcess } from "@/components/sections/home-process";
+import { PilotOffer } from "@/components/sections/pilot-offer";
 import { FinalCta } from "@/components/sections/final-cta";
 import { pageMetadata } from "@/lib/i18n/server";
 
 export function generateMetadata(): Promise<Metadata> {
   return pageMetadata(
     "/",
-    { en: "Software & AI Development Company in Albania", sq: "Kompani Zhvillimi Softueri & AI në Shqipëri" },
+    { en: "AI Agents, Automation & Software in Albania", sq: "Agjentë AI, chatbot dhe softuer për biznese në Shqipëri" },
     {
-      en: "AI agents, business automation, and custom software built to grow your business \u2014 TectoVault is a software & AI development company in Tirana, Albania.",
-      sq: "Agjentë AI, automatizim biznesi dhe softuer i personalizuar për të rritur biznesin tuaj — TectoVault është një kompani zhvillimi softueri & AI në Tiranë, Shqipëri.",
+      en: "AI agents and chatbots that answer your customers 24/7 on WhatsApp, phone and your website, plus business automation, websites and custom software. TectoVault, Tirana, Albania.",
+      sq: "Agjentë AI dhe chatbot që u përgjigjen klientëve tuaj 24/7 në WhatsApp, telefon dhe në faqen tuaj, si dhe automatizim biznesi, faqe interneti dhe softuer i personalizuar. TectoVault, Tiranë.",
     }
   );
 }
@@ -53,6 +54,7 @@ export default function Home() {
       <HomeCapability />
       <HomeAgents />
       <HomeAgentFlow />
+      <PilotOffer />
       <HomeProblems />
       <HomeServices />
       <HomeIndustries />

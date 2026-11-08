@@ -7,6 +7,7 @@ import { ServiceDetailBody } from "@/components/sections/service-detail-body";
 import { getLocale, pageMetadata } from "@/lib/i18n/server";
 import { localizePath } from "@/lib/i18n/config";
 import { serviceDetailsSq, serviceTranslationsSq } from "@/lib/i18n/content-sq";
+import { serviceSeo } from "@/lib/seo";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -20,10 +21,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const service = getServiceBySlug(slug);
   if (!service) return {};
+  const seo = serviceSeo[slug];
   return pageMetadata(
     `/services/${slug}`,
-    { en: service.title, sq: serviceTranslationsSq[slug]?.title ?? service.title },
-    { en: service.shortDescription, sq: serviceTranslationsSq[slug]?.shortDescription ?? service.shortDescription },
+    seo?.title ?? { en: service.title, sq: serviceTranslationsSq[slug]?.title ?? service.title },
+    seo?.description ?? { en: service.shortDescription, sq: serviceTranslationsSq[slug]?.shortDescription ?? service.shortDescription },
     slug === "ai-agents" ? "ai-agents" : "default"
   );
 }

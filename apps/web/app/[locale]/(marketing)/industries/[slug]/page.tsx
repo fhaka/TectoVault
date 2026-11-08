@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { industrySeo } from "@/lib/seo";
 import { notFound } from "next/navigation";
 
 import { siteConfig } from "@/lib/site-config";
@@ -22,10 +23,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const industry = getIndustryBySlug(slug);
   if (!industry) return {};
+  const seo = industrySeo[slug];
   return pageMetadata(
     `/industries/${slug}`,
-    { en: industry.title, sq: industryTranslationsSq[slug]?.title ?? industry.title },
-    { en: industry.overview, sq: industryTranslationsSq[slug]?.overview ?? industry.overview }
+    seo?.title ?? { en: industry.title, sq: industryTranslationsSq[slug]?.title ?? industry.title },
+    seo?.description ?? { en: industry.overview, sq: industryTranslationsSq[slug]?.overview ?? industry.overview }
   );
 }
 

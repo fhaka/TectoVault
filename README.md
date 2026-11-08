@@ -228,3 +228,23 @@ npm install
 npx wrangler login
 npm run deploy:cloudflare
 ```
+
+## Getting found on Google
+
+Search titles and descriptions for the service and industry pages live in
+`apps/web/lib/seo.ts` (English and Albanian). The sitemap is at `/sitemap.xml` and lists both
+languages. Two one-time steps happen outside the code:
+
+**Google Search Console** (shows which searches bring visitors, and gets new pages indexed)
+1. Go to search.google.com/search-console → **Add property** → **Domain** → `tectovault.com`.
+2. Verify it: Google offers to do it automatically through Cloudflare; otherwise copy the TXT
+   record it shows into Cloudflare → DNS → **Add record** (type TXT, name `@`).
+3. **Sitemaps** → submit `https://tectovault.com/sitemap.xml`.
+4. **URL inspection** → request indexing for `/`, `/sq`, `/services/ai-agents`,
+   `/sq/services/ai-agents` and `/sq/faq`.
+
+**Google Business Profile** (appears in Google Maps and local searches like "agjent AI Tiranë")
+1. Go to business.google.com → add **TectoVault**, category **Software company**.
+2. Choose a service area (Tirana / Albania) if you don't receive clients at an office.
+3. Add the phone, website, opening hours, services (AI agents, websites, automation) and photos.
+4. Complete Google's verification (usually a short video or a code).

@@ -17,11 +17,17 @@ export function typeToService(type: string): PackageService | null {
   return entry ? (entry[0] as PackageService) : null;
 }
 
-export function quoteHref({ service, type, pkg }: { service?: string; type?: string; pkg?: string } = {}) {
+export function quoteHref({
+  service,
+  type,
+  pkg,
+  offer,
+}: { service?: string; type?: string; pkg?: string; offer?: "pilot" } = {}) {
   const params = new URLSearchParams();
   const resolved = type ?? (service ? serviceToType[service as PackageService] : undefined);
   if (resolved) params.set("type", resolved);
   if (pkg) params.set("package", pkg);
+  if (offer) params.set("offer", offer);
   const query = params.toString();
   return query ? `/request-quote?${query}` : "/request-quote";
 }

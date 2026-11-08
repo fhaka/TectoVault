@@ -24,6 +24,7 @@ export const footerNav = {
   resources: [
     { label: "Blog", href: "/blog" },
     { label: "Packages", href: "/pricing" },
+    { label: "FAQ", href: "/faq" },
   ],
   legal: [
     { label: "Privacy", href: "/privacy" },
