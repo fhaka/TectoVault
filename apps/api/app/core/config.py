@@ -36,6 +36,16 @@ class Settings(BaseSettings):
     resend_from_email: str = "TectoVault <onboarding@resend.dev>"
     notification_email: str = "hello@example.com"
 
+    # Shared secret between the website and this API for internal calls (the
+    # AI agent's chat log). Set the same value as AGENT_LOG_KEY on the
+    # website. While it's empty, chat logging is switched off.
+    agent_log_key: str = ""
+    # Saved AI agent conversations are deleted after this many days.
+    chat_retention_days: int = 90
+
+    # Pilot programme: how many businesses can be accepted.
+    pilot_places: int = 5
+
     # First admin user, used only by the seed script (scripts/seed_admin.py)
     first_admin_email: EmailStr | None = None
     first_admin_password: str | None = None

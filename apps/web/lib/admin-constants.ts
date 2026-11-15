@@ -41,3 +41,31 @@ export const applicationStatusLabels: Record<ApplicationStatus, string> = {
   rejected: "Rejected",
   hired: "Hired",
 };
+
+// Mirrors PilotStatus in the backend (app/models/enums.py).
+export const pilotStatusOptions = [
+  "applied",
+  "call_booked",
+  "setting_up",
+  "live",
+  "review",
+  "converted",
+  "ended",
+  "declined",
+] as const;
+
+export type PilotStatus = (typeof pilotStatusOptions)[number];
+
+export const pilotStatusLabels: Record<PilotStatus, string> = {
+  applied: "Applied",
+  call_booked: "Call booked",
+  setting_up: "Setting up",
+  live: "Live",
+  review: "Review",
+  converted: "Became a client",
+  ended: "Ended",
+  declined: "Declined",
+};
+
+// Length of the pilot programme, in days.
+export const PILOT_DAYS = 30;

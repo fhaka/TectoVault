@@ -1,11 +1,15 @@
 from fastapi import APIRouter, BackgroundTasks, Depends, Request
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
+from app.core.config import get_settings
 from app.core.database import get_db
 from app.core.logging import logger
 from app.core.rate_limit import limiter
 from app.models.contact_request import ContactRequest
+from app.models.enums import PILOT_PLACE_STATUSES
 from app.models.job_application import JobApplication
+from app.models.pilot import Pilot
 from app.models.quote_request import QuoteRequest
 from app.schemas.public import (
     ContactCreate,
@@ -13,6 +17,7 @@ from app.schemas.public import (
     QuoteCreate,
     SubmissionAck,
 )
+from app.schemas.pilot import PilotAvailability
 from app.services import email
 from app.services.leads import create_lead_from_contact, create_lead_from_quote
 
@@ -71,6 +76,16 @@ def submit_quote(
     db.add(quote)
     db.flush()
     create_lead_from_quote(db, quote)
+    if payload.offer == "pilot":
+        db.add(
+            Pilot(
+                quote_request_id=quote.id,
+                name=quote.name,
+                email=quote.email,
+                company=quote.company,
+                phone=quote.phone,
+            )
+        )
     db.commit()
 
     background_tasks.add_task(email.notify_new_quote, quote.name, quote.email, quote.project_type)
@@ -106,3 +121,17 @@ def submit_application(
     background_tasks.add_task(email.notify_new_application, application.name, application.email)
 
     return SubmissionAck()
+
+
+def pilot_availability_for(db: Session) -> PilotAvailability:
+    total = get_settings().pilot_places
+    taken = db.scalar(select(func.count()).select_from(Pilot).where(Pilot.status.in_(PILOT_PLACE_STATUSES))) or 0
+    left = max(total - taken, 0)
+    return PilotAvailability(total=total, taken=min(taken, total), left=left, open=left > 0)
+
+
+@router.get("/pilot/availability", response_model=PilotAvailability)
+@limiter.limit("60/minute")
+def pilot_availability(request: Request, db: Session = Depends(get_db)) -> PilotAvailability:
+    """Places left in the pilot programme, shown on the website."""
+    return pilot_availability_for(db)

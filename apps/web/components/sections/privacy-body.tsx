@@ -9,7 +9,7 @@ export function PrivacyBody() {
 
   if (locale === "sq") {
     return (
-      <LegalLayout title="Privacy Policy" titleSq="Politika e Privatësisë" lastUpdated="8 Nëntor 2026">
+      <LegalLayout title="Privacy Policy" titleSq="Politika e Privatësisë" lastUpdated="15 Nëntor 2026">
         <section>
           <h2>1. Kush jemi</h2>
           <p>
@@ -46,8 +46,10 @@ export function PrivacyBody() {
             Agjenti AI në këtë sajt i shkruan përgjigjet me modele AI që i ekzekuton Cloudflare
             (Workers AI) ose, kur aktivizohen, me modelet Claude të Anthropic. Kur i shkruan, mesazhet e
             bisedës dërgohen te ky ofrues për të gjeneruar përgjigjen. Ofruesi i përpunon ato si
-            nënpërpunues dhe, sipas kushteve të veta, nuk i përdor për të trajnuar modelet e veta AI. Ne
-            nuk e ruajmë bisedën në serverët tanë.
+            nënpërpunues dhe, sipas kushteve të veta, nuk i përdor për të trajnuar modelet e veta AI. Ne e
+            ruajmë bisedën (mesazhet, datën dhe faqen ku bisedove) për 90 ditë, që ekipi ynë të ndjekë
+            kërkesat e tua dhe të përmirësojë përgjigjet e agjentit. Atë e sheh vetëm ekipi i TectoVault
+            dhe fshihet automatikisht pas 90 ditësh. Mund të na kërkosh ta fshijmë më herët në çdo kohë.
           </p>
           <p>
             Nëse i kërkon agjentit të rezervojë një takim, emri, email-i, ora që zgjedh dhe tema që
@@ -122,7 +124,7 @@ export function PrivacyBody() {
   }
 
   return (
-    <LegalLayout title="Privacy Policy" lastUpdated="November 8, 2026">
+    <LegalLayout title="Privacy Policy" lastUpdated="November 15, 2026">
       <section>
         <h2>1. Who we are</h2>
         <p>
@@ -160,7 +162,10 @@ export function PrivacyBody() {
           (Workers AI) or, when enabled, Anthropic&rsquo;s Claude models. When you chat with it, the
           messages in the conversation are sent to that provider to generate a response. The provider
           processes them as a sub-processor and, under its terms, does not use them to train its AI
-          models. We do not store the conversation on our servers.
+          models. We save the conversation (the messages, the date and the page you chatted on) for
+          90 days so our team can follow up on your requests and improve the agent&rsquo;s answers.
+          Only the TectoVault team can see it, and it is deleted automatically after 90 days. You can
+          ask us to delete it earlier at any time.
         </p>
         <p>
           If you ask the agent to book a call, your name, email, chosen time and the topic you

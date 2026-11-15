@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 
-from app.api.v1 import admin, auth, public
+from app.api.v1 import admin, agent_log, auth, public
 from app.core.config import get_settings
 from app.core.logging import logger
 from app.core.rate_limit import limiter
@@ -61,3 +61,4 @@ def health() -> dict[str, str]:
 app.include_router(auth.router, prefix=settings.api_v1_prefix)
 app.include_router(public.router, prefix=settings.api_v1_prefix)
 app.include_router(admin.router, prefix=settings.api_v1_prefix)
+app.include_router(agent_log.router, prefix=settings.api_v1_prefix)

@@ -40,6 +40,7 @@ export async function POST(request: Request) {
     phone: parsed.data.phone || null,
     company_website: parsed.data.companyWebsite || null,
     attachments,
+    offer: (body as Record<string, unknown>)?.offer === "pilot" ? "pilot" : null,
     website: "",
   });
 

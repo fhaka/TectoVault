@@ -237,7 +237,12 @@ export function RequestQuoteForm() {
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, attachments: files.map((f) => f.name) }),
+        body: JSON.stringify({
+          ...data,
+          attachments: files.map((f) => f.name),
+          // Creates a pilot record in the admin panel, not just a quote.
+          offer: pilot && data.projectType === "ai-agents" ? "pilot" : undefined,
+        }),
       });
       if (!res.ok) throw new Error("Request failed");
       setSubmitted(true);

@@ -19,12 +19,33 @@ const steps = [
 
 // Pilot programme for the first businesses: a dark card with a day counter
 // that runs from 1 to 30 across the three stages when it scrolls into view.
+// Places left come from the admin panel (accepted pilots), via /api/pilot.
+
+type Availability = { total: number; taken: number; left: number; open: boolean };
+
+let availabilityRequest: Promise<Availability | null> | null = null;
+function loadAvailability() {
+  availabilityRequest ??= fetch("/api/pilot")
+    .then((r) => (r.ok ? r.json() : null))
+    .then((d) => (d && typeof d.left === "number" ? (d as Availability) : null))
+    .catch(() => null);
+  return availabilityRequest;
+}
 export function PilotOffer({ className }: { className?: string }) {
   const { t } = useTranslation();
   const reduceMotion = useReducedMotion();
   const ref = React.useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-15% 0px" });
   const [day, setDay] = React.useState(reduceMotion ? pilotOffer.days : 1);
+  const [availability, setAvailability] = React.useState<Availability | null>(null);
+
+  React.useEffect(() => {
+    let alive = true;
+    loadAvailability().then((a) => alive && setAvailability(a));
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   React.useEffect(() => {
     if (!inView || reduceMotion) return;
@@ -38,6 +59,15 @@ export function PilotOffer({ className }: { className?: string }) {
 
   if (!pilotOffer.enabled) return null;
   const progress = (day - 1) / (pilotOffer.days - 1);
+  const places = availability?.total ?? pilotOffer.places;
+  const full = availability ? !availability.open : false;
+  const badge = !availability
+    ? t("pilot.badge").replace("{n}", String(places))
+    : full
+      ? t("pilot.badgeFull").replace("{n}", String(places))
+      : t(availability.left === 1 ? "pilot.badgeLeftOne" : "pilot.badgeLeft")
+          .replace("{left}", String(availability.left))
+          .replace("{n}", String(places));
 
   return (
     <section id="pilot" className={cn("py-16 sm:py-20 md:py-24", className)}>
@@ -62,28 +92,34 @@ export function PilotOffer({ className }: { className?: string }) {
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">{t("pilot.eyebrow")}</p>
                 <span className="flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-[11px] font-semibold text-accent">
                   <span className="flex gap-1" aria-hidden="true">
-                    {Array.from({ length: pilotOffer.places }, (_, i) => (
-                      <motion.span
-                        key={i}
-                        className="size-1.5 rounded-full bg-accent"
-                        animate={reduceMotion ? undefined : { opacity: [0.35, 1, 0.35] }}
-                        transition={{ duration: 1.8, repeat: Infinity, delay: i * 0.18 }}
-                      />
-                    ))}
+                    {/* One dot per place: solid = still open, faded = taken. */}
+                    {Array.from({ length: places }, (_, i) => {
+                      const taken = availability ? i < availability.taken : false;
+                      return (
+                        <motion.span
+                          key={i}
+                          className={cn("size-1.5 rounded-full", taken ? "bg-white/25" : "bg-accent")}
+                          animate={reduceMotion || taken ? undefined : { opacity: [0.35, 1, 0.35] }}
+                          transition={{ duration: 1.8, repeat: Infinity, delay: i * 0.18 }}
+                        />
+                      );
+                    })}
                   </span>
-                  {t("pilot.badge").replace("{n}", String(pilotOffer.places))}
+                  {badge}
                 </span>
               </div>
               <h2 className="mt-5 text-balance font-display text-3xl font-medium leading-tight md:text-5xl">
                 {t("pilot.title").replace("{days}", String(pilotOffer.days))}
               </h2>
               <p className="mt-5 max-w-xl leading-relaxed text-ink-muted">
-                {t("pilot.body").replace("{n}", String(pilotOffer.places)).replace("{days}", String(pilotOffer.days))}
+                {t(full ? "pilot.bodyFull" : "pilot.body")
+                  .replace("{n}", String(places))
+                  .replace("{days}", String(pilotOffer.days))}
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Button asChild size="lg" variant="accent">
                   <Link href={quoteHref({ type: "ai-agents", offer: "pilot" })}>
-                    {t("pilot.cta")}
+                    {t(full ? "pilot.ctaFull" : "pilot.cta")}
                     <ArrowUpRight className="size-4" />
                   </Link>
                 </Button>

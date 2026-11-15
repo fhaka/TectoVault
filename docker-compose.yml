@@ -33,6 +33,9 @@ services:
       RESEND_API_KEY: ${RESEND_API_KEY:-}
       RESEND_FROM_EMAIL: ${RESEND_FROM_EMAIL:-TectoVault <onboarding@resend.dev>}
       NOTIFICATION_EMAIL: ${NOTIFICATION_EMAIL:-hello@example.com}
+      # Shared secret for saving AI agent chats (same value on the web service).
+      AGENT_LOG_KEY: ${AGENT_LOG_KEY:-dev-agent-log-key}
+      PILOT_PLACES: ${PILOT_PLACES:-5}
       # Set to seed/update the first admin user on startup — see
       # docker-entrypoint.sh. Leave unset in production once the real admin
       # account exists.
@@ -55,6 +58,7 @@ services:
       # the api service above.
       API_BASE_URL: http://api:8000
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      AGENT_LOG_KEY: ${AGENT_LOG_KEY:-dev-agent-log-key}
       NODE_ENV: production
     ports:
       - "${WEB_PORT:-3000}:3000"

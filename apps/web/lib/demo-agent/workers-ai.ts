@@ -61,7 +61,7 @@ export async function streamWorkersAi(
   messages: ChatMessage[],
   onText: (text: string) => void,
   signal: AbortSignal
-) {
+): Promise<string | undefined> {
   const forced = process.env.WORKERS_AI_MODEL;
   const candidates = forced ? [forced] : MODELS.filter((m) => !unavailable.has(m));
   let lastError: unknown = new Error("No Workers AI model available");
@@ -88,7 +88,7 @@ export async function streamWorkersAi(
       while (true) {
         if (signal.aborted) {
           await reader.cancel();
-          return;
+          return model;
         }
         const { value, done } = await reader.read();
         if (done) break;
@@ -112,7 +112,7 @@ export async function streamWorkersAi(
     } finally {
       reader.releaseLock();
     }
-    return;
+    return model;
   }
   throw lastError;
 }

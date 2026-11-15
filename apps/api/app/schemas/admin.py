@@ -37,3 +37,8 @@ class DashboardSummary(BaseModel):
     total_contact_messages: int
     new_applications: int
     recent_leads: list[LeadOut]
+    chats_last_7_days: int = 0
+    new_pilot_applications: int = 0
+    active_pilots: int = 0
+    pilots_review_due: int = 0
+    pilot_places_left: int = 0

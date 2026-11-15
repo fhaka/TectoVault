@@ -199,6 +199,7 @@ Secrets** (the Worker's runtime settings, not the "build variables" box). Pushes
 | --- | --- | --- |
 | `API_BASE_URL` | Variable | URL of the FastAPI backend. Contact, quote and careers forms, the admin panel and the AI agent's call bookings all go through it. |
 | `ANTHROPIC_API_KEY` | **Secret**, optional | Claude API key. When set, the live demo agent (`/api/agent`) uses Claude and can book intro calls. When unset, it uses the free Workers AI model (below). |
+| `AGENT_LOG_KEY` | **Secret** | Saves AI agent chats to the admin panel (**AI chats**). Must match `AGENT_LOG_KEY` on the backend. Generate one with `openssl rand -hex 32`. Without it, chats aren't saved (the chat itself still works). |
 | `WORKERS_AI_MODEL` | Variable, optional | Forces one Workers AI model, e.g. `@cf/meta/llama-3.3-70b-instruct-fp8-fast`. Leave unset to try the built-in list in order. |
 
 Never put a key in the repository, README or `wrangler.jsonc` — the repo is on GitHub. Consider a
@@ -228,6 +229,32 @@ npm install
 npx wrangler login
 npm run deploy:cloudflare
 ```
+
+## AI agent chats and the pilot programme
+
+**Saved chats.** Every conversation with the AI agent on the website is saved to the backend and
+shown in the admin panel under **AI chats** (full transcript, language, page, and the contact
+details if the visitor booked a call). Chats are deleted automatically 90 days after their last
+message (`CHAT_RETENTION_DAYS` on the backend); you can delete one earlier from its page. This
+needs the same secret in two places:
+1. Backend environment: `AGENT_LOG_KEY=<a long random string>`
+2. Cloudflare → `tectovault` worker → Variables and Secrets: `AGENT_LOG_KEY` (type **Secret**) with
+   the same value.
+
+**Booking from the chat.** The "Book a free call" button in the chat works with both AI
+providers. The request arrives in **Messages** and **Leads** like a contact form (with the usual
+email notification), and is linked to the chat.
+
+**Pilot programme.** "Apply for the pilot" on the website creates a record under **Pilots** in the
+admin panel. Move it through *Applied → Call booked → Setting up → Live → Review → Became a
+client / Ended* (or *Declined*). Accepting a pilot (Setting up onwards) takes one of the places;
+the website shows how many are left and switches to a waiting list when they're all taken. Setting
+a pilot to **Live** starts its 30 days; the admin panel shows the day and flags **Review due** after
+day 30. The number of places is `PILOT_PLACES` on the backend (default 5). To hide the section
+entirely, set `enabled: false` in `apps/web/content/pilot.ts`.
+
+**Database update.** These features add three tables. The Docker image applies the migration on
+start; if you run the API another way, run `alembic upgrade head` once after deploying.
 
 ## Getting found on Google
 

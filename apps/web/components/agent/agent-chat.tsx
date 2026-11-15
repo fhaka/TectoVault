@@ -2,13 +2,14 @@
 
 import * as React from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowUp, Bot, Check, Loader2, RotateCcw, X } from "lucide-react";
+import { ArrowUp, Bot, CalendarCheck, Check, Loader2, RotateCcw, X } from "lucide-react";
+import Link from "@/components/i18n/link";
 
 import { cn } from "@/lib/utils";
 import { useTranslation } from "@/lib/i18n/language-context";
 import { useHideOnScroll } from "@/lib/use-hide-on-scroll";
 
-// Floating live demo agent. Talks to /api/agent, which streams NDJSON events
+// Floating AI agent (TectoVault's assistant). Talks to /api/agent, which streams NDJSON events
 // (text chunks + tool progress). Any element can open it with
 // window.dispatchEvent(new CustomEvent(OPEN_AGENT_EVENT, { detail: { prompt } })).
 
@@ -40,6 +41,14 @@ type ToolStatus = "start" | "done" | "error";
 type ToolChip = { id: string; label: string; status: ToolStatus };
 type ChatMessage = { role: "user" | "assistant"; content: string; tools?: ToolChip[]; error?: boolean };
 
+// Identifies one conversation in the admin panel. New on "start over".
+function newConversationId() {
+  if (typeof crypto !== "undefined" && "randomUUID" in crypto) return crypto.randomUUID();
+  return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (c) =>
+    (Number(c) ^ (Math.random() * 16) >> (Number(c) / 4)).toString(16)
+  );
+}
+
 const SUGGESTIONS = ["agentChat.suggest1", "agentChat.suggest2", "agentChat.suggest3"];
 
 export function AgentChat() {
@@ -52,6 +61,8 @@ export function AgentChat() {
   const [messages, setMessages] = React.useState<ChatMessage[]>([]);
   const [input, setInput] = React.useState("");
   const [busy, setBusy] = React.useState(false);
+  const [booking, setBooking] = React.useState(false);
+  const conversationRef = React.useRef<string | null>(null);
   const abortRef = React.useRef<AbortController | null>(null);
   const listRef = React.useRef<HTMLDivElement>(null);
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
@@ -109,6 +120,8 @@ export function AgentChat() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             locale,
+            conversationId: (conversationRef.current ??= newConversationId()),
+            page: window.location.pathname,
             // Only the visible text goes back; keep the most recent turns.
             messages: history
               .filter((m) => m.content.trim())
@@ -180,6 +193,16 @@ export function AgentChat() {
     abortRef.current?.abort();
     setMessages([]);
     setInput("");
+    setBooking(false);
+    conversationRef.current = null;
+  };
+
+  const onBooked = (name: string) => {
+    setBooking(false);
+    setMessages((prev) => [
+      ...prev,
+      { role: "assistant", content: t("agentChat.book.done").replace("{name}", name.split(" ")[0]) },
+    ]);
   };
 
   const last = messages[messages.length - 1];
@@ -317,7 +340,7 @@ export function AgentChat() {
                       initial={reduceMotion ? false : { opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.15 + i * 0.08 }}
-                      onClick={() => send(t(key))}
+                      onClick={() => (key === "agentChat.suggest3" ? setBooking(true) : send(t(key)))}
                       className="rounded-full border border-accent/30 bg-accent/10 px-3.5 py-2 text-left text-xs text-accent transition-colors hover:bg-accent/20"
                     >
                       {t(key)}
@@ -358,6 +381,18 @@ export function AgentChat() {
                 </React.Fragment>
               ))}
 
+              <AnimatePresence>
+                {booking ? (
+                  <BookingCard
+                    key="booking"
+                    conversationId={() => (conversationRef.current ??= newConversationId())}
+                    lastTopic={[...messages].reverse().find((m) => m.role === "user")?.content}
+                    onCancel={() => setBooking(false)}
+                    onBooked={onBooked}
+                  />
+                ) : null}
+              </AnimatePresence>
+
               {waiting ? (
                 <div className="flex items-center gap-1.5 pl-1" aria-label={t("agentChat.typing")}>
                   {[0, 1, 2].map((d) => (
@@ -380,6 +415,16 @@ export function AgentChat() {
               }}
               className="relative border-t border-white/10 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]"
             >
+              {!booking ? (
+                <button
+                  type="button"
+                  onClick={() => setBooking(true)}
+                  className="mb-2 flex w-full items-center justify-center gap-2 rounded-xl border border-accent/30 bg-accent/10 py-2 text-xs font-medium text-accent transition-colors hover:bg-accent/20"
+                >
+                  <CalendarCheck className="size-3.5" />
+                  {t("agentChat.book.open")}
+                </button>
+              ) : null}
               <div className="flex items-end gap-2 rounded-2xl border border-white/10 bg-white/[0.04] p-1.5 pl-4 focus-within:border-accent/50">
                 <textarea
                   ref={inputRef}
@@ -406,12 +451,115 @@ export function AgentChat() {
                   {busy ? <Loader2 className="size-4 animate-spin" /> : <ArrowUp className="size-4" />}
                 </button>
               </div>
-              <p className="mt-2 text-center text-[10px] text-white/40">{t("agentChat.disclaimer")}</p>
+              <p className="mt-2 text-center text-[10px] leading-relaxed text-white/40">
+                {t("agentChat.disclaimer")}{" "}
+                <Link href="/privacy" className="underline underline-offset-2 hover:text-white/70">
+                  {t("agentChat.privacy")}
+                </Link>
+              </p>
             </form>
           </motion.div>
         ) : null}
       </AnimatePresence>
     </>
+  );
+}
+
+function BookingCard({
+  conversationId,
+  lastTopic,
+  onCancel,
+  onBooked,
+}: {
+  conversationId: () => string;
+  lastTopic?: string;
+  onCancel: () => void;
+  onBooked: (name: string) => void;
+}) {
+  const { t, locale } = useTranslation();
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [phone, setPhone] = React.useState("");
+  const [when, setWhen] = React.useState("");
+  const [state, setState] = React.useState<"idle" | "sending" | "error">("idle");
+  const [error, setError] = React.useState("");
+  const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  const ready = name.trim().length >= 2 && validEmail;
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!ready || state === "sending") return;
+    setState("sending");
+    try {
+      const res = await fetch("/api/agent/book", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          conversationId: conversationId(),
+          locale,
+          page: window.location.pathname,
+          name: name.trim(),
+          email: email.trim(),
+          phone: phone.trim() || undefined,
+          when: when.trim() || undefined,
+          topic: lastTopic?.slice(0, 1000),
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        setError(data?.message ?? t("agentChat.error"));
+        setState("error");
+        return;
+      }
+      onBooked(name.trim());
+    } catch {
+      setError(t("agentChat.error"));
+      setState("error");
+    }
+  };
+
+  const field =
+    "h-10 w-full rounded-xl border border-white/10 bg-white/[0.05] px-3 text-sm text-white outline-none placeholder:text-white/35 focus:border-accent/60";
+
+  return (
+    <motion.form
+      onSubmit={submit}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 10 }}
+      className="space-y-2.5 rounded-2xl border border-accent/30 bg-accent/[0.06] p-4"
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="flex items-center gap-2 text-sm font-medium text-white">
+            <CalendarCheck className="size-4 text-accent" />
+            {t("agentChat.book.title")}
+          </p>
+          <p className="mt-1 text-xs leading-relaxed text-white/55">{t("agentChat.book.body")}</p>
+        </div>
+        <button
+          type="button"
+          onClick={onCancel}
+          aria-label={t("agentChat.close")}
+          className="rounded-full p-1 text-white/50 hover:bg-white/10 hover:text-white"
+        >
+          <X className="size-3.5" />
+        </button>
+      </div>
+      <input className={field} value={name} onChange={(e) => setName(e.target.value)} placeholder={t("agentChat.book.name")} aria-label={t("agentChat.book.name")} autoComplete="name" maxLength={255} />
+      <input className={field} type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t("agentChat.book.email")} aria-label={t("agentChat.book.email")} autoComplete="email" maxLength={255} />
+      <input className={field} type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={t("agentChat.book.phone")} aria-label={t("agentChat.book.phone")} autoComplete="tel" maxLength={50} />
+      <input className={field} value={when} onChange={(e) => setWhen(e.target.value)} placeholder={t("agentChat.book.when")} aria-label={t("agentChat.book.when")} maxLength={200} />
+      {state === "error" ? <p className="text-xs text-red-300">{error}</p> : null}
+      <button
+        type="submit"
+        disabled={!ready || state === "sending"}
+        className="flex h-10 w-full items-center justify-center gap-2 rounded-xl bg-accent text-sm font-medium text-accent-foreground transition-opacity disabled:opacity-40"
+      >
+        {state === "sending" ? <Loader2 className="size-4 animate-spin" /> : <Check className="size-4" />}
+        {t("agentChat.book.submit")}
+      </button>
+    </motion.form>
   );
 }
 

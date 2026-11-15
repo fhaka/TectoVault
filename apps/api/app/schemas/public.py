@@ -1,5 +1,6 @@
 import uuid
 from datetime import datetime
+from typing import Literal
 
 from pydantic import BaseModel, EmailStr, Field, field_validator
 
@@ -40,6 +41,8 @@ class QuoteCreate(HoneypotMixin):
     phone: str | None = Field(default=None, max_length=50)
     company_website: str | None = Field(default=None, max_length=255)
     attachments: list[str] = Field(default_factory=list)
+    # "pilot" when the visitor applied through the pilot programme button.
+    offer: Literal["pilot"] | None = None
 
     @field_validator("attachments")
     @classmethod

@@ -22,6 +22,11 @@ type DashboardSummary = {
   total_contact_messages: number;
   new_applications: number;
   recent_leads: LeadOut[];
+  chats_last_7_days?: number;
+  new_pilot_applications?: number;
+  active_pilots?: number;
+  pilots_review_due?: number;
+  pilot_places_left?: number;
 };
 
 export default async function AdminDashboardPage() {
@@ -32,6 +37,14 @@ export default async function AdminDashboardPage() {
     { label: "Quote requests", value: summary?.open_quote_requests ?? 0, href: "/admin/quotes" },
     { label: "Contact messages", value: summary?.total_contact_messages ?? 0, href: "/admin/messages" },
     { label: "New applications", value: summary?.new_applications ?? 0, href: "/admin/applications" },
+    { label: "New pilot applications", value: summary?.new_pilot_applications ?? 0, href: "/admin/pilots" },
+    {
+      label: summary?.pilots_review_due ? `Running pilots · ${summary.pilots_review_due} review due` : "Running pilots",
+      value: summary?.active_pilots ?? 0,
+      href: "/admin/pilots",
+    },
+    { label: "Pilot places left", value: summary?.pilot_places_left ?? 0, href: "/admin/pilots" },
+    { label: "AI chats (last 7 days)", value: summary?.chats_last_7_days ?? 0, href: "/admin/chats" },
   ];
 
   return (
