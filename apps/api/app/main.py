@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
@@ -9,10 +11,23 @@ from app.api.v1 import admin, agent_log, auth, public
 from app.core.config import get_settings
 from app.core.logging import logger
 from app.core.rate_limit import limiter
+from app.core.startup import on_startup
 
 settings = get_settings()
 
-app = FastAPI(title=settings.project_name, docs_url="/docs" if settings.environment != "production" else None)
+
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    on_startup()
+    yield
+
+
+app = FastAPI(
+    title=settings.project_name,
+    docs_url="/docs" if settings.environment != "production" else None,
+    lifespan=lifespan,
+)
 
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)

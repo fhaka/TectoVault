@@ -16,6 +16,21 @@ export default function AdminLoginPage() {
   const [error, setError] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
+  // Sent back here by the admin panel: say why, instead of failing silently.
+  React.useEffect(() => {
+    const reason = new URLSearchParams(window.location.search).get("reason");
+    const message =
+      reason === "session"
+        ? "Signed in, but the server didn't accept the session. Please sign in again; if it keeps happening, the API's SECRET_KEY may have changed during a deploy."
+        : reason === "server"
+          ? "The admin panel couldn't reach the server (it may be starting up, which can take up to a minute). Please try again."
+          : null;
+    if (message) {
+      const id = window.setTimeout(() => setError(message), 0);
+      return () => window.clearTimeout(id);
+    }
+  }, []);
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
@@ -24,7 +39,8 @@ export default function AdminLoginPage() {
       const res = await fetch("/api/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        // Autofill often adds a trailing space to the email.
+        body: JSON.stringify({ email: email.trim(), password }),
       });
       const data = await res.json();
       if (!res.ok || !data.ok) {

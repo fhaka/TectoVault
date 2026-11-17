@@ -123,11 +123,14 @@ statistics or results. Where real information isn't available yet:
 - **Applications** — careers submissions, filterable by status, with inline status updates.
 - **Pilots** and **AI chats** — see [AI agent chats and the pilot programme](#ai-agent-chats-and-the-pilot-programme).
 
-**Admin account and password.** On start, the API creates the admin user from
-`FIRST_ADMIN_EMAIL` / `FIRST_ADMIN_PASSWORD` if it doesn't exist yet. It never changes an existing
-password on a normal restart or redeploy. To reset a forgotten password: set `FIRST_ADMIN_EMAIL`
-to the admin's email, `FIRST_ADMIN_PASSWORD` to the new password and `ADMIN_PASSWORD_RESET=1`,
-deploy once, sign in, then remove `ADMIN_PASSWORD_RESET`.
+**Admin account and password.** Every time the API starts (Docker or not, e.g. a Render
+"Python" service) it applies database migrations and creates the admin user from
+`FIRST_ADMIN_EMAIL` / `FIRST_ADMIN_PASSWORD` if it doesn't exist yet (`app/core/startup.py`). It
+never changes an existing password on a normal restart or redeploy. To reset a forgotten
+password: set `FIRST_ADMIN_EMAIL` to the admin's email, `FIRST_ADMIN_PASSWORD` to the new password
+and `ADMIN_PASSWORD_RESET=1`, deploy once, sign in, then remove `ADMIN_PASSWORD_RESET`. The API's
+logs show what happened on each start: lines beginning with `Startup:` (including the email
+addresses of all admin accounts in the database).
 
 Authentication: the FastAPI backend issues a JWT on login; the Next.js `/api/admin/login` route
 stores it in an httpOnly, secure-in-production cookie. `middleware.ts` (compiled to `proxy.ts` —

@@ -8,18 +8,8 @@ set -e
 echo "Running database migrations..."
 alembic upgrade head
 
-# Create the first admin user if it doesn't exist yet. On later starts the
-# existing password is left alone, so a redeploy never resets it. To reset
-# the password on purpose, also set ADMIN_PASSWORD_RESET=1 for one deploy
-# (then remove it again).
-if [ -n "$FIRST_ADMIN_EMAIL" ] && [ -n "$FIRST_ADMIN_PASSWORD" ]; then
-  if [ "$ADMIN_PASSWORD_RESET" = "1" ]; then
-    echo "Resetting admin password (ADMIN_PASSWORD_RESET=1)..."
-    python -m scripts.seed_admin
-  else
-    echo "Ensuring admin user exists..."
-    python -m scripts.seed_admin --create-only
-  fi
-fi
+# The admin account (FIRST_ADMIN_EMAIL / FIRST_ADMIN_PASSWORD, and
+# ADMIN_PASSWORD_RESET=1 to reset a password) is handled by the app itself at
+# startup — see app/core/startup.py — so it works however the API is run.
 
 exec "$@"

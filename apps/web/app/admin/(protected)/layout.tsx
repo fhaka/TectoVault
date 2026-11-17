@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
-import { adminFetchJson } from "@/lib/admin-api";
+import { adminFetch } from "@/lib/admin-api";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { LogoutButton } from "@/components/admin/logout-button";
 import { siteConfig } from "@/lib/site-config";
@@ -16,10 +16,20 @@ type CurrentUser = { id: string; email: string; name: string; role: string };
 // every load of an admin page asks the backend who the token belongs to.
 // An expired, forged, or missing token gets a 401 and we bounce to login.
 export default async function ProtectedAdminLayout({ children }: { children: React.ReactNode }) {
-  const user = await adminFetchJson<CurrentUser>("/auth/me");
+  // Tell the login page why we sent the visitor back, so a server problem
+  // never looks like a wrong password (and the session cookie gets cleared).
+  let user: CurrentUser | null = null;
+  let reason: "session" | "server" | null = null;
+  try {
+    const res = await adminFetch("/auth/me");
+    if (res.ok) user = (await res.json()) as CurrentUser;
+    else reason = res.status === 401 || res.status === 403 ? "session" : "server";
+  } catch {
+    reason = "server";
+  }
 
   if (!user) {
-    redirect("/admin/login");
+    redirect(`/admin/login?reason=${reason ?? "server"}`);
   }
 
   return (

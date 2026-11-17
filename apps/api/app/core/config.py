@@ -49,6 +49,9 @@ class Settings(BaseSettings):
     # First admin user, used only by the seed script (scripts/seed_admin.py)
     first_admin_email: EmailStr | None = None
     first_admin_password: str | None = None
+    # Set to true for one deploy to reset the admin password to
+    # FIRST_ADMIN_PASSWORD; otherwise an existing password is never changed.
+    admin_password_reset: bool = False
 
     @property
     def cors_origin_list(self) -> list[str]:

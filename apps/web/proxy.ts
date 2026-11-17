@@ -77,6 +77,14 @@ function adminGuard(request: NextRequest) {
   const hasSession = request.cookies.has(ADMIN_SESSION_COOKIE);
 
   if (pathname === "/admin/login") {
+    // Sent back by the admin panel because the session didn't work: show the
+    // login page and drop the stale cookie, instead of bouncing to /admin
+    // again (which looped silently).
+    if (request.nextUrl.searchParams.has("reason")) {
+      const response = NextResponse.next();
+      response.cookies.delete(ADMIN_SESSION_COOKIE);
+      return withNoindex(response);
+    }
     if (hasSession) {
       return withNoindex(NextResponse.redirect(new URL("/admin", request.url)));
     }
