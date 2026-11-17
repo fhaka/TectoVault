@@ -8,14 +8,18 @@ set -e
 echo "Running database migrations..."
 alembic upgrade head
 
-# Optionally seed the first admin user (idempotent — see scripts/seed_admin.py,
-# it updates the existing user if one already exists). Only runs when both
-# FIRST_ADMIN_EMAIL and FIRST_ADMIN_PASSWORD are set, which they are by
-# default in docker-compose.yml for local dev; leave them unset in
-# production once the real admin account exists.
+# Create the first admin user if it doesn't exist yet. On later starts the
+# existing password is left alone, so a redeploy never resets it. To reset
+# the password on purpose, also set ADMIN_PASSWORD_RESET=1 for one deploy
+# (then remove it again).
 if [ -n "$FIRST_ADMIN_EMAIL" ] && [ -n "$FIRST_ADMIN_PASSWORD" ]; then
-  echo "Seeding admin user..."
-  python -m scripts.seed_admin
+  if [ "$ADMIN_PASSWORD_RESET" = "1" ]; then
+    echo "Resetting admin password (ADMIN_PASSWORD_RESET=1)..."
+    python -m scripts.seed_admin
+  else
+    echo "Ensuring admin user exists..."
+    python -m scripts.seed_admin --create-only
+  fi
 fi
 
 exec "$@"

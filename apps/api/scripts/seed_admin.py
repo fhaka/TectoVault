@@ -26,6 +26,11 @@ def main() -> None:
     parser.add_argument("--email", default=settings.first_admin_email)
     parser.add_argument("--password", default=settings.first_admin_password)
     parser.add_argument("--name", default="Admin")
+    parser.add_argument(
+        "--create-only",
+        action="store_true",
+        help="Only create the user if it doesn't exist; never change an existing password.",
+    )
     args = parser.parse_args()
 
     if not args.email or not args.password:
@@ -40,6 +45,9 @@ def main() -> None:
     db = SessionLocal()
     try:
         user = db.scalar(select(User).where(User.email == email))
+        if user and args.create_only:
+            print(f"Admin user already exists, password left unchanged: {email}")
+            return
         if user:
             user.hashed_password = hash_password(args.password)
             user.name = args.name

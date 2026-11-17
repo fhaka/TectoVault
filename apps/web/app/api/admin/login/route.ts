@@ -40,6 +40,17 @@ export async function POST(request: Request) {
     );
   }
 
+  // Only a real 401 means wrong credentials. Anything else (the API
+  // restarting, a failed deploy, a sleeping free instance returning 502/503)
+  // is a server problem, not a password problem.
+  if (!backendRes.ok && backendRes.status !== 401 && backendRes.status !== 403) {
+    console.error(`[admin] login: backend returned ${backendRes.status}`);
+    return NextResponse.json(
+      { ok: false, message: "The server isn't responding right now (it may be restarting). Please try again in a minute." },
+      { status: 503 }
+    );
+  }
+
   if (!backendRes.ok) {
     // Same generic message whether the email or the password was wrong —
     // never reveal which one, so we don't help an attacker enumerate accounts.
